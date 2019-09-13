@@ -1,0 +1,8 @@
+.toolbar {
+    background-color: blueviolet;
+    display: flex;
+}
+
+.elem {
+    margin-right: 50px;
+}

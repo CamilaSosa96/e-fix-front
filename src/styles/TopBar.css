@@ -1,0 +1,14 @@
+.toolbar {
+    background-color: blueviolet;
+}
+
+.minilogo {
+    max-height: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left:  5px;
+}
+
+.topbarElem {
+    display: inline-block;
+}

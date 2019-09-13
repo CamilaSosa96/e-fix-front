@@ -1,16 +1,16 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route} from "react-router-dom";
+import MainScreen from "./screens/MainScreen";
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src="../efixlogo.png" className="logo" alt="logo" />
-        <p>
-          Bienvenido a E-FIX!
-        </p>
-      </header>
-    </div>
+    <Router>
+        <Route exact path="/" component={MainScreen} />
+        <Route exact path="/home" component={HomeScreen} />
+        <Route exact path="/login" component={LoginScreen} />
+    </Router>
   );
 }
 
