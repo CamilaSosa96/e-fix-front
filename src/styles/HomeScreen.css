@@ -6,3 +6,32 @@
 .elem {
     margin-right: 50px;
 }
+
+.createOrder { 
+    position: absolute;
+    align-self: center;
+    margin-top: 100px;
+    right: 50%    
+}
+
+.createForm {
+    position: absolute;
+    align-self: center;
+    margin-top: 100px;
+    right: 50%  
+}
+
+.elemf {
+    display: flex;
+}
+
+h1 {
+    text-align: center
+}
+
+.acceptbutton {
+    position: absolute;
+    align-self: center;
+    margin-top: 100px;
+    right: 50% 
+}
