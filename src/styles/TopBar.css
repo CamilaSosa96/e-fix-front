@@ -9,6 +9,14 @@
     margin-left:  5px;
 }
 
-.topbarElem {
-    display: inline-block;
+.logOutButton {
+    position: absolute;
+    align-self: center;
+    right: 20px;
+}
+
+.searchbar {
+    position: absolute;
+    align-self: center;
+    right: 50%
 }
