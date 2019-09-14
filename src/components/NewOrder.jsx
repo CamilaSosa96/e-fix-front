@@ -1,12 +1,20 @@
 import React from 'react';
-
 class NewOrder extends React.Component{
+
+    constructor(){
+        super()
+        this.handleParentComponent = this.handleParentComponent.bind(this);
+    }
+
+    handleParentComponent(){
+        this.props.handleComponent('message');
+    }
 
     render(){
         return (
             <div>
                 <h1>Ingrese los datos</h1>
-                <form className='createForm'>
+                <form className='createForm' onSubmit={this.handleParentComponent}>
                     <input className='elemf' type="text" placeholder="Nombre Cliente"/>
                     <input className='elemf' type="text" placeholder="DNI Cliente"/>
                     <input className='elemf' type="text" placeholder="Tipo de producto"/>

@@ -1,8 +1,9 @@
 import React from 'react'
 import ToolBar from '../components/ToolBar'
 import HomeComponents from '../components/HomeComponents'
-import '../styles/HomeScreen.css'
 import NewOrder from '../components/NewOrder'
+import Message from './Message'
+import '../styles/HomeScreen.css'
 
 class HomeScreen extends React.Component {
 
@@ -25,7 +26,8 @@ class HomeScreen extends React.Component {
             <div>
             <ToolBar handleComponent={this.handleComponent}/>
             {(this.state.component === 'home') && <HomeComponents handleComponent={this.handleComponent}/>}
-            {(this.state.component === 'createorder') && <NewOrder/>}
+            {(this.state.component === 'createorder') && <NewOrder handleComponent={this.handleComponent}/>}
+            {(this.state.component === 'message') && <Message handleComponent={this.handleComponent}/>}
             </div>
         )
     }

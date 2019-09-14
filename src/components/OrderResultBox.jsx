@@ -1,20 +1,24 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
 
 class OrderResult extends React.Component {
 
-    nextPath(path) {
-        this.props.history.push(path);
-      }
+    constructor(props){
+        super(props)
+        this.goToEdit = this.goToEdit.bind(this)
+    }
+
+    goToEdit(){
+        this.props.changeComp('edit')
+    }
 
     render(){
         return(
             <div className="resbox">
                 <h3>{this.props.msj}</h3>
-                <button onClick={() => this.nextPath('/editOrder')}> EDITAR</button>
+                <button onClick={this.goToEdit}> EDITAR</button>
             </div>
         )
     }
 }
 
-export default withRouter(OrderResult);
+export default OrderResult;

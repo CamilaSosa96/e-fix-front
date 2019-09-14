@@ -4,7 +4,7 @@ class ApprovalScreen extends React.Component {
 
     render(){
         return(
-            <div>
+            <div className="cliente">
                 <h1>Bienvenida Camila!</h1>
                 <h2>Su producto: Samsung Galaxy J1 Mini</h2>
                 <h2>presenta: Falla en el botón de encendido</h2>

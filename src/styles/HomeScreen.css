@@ -17,12 +17,13 @@
 .createForm {
     position: absolute;
     align-self: center;
-    margin-top: 100px;
-    right: 50%  
+    margin-top: 50px;
+    right: 45%  
 }
 
 .elemf {
     display: flex;
+    right: 45%
 }
 
 h1 {
@@ -37,8 +38,20 @@ h1 {
 }
 
 .resbox{
-    background-color: yellow;
+    background-color: rgb(254, 253, 255);
     margin: 0 auto;
     size: 50%;
     max-width: 500px;
+}
+
+.msj{
+    text-align: center
+}
+
+.editando {
+    text-align: center
+}
+
+.cliente {
+    text-align: center
 }

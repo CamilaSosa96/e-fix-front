@@ -9,7 +9,7 @@ class ResultScreen extends React.Component {
         super(props)
         this.state = {
             comp: 'search',
-            msj: "Camila Sosa - Samsung Galaxy J1 Mini - [Recibido]"
+            msj: "Camila Sosa - Samsung Galaxy J1 Mini - [Esperando aprobación del presupuesto]"
         }
         this.msjHandler = this.msjHandler.bind(this)
         this.compHandler = this.compHandler.bind(this)

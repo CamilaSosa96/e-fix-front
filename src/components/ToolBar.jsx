@@ -2,24 +2,39 @@ import React from 'react';
 import '../styles/ToolBar.css';
 import {withRouter} from 'react-router-dom';
 
-class TopBar extends React.Component {
+class ToolBar extends React.Component {
 
-    nextPath(path) {
-        this.props.history.push(path);
-      }
+    constructor(props){
+        super(props)
+        this.handleParentComponentHome = this.handleParentComponentHome.bind(this)
+        this.logOut = this.logOut.bind(this)
+        this.goResults = this.goResults.bind(this)
+    }
+
+    handleParentComponentHome(){
+        this.props.handleComponent('home');
+    }
+
+    logOut(){
+        this.props.history.push('/login');
+    }
+
+    goResults(){
+        this.props.history.push('/results');
+    }
 
     render(){
         return(
             <div className="toolbar">
-                <img src="../efixlogo.png" className="minilogo" alt="E-FIX" onClick={() => this.nextPath('/home')}/>
-                <form onSubmit={() => this.nextPath('/searchResults')} className='searchbar'>
+                <img src="../efixlogo.png" className="minilogo" alt="E-FIX" onClick={this.handleParentComponentHome}/>
+                <form className='searchbar' onSubmit={this.goResults} >
                     <input type="text" placeholder="Buscar algo"></input>
                     <input type="submit" value='Buscar'></input>
                 </form>
-                <button  className="logOutButton" onClick={() => this.nextPath('/login') }> SALIR </button>
+                <button  className="logOutButton" onClick={this.logOut}> SALIR </button>
             </div>
         )
     }
 }
 
-export default withRouter(TopBar);
+export default withRouter(ToolBar);

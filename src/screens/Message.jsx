@@ -1,30 +1,25 @@
 import React from 'react'
-import {withRouter} from 'react-router-dom';
 
 class Message extends React.Component{
 
     constructor(props){
         super(props);
-        this.volver = this.volver.bind(this);
+        this.handleParentComponent = this.handleParentComponent.bind(this)
     }
 
-    volver(){
-        this.nextPath("/home");
-        }
-
-    nextPath(path) {
-        this.props.history.push(path);
-      }
-
+    handleParentComponent(){
+        this.props.handleComponent('home');
+    }
+  
     render(){
         return(
             <div>
-                <h1>Orden Creada</h1>
-                <button  className="acceptbutton" onClick={this.volver}> <h3>ACEPTAR</h3> </button>
+                <h2 className="msj">La orden fue creada satisfactoriamente!</h2>
+                <button  className="acceptbutton" onClick={this.handleParentComponent}> <h3>ACEPTAR</h3> </button>
             </div>
         )
     }
 
 }
 
-export default withRouter(Message);
+export default Message;
