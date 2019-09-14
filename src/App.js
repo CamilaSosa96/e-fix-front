@@ -5,6 +5,10 @@ import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import NewOrder from "./components/NewOrder";
 import Message from './screens/Message';
+import ResultScreen from "./screens/ResultsScreen";
+import EditScreen from "./screens/EditScreen"
+import ResultsScreen2 from './screens/ResultsScreen2'
+import ApprovalScreen from './screens/ApprovalScreen'
 
 function App() {
   return (
@@ -14,6 +18,10 @@ function App() {
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/newOrder" component={NewOrder} />
         <Route exact path="/message" component={Message} />
+        <Route exact path="/searchResults" component={ResultScreen} />
+        <Route exact path="/editOrder" component={EditScreen} />
+        <Route exact path="/results" component={ResultsScreen2} />
+        <Route exact path="/approval/1" component={ApprovalScreen}/>
     </Router>
   );
 }

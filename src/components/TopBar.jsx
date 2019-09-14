@@ -11,8 +11,8 @@ class TopBar extends React.Component {
     render(){
         return(
             <div className="toolbar">
-                <img src="../efixlogo.png" className="minilogo" alt="E-FIX"/>
-                <form className='searchbar'>
+                <img src="../efixlogo.png" className="minilogo" alt="E-FIX" onClick={() => this.nextPath('/home')}/>
+                <form onSubmit={() => this.nextPath('/searchResults')} className='searchbar'>
                     <input type="text" placeholder="Buscar algo"></input>
                     <input type="submit" value='Buscar'></input>
                 </form>
