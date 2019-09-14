@@ -1,6 +1,5 @@
 import React from 'react'
 import {withRouter} from 'react-router-dom';
-import TopBar from '../components/TopBar';
 
 class Message extends React.Component{
 
@@ -20,7 +19,6 @@ class Message extends React.Component{
     render(){
         return(
             <div>
-                <TopBar></TopBar>
                 <h1>Orden Creada</h1>
                 <button  className="acceptbutton" onClick={this.volver}> <h3>ACEPTAR</h3> </button>
             </div>

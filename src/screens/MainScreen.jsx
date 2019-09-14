@@ -1,8 +1,7 @@
-import React from 'react';
-import LoginScreen from './LoginScreen';
+import React from 'react'
+import LoginScreen from './LoginScreen'
 
 class MainScreen extends React.Component {
-
 
     render() {
         return (
@@ -13,4 +12,4 @@ class MainScreen extends React.Component {
     }
 }
 
-export default MainScreen;
+export default MainScreen

@@ -1,5 +1,4 @@
 import React from 'react';
-import TopBar from '../components/TopBar';
 import {withRouter} from 'react-router-dom';
 
 class EditScreen extends React.Component {
@@ -11,7 +10,6 @@ class EditScreen extends React.Component {
     render(){
         return (
             <div>
-                <TopBar></TopBar>
                 <h1>Editar datos</h1>
                 ID de la orden: 1
                 <form onSubmit={() => this.nextPath('/results')}>

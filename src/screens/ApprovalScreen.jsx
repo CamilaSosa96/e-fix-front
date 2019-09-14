@@ -1,5 +1,4 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
 
 class ApprovalScreen extends React.Component {
 

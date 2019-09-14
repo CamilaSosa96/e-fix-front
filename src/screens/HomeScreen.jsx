@@ -1,23 +1,34 @@
 import React from 'react'
-import TopBar from '../components/TopBar.jsx';
+import ToolBar from '../components/ToolBar'
+import HomeComponents from '../components/HomeComponents'
 import '../styles/HomeScreen.css'
-import {withRouter} from 'react-router-dom';
-import OrderScreen from './OrderScreen.jsx';
+import NewOrder from '../components/NewOrder'
 
 class HomeScreen extends React.Component {
 
-    nextPath(path) {
-        this.props.history.push(path);
-      }
+    constructor(props){
+        super(props)
+        this.state = {
+            component: 'home'
+        }
+        this.handleComponent = this.handleComponent.bind(this)
+    }
+    
+    handleComponent(componentName){
+        this.setState({
+            component: componentName
+        })
+    }
 
     render(){
         return (
             <div>
-            <TopBar></TopBar>
-            <OrderScreen className="order"></OrderScreen>
+            <ToolBar handleComponent={this.handleComponent}/>
+            {(this.state.component === 'home') && <HomeComponents handleComponent={this.handleComponent}/>}
+            {(this.state.component === 'createorder') && <NewOrder/>}
             </div>
         )
     }
 }
 
-export default withRouter(HomeScreen)
+export default HomeScreen;
