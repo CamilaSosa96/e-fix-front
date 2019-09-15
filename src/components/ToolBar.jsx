@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/ToolBar.css';
 import {withRouter} from 'react-router-dom';
 
 class ToolBar extends React.Component {
