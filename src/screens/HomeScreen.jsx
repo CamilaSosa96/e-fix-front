@@ -1,4 +1,6 @@
 import React from 'react'
+import {Button} from '@blueprintjs/core'
+import NewOrderForm from '../components/NewOrderForm'
 
 class HomeScreen extends React.Component {
 
@@ -19,7 +21,17 @@ class HomeScreen extends React.Component {
     render(){
         return (
             <div>
-                <h1>Hola estas en home!</h1>
+                {this.state.component === 'home' &&
+                <div>
+                    <Button onClick={() => this.handleComponent('newOrder')}> Crear orden </Button>
+                    <Button> Ver todas las ordenes </Button>
+                </div>
+                }
+                {this.state.component === 'newOrder' &&
+                <div>
+                    <NewOrderForm parentHandler={this.handleComponent}></NewOrderForm>
+                </div>
+                }
             </div>
         )
     }
