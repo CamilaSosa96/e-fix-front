@@ -64,3 +64,30 @@ export function updateState(id, state, callback){
         callback(error, null);
     })
 }
+
+export function searchOrders(string, callback){
+    axios.get(`http://${host}/search/${string}`).then((response) =>{ 
+        const orderList = response.data.result; 
+        const resultList = [];
+        orderList.forEach(elem => {
+            const order = {    
+                id: elem.id,                              
+                name: elem.nombre_cliente,
+                dni: elem.dni_cliente,
+                email: elem.email_cliente,
+                type: elem.tipo_producto,
+                brand: elem.marca_producto,
+                model: elem.modelo_producto,
+                problem: elem.problema_inicial,
+                diagnosis: elem.diagnostico,
+                budget: elem.presupuesto,
+                state: elem.estado_producto,
+                lastUpdateDate: elem.fecha_actualizacion
+            }
+            resultList.push(order)
+        });
+        callback(null, resultList);
+    }).catch((error) => {
+        callback(error, null);
+    })
+}

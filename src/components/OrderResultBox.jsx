@@ -68,6 +68,8 @@ class OrderResultBox extends React.Component{
                         onClose={()=> this.setState({info: false})}>
                     <h1>Orden de Reparación #{this.props.id}</h1>
                     <h3>Nombre del Cliente: {this.props.name}</h3>
+                    <h3>DNI: {this.props.dni}</h3>
+                    <h3>E-mail: {this.props.email}</h3>
                     <h3>Producto: [{this.props.type}] {this.props.brand}{" "}{this.props.model}</h3>
                     <h3>Falla inicial: {this.props.problem}</h3>
                     <h3>Diagnóstico: {this.getDiagnosis()}</h3>
