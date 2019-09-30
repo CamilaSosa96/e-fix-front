@@ -1,37 +1,75 @@
 import React from 'react'
+import { FormGroup, InputGroup, Alert} from "@blueprintjs/core";
+import {Image} from 'react-bootstrap'
 import '../styles/LoginScreen.css'
-import {withRouter} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
+import {validateUser} from '../efixService'
 
 class LoginScreen extends React.Component {
 
     constructor(props){
         super(props)
-        this.loginHandler = this.loginHandler.bind(this)
+        this.state = {
+            isLoggedIn: false,
+            alert: false,
+            msg: "",
+            user: "",
+            pass: "",
+        }
+        this.handleLogin = this.handleLogin.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
 
-    loginHandler (){
-        this.nextPath('/home')
+    handleLogin(event){
+        validateUser(this.state.user, this.state.pass, (error, response) => {
+            if(error){
+                console.log(error.staus)
+                this.setState({alert: true})
+            } else {
+                this.setState({isLoggedIn: true})
+            }
+        })
+        event.preventDefault();
     }
 
-    nextPath(path) {
-        this.props.history.push(path)
-      }
+    handleChange(event){
+        this.setState({[event.target.name]: event.target.value})
+        event.preventDefault();
+    }
 
-    render () {
+    render () {  
         return (
-            <body>
-            <div className="loginscreen">
-                <img src="../efixlogo.png" className="logo" alt="E-FIX"/>
-                <form onSubmit={this.loginHandler} className="form"> <br/><br/>
-                    <label className="elemLS"><input type="text" name="name" placeholder="Usuario"/> </label>  <br/><br/>
-                    <label className="elemLS"><input type="password" name="name" placeholder="Contraseña"/> </label>  <br/><br/>
-                    <input className="elemLS" type='submit' value='Ingresar'></input>
+            <div>
+                {this.state.isLoggedIn && <Redirect to="/home"/>}
+                <Alert isOpen={this.state.alert}
+                    onClose={()=>{this.setState({user: "", pass: "", alert: false})}}>
+                    La combinación de usuario y contraseña es incorrecta. 
+                </Alert>
+                <form onSubmit={this.handleLogin}>
+                    <FormGroup style={{textAlign: "center", marginTop: '150px'}}> 
+                        <Image style={{width:'35%', marginTop: '-50px'}} src="../efixlogo.png"></Image>
+                        <h2>¡Bienvenido a E-FIX! Ingrese para continuar:</h2>
+                        <InputGroup 
+                            style={{marginTop: '10px', maxWidth: '200px'}}
+                            name='user' 
+                            type='text'
+                            placeholder='Usuario'
+                            onChange={this.handleChange}/>
+                        <InputGroup 
+                            style={{marginTop: '10px', maxWidth: '200px'}}
+                            name='pass'
+                            type='password' 
+                            placeholder='Contraseña'
+                            onChange={this.handleChange}/>              
+                        <InputGroup
+                            style={{marginTop: '10px', maxWidth: '200px'}}
+                            type='submit'
+                            value='Ingresar'/>           
+                    </FormGroup>
                 </form>
-            </div>   
-            </body>      
+            </div>      
         )
-    } 
-     
+    }  
 }
 
-export default withRouter(LoginScreen);
+export default LoginScreen;
