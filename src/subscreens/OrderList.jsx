@@ -1,6 +1,6 @@
 import React from 'react'
 import {getAllOrders} from '../efixService'
-import OrderResultBox from './OrderResultBox'
+import OrderResultBox from '../components/OrderBox'
 
 class OrderList extends React.Component{
 

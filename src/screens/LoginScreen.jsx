@@ -1,6 +1,7 @@
 import React from 'react'
 import { FormGroup, InputGroup, Alert} from "@blueprintjs/core";
 import {Image} from 'react-bootstrap'
+import { Colors } from "@blueprintjs/core";
 import '../styles/LoginScreen.css'
 import {Redirect} from 'react-router-dom'
 import {validateUser} from '../efixService'
@@ -21,11 +22,14 @@ class LoginScreen extends React.Component {
     }
 
     handleLogin(event){
-        validateUser(this.state.user, this.state.pass, (error, response) => {
+        validateUser(this.state.user, this.state.pass, (error) => {
             if(error){
-                console.log(error.staus)
-                this.setState({alert: true})
-            } else {
+                if(error.message === 'Network Error'){
+                    this.setState({msg: 'No se ha podido conectar al back-end', alert: true})
+                } else {
+                    this.setState({msg: 'El usuario y/o contraseña son incorrectos', alert: true})
+                }
+            } else { 
                 this.setState({isLoggedIn: true})
             }
         })
@@ -43,12 +47,12 @@ class LoginScreen extends React.Component {
                 {this.state.isLoggedIn && <Redirect to="/home"/>}
                 <Alert isOpen={this.state.alert}
                     onClose={()=>{this.setState({user: "", pass: "", alert: false})}}>
-                    La combinación de usuario y contraseña es incorrecta. 
+                    {this.state.msg}
                 </Alert>
                 <form onSubmit={this.handleLogin}>
                     <FormGroup style={{textAlign: "center", marginTop: '150px'}}> 
-                        <Image style={{width:'35%', marginTop: '-50px'}} src="../efixlogo.png"></Image>
-                        <h2>¡Bienvenido a E-FIX! Ingrese para continuar:</h2>
+                        <Image style={{width:'350px', marginTop: '-50px'}} src="../efixlogo.png"/>
+                        <h2>Gestor de Órdenes de Reparación</h2>
                         <InputGroup 
                             style={{marginTop: '10px', maxWidth: '200px'}}
                             name='user' 
@@ -62,9 +66,13 @@ class LoginScreen extends React.Component {
                             placeholder='Contraseña'
                             onChange={this.handleChange}/>              
                         <InputGroup
-                            style={{marginTop: '10px', maxWidth: '200px'}}
+                            style={{marginTop: '10px', 
+                                    maxWidth: '200px', 
+                                    backgroundColor: Colors.VIOLET1, 
+                                    fontWeight: 'bold',
+                                    color: Colors.WHITE}}
                             type='submit'
-                            value='Ingresar'/>           
+                            value='INGRESAR'/>           
                     </FormGroup>
                 </form>
             </div>      

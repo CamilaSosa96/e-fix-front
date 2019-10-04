@@ -1,9 +1,9 @@
 import React from 'react'
-import {Button} from '@blueprintjs/core'
-import NewOrderForm from '../components/NewOrderForm'
-import OrderList from '../components/OrderList'
+import NewOrderForm from '../subscreens/NewOrderForm'
+import OrderList from '../subscreens/OrderList'
 import NavigationBar from '../components/NavigationBar'
-import SearchResult from '../components/SearchResult'
+import SearchResult from '../subscreens/SearchResult'
+import HomeOptions from '../subscreens/HomeOptions'
 
 class HomeScreen extends React.Component {
 
@@ -23,33 +23,18 @@ class HomeScreen extends React.Component {
 
     handleSearch(string){
         this.setState({component: 'search', searchString: string})
+        this.setState({component: ''})
+        this.setState({component: 'search', searchString: string})
     }
 
     render(){
         return (
             <div>
-                <NavigationBar doSearch={this.handleSearch}/>
-                {this.state.component === 'home' &&
-                <div style={{position: 'absolute', 
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%,-50%)'}}>
-                    <Button onClick={() => this.handleComponent('newOrder')}
-                            style={{marginRight: '20px'}}
-                            intent='success'> 
-                        <h1>CREAR ORDEN</h1> 
-                    </Button>
-                    <Button onClick={() => this.handleComponent('allOrders')}
-                            intent='primary'> 
-                        <h1>VER TODAS LAS ORDENES</h1> 
-                    </Button>
-                </div>
-                }
-                {this.state.component === 'newOrder' &&
-                <NewOrderForm parentHandler={this.handleComponent}></NewOrderForm>}
+                <NavigationBar doSearch={this.handleSearch} handleComponent={this.handleComponent}/>
+                {this.state.component === 'home' && <HomeOptions handleComponent={this.handleComponent}/>}
+                {this.state.component === 'newOrder' && <NewOrderForm parentHandler={this.handleComponent}/>}
                 {this.state.component === 'allOrders' && <OrderList/>}
-                {this.state.component === 'search' && 
-                <SearchResult searchString={this.state.searchString}/>}
+                {this.state.component === 'search' && <SearchResult searchString={this.state.searchString}/>}
             </div>
         )
     }

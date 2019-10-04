@@ -1,6 +1,7 @@
 import React from 'react'
 import {searchOrders} from '../efixService'
-import OrderResultBox from './OrderResultBox'
+import OrderResultBox from '../components/OrderBox'
+import { InputGroup } from '@blueprintjs/core'
 
 class SearchResult extends React.Component{
 
@@ -8,12 +9,18 @@ class SearchResult extends React.Component{
         super(props)
         this.state = {
             isLoaded: false,
-            orders: []
+            orders: [],
+            searchString: this.props.searchString
         }
+        this.cargarOrdenes = this.cargarOrdenes.bind(this)
     }
 
     componentDidMount(){
-        const string = this.props.searchString
+        this.cargarOrdenes()
+    }
+
+    cargarOrdenes(){
+        const string = this.state.searchString
         const orderBoxes = []
         searchOrders(string, (err, result)=>{
             result.forEach((elem) => {
@@ -39,8 +46,7 @@ class SearchResult extends React.Component{
             orders: orderBoxes,
             isLoaded: true
        })
-    })    
-
+    }) 
     }
 
     render(){
@@ -50,7 +56,11 @@ class SearchResult extends React.Component{
                     <h1>Resultados de búsquedas</h1>
                     
                         {this.state.orders}
-                   
+                    <InputGroup
+                        type='hidden'
+                        value={this.state.searchString}
+                        onChange={this.cargarOrdenes}
+                    ></InputGroup>
                 </div>
             )
         } else {

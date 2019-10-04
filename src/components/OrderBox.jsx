@@ -54,7 +54,7 @@ class OrderResultBox extends React.Component{
         if(value === 'RECIBIDO'){return 'Recibido'}
         if(value === 'ESPERANDO_PRESUPUESTO'){return 'Esperando aprobación de presupuesto'}
         if(value === 'REPARACION'){return 'En reparación'}
-        if(value === 'RETIRAR_SINARREGLO'){return 'Listo para retirar sin arreglar'}
+        if(value === 'RETIRAR_SINARREGLO'){return 'Listo para retirar sin reparar'}
         if(value === 'REPARADO'){return 'Reparado'}
         if(value === 'CANCELADA'){return 'Reparación Cancelada'}
         if(value === 'ENTREGADO'){return 'Entregado'}
