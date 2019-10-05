@@ -1,8 +1,8 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
 import {validateUser} from '../efixService'
-import { FormGroup, InputGroup, Alert} from "@blueprintjs/core"
-import { Colors } from "@blueprintjs/core"
+import { FormGroup, InputGroup, Alert} from '@blueprintjs/core'
+import { Colors } from '@blueprintjs/core'
 import {Image} from 'react-bootstrap'
 import '../styles/LoginScreen.css'
 
@@ -13,9 +13,9 @@ class LoginScreen extends React.Component {
         this.state = {
             isLoggedIn: false,
             alert: false,
-            msg: "",
-            user: "",
-            pass: "",
+            msg: '',
+            user: '',
+            pass: '',
         }
         this.handleLogin = this.handleLogin.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -44,14 +44,14 @@ class LoginScreen extends React.Component {
     render () {  
         return (
             <div>
-                {this.state.isLoggedIn && <Redirect to="/home"/>}
+                {this.state.isLoggedIn && <Redirect to='/home'/>}
                 <Alert isOpen={this.state.alert}
-                    onClose={()=>{this.setState({user: "", pass: "", alert: false})}}>
+                    onClose={()=>{this.setState({user: '', pass: '', alert: false})}}>
                     {this.state.msg}
                 </Alert>
                 <form onSubmit={this.handleLogin}>
-                    <FormGroup style={{textAlign: "center", marginTop: '150px'}}> 
-                        <Image style={{width:'350px', marginTop: '-50px'}} src="../efixlogo.png"/>
+                    <FormGroup style={{textAlign: 'center', marginTop: '150px'}}> 
+                        <Image style={{width:'350px', marginTop: '-50px'}} src='../efixlogo.png'/>
                         <h2>Gestor de Órdenes de Reparación</h2>
                         <InputGroup 
                             style={{marginTop: '10px', maxWidth: '200px'}}

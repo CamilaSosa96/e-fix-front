@@ -1,7 +1,7 @@
 import React from 'react'
-import { Redirect } from "react-router-dom"
+import { Redirect } from 'react-router-dom'
 import NavigationBar from '../components/NavigationBar'
-import { Button } from "@blueprintjs/core"
+import { Button } from '@blueprintjs/core'
 
 class HomeScreen extends React.Component {
 
@@ -17,19 +17,24 @@ class HomeScreen extends React.Component {
         return (
             <div>
                 <NavigationBar/>
-                {this.state.goCreate && <Redirect to="/createOrder"/>}
-                {this.state.goSeeAll && <Redirect to="/orders"/>}
-                <div style={{}}>
-                    <Button onClick={() => this.setState({goCreate: true})}
-                            style={{marginRight: '20px'}}
+                {this.state.goCreate && <Redirect to='/createOrder'/>}
+                {this.state.goSeeAll && <Redirect to='/orders'/>}
+                <div style={{textAlign: 'center'}}>
+                    <div>
+                    <Button style={{width:'500px', marginTop: '100px'}}
+                            onClick={() => this.setState({goCreate: true})}
                             intent='success'> 
                         <h1>CREAR ORDEN</h1> 
                     </Button>
-                    <Button onClick={() => this.setState({goSeeAll: true})}
+                    </div>
+                    <div>
+                    <Button style={{width:'500px', marginTop: '100px'}}
+                            onClick={() => this.setState({goSeeAll: true})}
                             intent='primary'> 
                         <h1>VER TODAS LAS ORDENES</h1> 
                     </Button>
-            </div>
+                    </div>  
+                </div>
             </div>
         )
     }
