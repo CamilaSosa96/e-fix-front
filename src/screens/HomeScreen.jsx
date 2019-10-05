@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import NavigationBar from '../components/NavigationBar'
-import { Button } from '@blueprintjs/core'
+import { Button, Icon } from '@blueprintjs/core'
 
 class HomeScreen extends React.Component {
 
@@ -23,6 +23,7 @@ class HomeScreen extends React.Component {
                     <div>
                     <Button style={{width:'500px', marginTop: '100px'}}
                             onClick={() => this.setState({goCreate: true})}
+                            icon={<Icon icon='add' iconSize='25'/>}
                             intent='success'> 
                         <h1>CREAR ORDEN</h1> 
                     </Button>
@@ -30,6 +31,7 @@ class HomeScreen extends React.Component {
                     <div>
                     <Button style={{width:'500px', marginTop: '100px'}}
                             onClick={() => this.setState({goSeeAll: true})}
+                            icon={<Icon icon='list' iconSize='25'/>}
                             intent='primary'> 
                         <h1>VER TODAS LAS ORDENES</h1> 
                     </Button>

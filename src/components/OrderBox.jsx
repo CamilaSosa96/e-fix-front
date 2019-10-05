@@ -92,7 +92,7 @@ class OrderResultBox extends React.Component{
                         <Button onClick={this.updateState}> Aceptar </Button>
                 </Dialog>
                 <Card elevation={Elevation.TWO} interactive='true'
-                      style={{width: '500px', height: '150px', marginBottom: '30px'}}>
+                      style={{width: '500px', height: '150px', marginBottom: '30px', textAlign: 'center'}}>
                     <div style={{display: 'inline-block'}}>
                         <div>   
                             {this.props.brand} {"  "} {this.props.model}
