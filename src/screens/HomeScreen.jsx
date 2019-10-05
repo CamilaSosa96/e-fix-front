@@ -1,40 +1,35 @@
 import React from 'react'
-import NewOrderForm from '../subscreens/NewOrderForm'
-import OrderList from '../subscreens/OrderList'
+import { Redirect } from "react-router-dom"
 import NavigationBar from '../components/NavigationBar'
-import SearchResult from '../subscreens/SearchResult'
-import HomeOptions from '../subscreens/HomeOptions'
+import { Button } from "@blueprintjs/core"
 
 class HomeScreen extends React.Component {
 
     constructor(props){
         super(props)
         this.state = {
-            component: 'home',
-            searchString: ""
+            goCreate: false, 
+            goSeeAll: false
         }
-        this.handleComponent = this.handleComponent.bind(this)
-        this.handleSearch = this.handleSearch.bind(this)
-    }
-    
-    handleComponent(componentName){
-        this.setState({component: componentName})
-    }
-
-    handleSearch(string){
-        this.setState({component: 'search', searchString: string})
-        this.setState({component: ''})
-        this.setState({component: 'search', searchString: string})
     }
 
     render(){
         return (
             <div>
-                <NavigationBar doSearch={this.handleSearch} handleComponent={this.handleComponent}/>
-                {this.state.component === 'home' && <HomeOptions handleComponent={this.handleComponent}/>}
-                {this.state.component === 'newOrder' && <NewOrderForm parentHandler={this.handleComponent}/>}
-                {this.state.component === 'allOrders' && <OrderList/>}
-                {this.state.component === 'search' && <SearchResult searchString={this.state.searchString}/>}
+                <NavigationBar/>
+                {this.state.goCreate && <Redirect to="/createOrder"/>}
+                {this.state.goSeeAll && <Redirect to="/orders"/>}
+                <div style={{}}>
+                    <Button onClick={() => this.setState({goCreate: true})}
+                            style={{marginRight: '20px'}}
+                            intent='success'> 
+                        <h1>CREAR ORDEN</h1> 
+                    </Button>
+                    <Button onClick={() => this.setState({goSeeAll: true})}
+                            intent='primary'> 
+                        <h1>VER TODAS LAS ORDENES</h1> 
+                    </Button>
+            </div>
             </div>
         )
     }

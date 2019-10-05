@@ -5,7 +5,7 @@ class RedirScreen extends React.Component {
 
     render(){
         return (
-            <Redirect to='/login' />
+            <Redirect to='/login'/>
         )
     }
 

@@ -1,10 +1,10 @@
 import React from 'react'
-import { FormGroup, InputGroup, Alert} from "@blueprintjs/core";
-import {Image} from 'react-bootstrap'
-import { Colors } from "@blueprintjs/core";
-import '../styles/LoginScreen.css'
 import {Redirect} from 'react-router-dom'
 import {validateUser} from '../efixService'
+import { FormGroup, InputGroup, Alert} from "@blueprintjs/core"
+import { Colors } from "@blueprintjs/core"
+import {Image} from 'react-bootstrap'
+import '../styles/LoginScreen.css'
 
 class LoginScreen extends React.Component {
 

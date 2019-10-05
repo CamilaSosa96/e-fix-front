@@ -1,4 +1,5 @@
 import React from 'react'
+import {Redirect} from 'react-router-dom'
 import {Navbar, InputGroup, Icon, Colors} from '@blueprintjs/core'
 
 class NavigationBar extends React.Component{
@@ -7,6 +8,7 @@ class NavigationBar extends React.Component{
         super(props)
         this.state = {
             search: "",
+            goSearch: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
@@ -18,12 +20,16 @@ class NavigationBar extends React.Component{
     }
 
     handleSearch(){
-        this.setState({search: ""})
-        this.props.doSearch(this.state.search)  
+        if(this.state.search !== ""){
+            this.setState({goSearch: true})
+        }
+        
     }
 
     render(){
         return(
+            <div>
+            {this.state.goSearch && <Redirect to={`/orders/${this.state.search}`} />}
             <Navbar style={{backgroundColor: '#5B1790',
                             height: '70px',
                             position: 'relative'}}>
@@ -55,6 +61,7 @@ class NavigationBar extends React.Component{
                     />
                 </div>
             </Navbar>
+            </div>
         )
     }
 }

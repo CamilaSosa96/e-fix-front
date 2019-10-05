@@ -1,6 +1,8 @@
 import React from 'react'
-import {Button, InputGroup, Alert} from '@blueprintjs/core'
+import { Redirect } from "react-router-dom";
 import {saveOrder} from '../efixService'
+import NavigationBar from '../components/NavigationBar'
+import {Button, InputGroup, Alert} from '@blueprintjs/core'
 
 class NewOrderForm extends React.Component {
 
@@ -16,7 +18,8 @@ class NewOrderForm extends React.Component {
             problem: "",
             alert: false,
             alertMSJ: "",
-            onAlertClick: this.goBackHome
+            onAlertClick: this.goBackHome,
+            goHome: false
         }
         this.handleOrderCreation = this.handleOrderCreation.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -59,7 +62,7 @@ class NewOrderForm extends React.Component {
     }
 
     goBackHome(){
-        this.props.parentHandler('home')
+        this.setState({goHome: true})
     }
 
     render(){
@@ -71,6 +74,8 @@ class NewOrderForm extends React.Component {
                         onClose={this.state.onAlertClick}>
                         {this.state.alertMSJ}
                     </Alert>}
+                {this.state.goHome && <Redirect to="/home"/>}
+                <NavigationBar/>
                 <h1>Crear nueva orden de reparación</h1>
                 <form onSubmit={this.handleOrderCreation}>
                     <InputGroup 
@@ -120,7 +125,7 @@ class NewOrderForm extends React.Component {
                         value='Crear Orden'
                         placeholder='Crear'/>
                 </form>
-                <Button onClick={()=> this.props.parentHandler('home')}>Volver</Button>
+                <Button onClick={this.goBackHome}>Volver</Button>
             </div>
         )
     }
