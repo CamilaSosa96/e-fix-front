@@ -13,7 +13,7 @@ function App() {
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/home" component={HomeScreen} />
         <Route exact path="/createOrder" component={NewOrderForm} />
-        <Route path="/orders/:searchString" component={OrdersScreen} />
+        <Route path="/orders/:searchString" render={props => <OrdersScreen key={Date.now()} {...props} />}/>
         <Route exact path="/orders" component={OrdersScreen} />
     </Router>
   );

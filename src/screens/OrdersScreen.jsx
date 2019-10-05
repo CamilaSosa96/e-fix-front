@@ -19,7 +19,6 @@ class OrderScreen extends React.Component {
     }
 
     componentDidMount(){
-        console.log(this.props.match.params.searchString)
         let string = this.state.search
         const orderBoxes = []
         if(string === undefined){
@@ -77,8 +76,9 @@ class OrderScreen extends React.Component {
     }
     
 
+    
+
     render(){
-        
         if(this.state.isLoaded){
             return(
                 

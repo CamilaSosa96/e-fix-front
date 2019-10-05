@@ -8,7 +8,8 @@ class NavigationBar extends React.Component{
         super(props)
         this.state = {
             search: "",
-            goSearch: false
+            goSearch: false,
+            goHome: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
@@ -29,7 +30,8 @@ class NavigationBar extends React.Component{
     render(){
         return(
             <div>
-            {this.state.goSearch && <Redirect to={`/orders/${this.state.search}`} />}
+            {this.state.goSearch && <Redirect to={`/orders/${this.state.search}`}/>}
+            {this.state.goHome && <Redirect to='/home' />}
             <Navbar style={{backgroundColor: '#5B1790',
                             height: '70px',
                             position: 'relative'}}>
@@ -39,7 +41,7 @@ class NavigationBar extends React.Component{
                             transform: 'translate(0,-50%)'}}
                     src='../efixlogo.png' 
                     alt='E-FIX' 
-                    onClick={() => this.props.handleComponent('home')}/>                 
+                    onClick={()=> this.setState({goHome:true})}/>                 
                 <div style={{width: '400px',
                             height: '5x',
                             position: 'absolute',
