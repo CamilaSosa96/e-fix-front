@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import RedirScreen from './screens/RedirScreen'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
@@ -7,6 +8,7 @@ import OrdersScreen from './screens/OrdersScreen'
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 
 function App() {
+  axios.defaults.withCredentials = true
   return (
     <Router>
         <Route exact path='/' component={RedirScreen} />
