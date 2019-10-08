@@ -4,7 +4,7 @@ import axios from 'axios';
 const host = 'localhost:5000'
 
 export function validateUser(username, password, callback) {
-    axios.post(`http://${host}/authUser`,{
+    axios.post(`http://${host}/auth`,{
         user: username, 
         pass: password
     }).then((response) => {

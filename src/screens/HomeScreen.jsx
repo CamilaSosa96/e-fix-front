@@ -1,55 +1,42 @@
 import React from 'react'
-import {Button} from '@blueprintjs/core'
-import NewOrderForm from '../components/NewOrderForm'
-import OrderList from '../components/OrderList'
+import { Redirect } from 'react-router-dom'
 import NavigationBar from '../components/NavigationBar'
-import SearchResult from '../components/SearchResult'
+import { Button, Icon } from '@blueprintjs/core'
 
 class HomeScreen extends React.Component {
 
     constructor(props){
         super(props)
         this.state = {
-            component: 'home',
-            searchString: ""
+            goCreate: false, 
+            goSeeAll: false
         }
-        this.handleComponent = this.handleComponent.bind(this)
-        this.handleSearch = this.handleSearch.bind(this)
-    }
-    
-    handleComponent(componentName){
-        this.setState({component: componentName})
-    }
-
-    handleSearch(string){
-        this.setState({component: 'search', searchString: string})
     }
 
     render(){
         return (
             <div>
-                <NavigationBar doSearch={this.handleSearch}/>
-                {this.state.component === 'home' &&
-                <div style={{position: 'absolute', 
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%,-50%)'}}>
-                    <Button onClick={() => this.handleComponent('newOrder')}
-                            style={{marginRight: '20px'}}
+                <NavigationBar/>
+                {this.state.goCreate && <Redirect to='/createOrder'/>}
+                {this.state.goSeeAll && <Redirect to='/orders'/>}
+                <div style={{textAlign: 'center'}}>
+                    <div>
+                    <Button style={{width:'500px', marginTop: '100px'}}
+                            onClick={() => this.setState({goCreate: true})}
+                            icon={<Icon icon='add' iconSize='25'/>}
                             intent='success'> 
                         <h1>CREAR ORDEN</h1> 
                     </Button>
-                    <Button onClick={() => this.handleComponent('allOrders')}
+                    </div>
+                    <div>
+                    <Button style={{width:'500px', marginTop: '100px'}}
+                            onClick={() => this.setState({goSeeAll: true})}
+                            icon={<Icon icon='list' iconSize='25'/>}
                             intent='primary'> 
                         <h1>VER TODAS LAS ORDENES</h1> 
                     </Button>
+                    </div>  
                 </div>
-                }
-                {this.state.component === 'newOrder' &&
-                <NewOrderForm parentHandler={this.handleComponent}></NewOrderForm>}
-                {this.state.component === 'allOrders' && <OrderList/>}
-                {this.state.component === 'search' && 
-                <SearchResult searchString={this.state.searchString}/>}
             </div>
         )
     }
