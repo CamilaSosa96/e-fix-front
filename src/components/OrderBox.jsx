@@ -1,6 +1,7 @@
 import React from 'react'
 import {Card, Elevation, Button, Dialog} from '@blueprintjs/core'
 import {updateState} from '../efixService'
+import {stateNameTranslator} from '../handlers/StateStyleHandler'
 import OBDStateChange from './OBDStateChange'
 import OBDInformation from './OBDInformation'
 
@@ -11,11 +12,10 @@ class OrderResultBox extends React.Component{
         this.state = {
             info: false,
             editState: false,
-            productState: this.valueTranslator(this.props.state),
+            productState: stateNameTranslator(this.props.state),
             lastUpdate: this.props.lastUpdateDate
         }
         this.handleChange = this.handleChange.bind(this)
-        this.valueTranslator = this.valueTranslator.bind(this)
         this.updateState = this.updateState.bind(this)
         this.closeStateDialog = this.closeStateDialog.bind(this)
         this.handleOrderStatusChange = this.handleOrderStatusChange.bind(this)
@@ -29,7 +29,7 @@ class OrderResultBox extends React.Component{
         updateState(this.props.id, rawStateValue, (response) =>{
             this.setState({
                 editState: false, 
-                productState: this.valueTranslator(rawStateValue),
+                productState: stateNameTranslator(rawStateValue),
                 lastUpdate: new Date().toLocaleString()
             })
         })
@@ -37,17 +37,6 @@ class OrderResultBox extends React.Component{
 
     closeStateDialog(){
         this.setState({editState: false})
-    }
-
-    valueTranslator(value) {
-        if(value === 'RECIBIDO')return 'Recibido'
-        if(value === 'ESPERANDO_PRESUPUESTO')return 'Esperando aprobación de presupuesto'
-        if(value === 'REPARACION')return 'En reparación'
-        if(value === 'RETIRAR_SINARREGLO')return 'Listo para retirar sin reparar'
-        if(value === 'REPARADO')return 'Reparado'
-        if(value === 'CANCELADA')return 'Reparación Cancelada'
-        if(value === 'ENTREGADO')return 'Entregado'
-        return ''
     }
 
     stateInfo(){
@@ -58,7 +47,7 @@ class OrderResultBox extends React.Component{
     }
 
     handleOrderStatusChange(rawStateValue){
-        this.setState({editState: false, productState: this.valueTranslator(rawStateValue)})
+        this.setState({editState: false, productState: stateNameTranslator(rawStateValue)})
         this.updateState(rawStateValue)
     }
 
@@ -78,7 +67,6 @@ class OrderResultBox extends React.Component{
                                         handleChange = {this.handleChange}
                                         updateState={this.updateState}
                                         closeStateDialog={this.closeStateDialog}
-                                        valueTranslator={this.valueTranslator}
                                         handleOrderStatusChange = {this.handleOrderStatusChange}></OBDStateChange>
                 </Dialog>
                 <Card elevation={Elevation.TWO} 
