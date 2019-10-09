@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import {saveOrder} from '../efixService'
+import {saveOrder, isAuthored} from '../efixService'
 import NavigationBar from '../components/NavigationBar'
 import {Button, InputGroup, Alert, Card, Icon} from '@blueprintjs/core'
 
@@ -19,6 +19,7 @@ class NewOrderForm extends React.Component {
             alertMSJ: '',
             alert: false,
             goHome: false,
+            goLogin: false,
             onAlertClick: this.goBackHome
         }
         this.handleOrderCreation = this.handleOrderCreation.bind(this)
@@ -26,6 +27,12 @@ class NewOrderForm extends React.Component {
         this.isValidOrder = this.isValidOrder.bind(this)
         this.goBackHome = this.goBackHome.bind(this)
         this.closeAlert = this.closeAlert.bind(this)
+    }
+
+    componentDidMount(){
+        isAuthored((error, response) => {
+            if(error){this.setState({goLogin: true})}
+        })
     }
 
     handleOrderCreation(event){
@@ -69,6 +76,7 @@ class NewOrderForm extends React.Component {
         return(
             <div>
                 <div>
+                    {this.state.goLogin && <Redirect to='/login'/>}
                     {this.state.alert && 
                         <Alert
                             isOpen={this.state.alert} 

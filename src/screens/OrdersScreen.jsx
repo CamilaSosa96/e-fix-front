@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { Redirect } from 'react-router-dom'
-import {searchOrders, getAllOrders} from '../efixService'
+import {searchOrders, getAllOrders, isAuthored} from '../efixService'
 import OrderResultBox from '../components/OrderBox'
 import NavigationBar from '../components/NavigationBar'
 import { Button, Icon, Spinner, Alert } from '@blueprintjs/core'
@@ -15,6 +15,7 @@ class OrderScreen extends React.Component {
             search: this.props.match.params.searchString,
             isLoaded: false,
             goHome: false,
+            goLogin: false,
             alert: false,
             msg: ''
         }
@@ -22,6 +23,9 @@ class OrderScreen extends React.Component {
     }
 
     componentDidMount(){
+        isAuthored((error, response) => {
+            if(error){this.setState({goLogin: true})}
+        })
         let string = this.state.search
         if(string === undefined){
             getAllOrders((err, result) => {
@@ -77,6 +81,7 @@ class OrderScreen extends React.Component {
                     onClose={()=>{this.setState({goHome: true})}}>
                     {this.state.msg}
                 </Alert>
+                {this.state.goLogin && <Redirect to='/login'/>}
                 {this.state.goHome && <Redirect to='/home'/>}
                 {this.state.isLoaded ? 
                     <div>

@@ -14,6 +14,14 @@ export function validateUser(username, password, callback) {
     });
 }
 
+export function isAuthored(callback){
+    axios.get(`http://${host}/isAuthored`).then((response) => {
+        callback(null, response);
+    }).catch((error) => {
+        callback(error, null);
+    });
+}
+
 export function saveOrder(name, dni, email, type, brand, model, problem, callback){
     axios.post(`http://${host}/saveOrder`, {
         clientName: name,

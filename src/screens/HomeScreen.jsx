@@ -1,5 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
+import {isAuthored} from '../efixService'
 import NavigationBar from '../components/NavigationBar'
 import { Button, Icon } from '@blueprintjs/core'
 
@@ -9,14 +10,22 @@ class HomeScreen extends React.Component {
         super(props)
         this.state = {
             goCreate: false, 
-            goSeeAll: false
+            goSeeAll: false,
+            goLogin: false
         }
+    }
+
+    componentDidMount(){
+        isAuthored((error, response) => {
+            if(error){this.setState({goLogin: true})}
+        })
     }
 
     render(){
         return (
             <div>
                 <NavigationBar/>
+                {this.state.goLogin && <Redirect to='/login'/>}
                 {this.state.goCreate && <Redirect to='/createOrder'/>}
                 {this.state.goSeeAll && <Redirect to='/orders'/>}
                 <div style={{textAlign: 'center'}}>
