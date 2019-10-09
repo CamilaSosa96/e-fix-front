@@ -17,28 +17,37 @@ class OrderScreen extends React.Component {
             goHome: false,
             goLogin: false,
             alert: false,
-            msg: ''
+            msg: '',
         }
+        this._isMounted = false
         this.createBoxesFromArray = this.createBoxesFromArray.bind(this)
     }
 
     componentDidMount(){
-        isAuthored((error, response) => {
-            if(error){this.setState({goLogin: true})}
-        })
-        let string = this.state.search
-        if(string === undefined){
-            getAllOrders((err, result) => {
-               if(err) this.setState({msg: 'No se ha podido conectar al back-end', alert: true})
-               else this.setState({orders: this.createBoxesFromArray(result), isLoaded: true})
-            })        
-        } else {
-            searchOrders(string, (err, result) =>{
-                if(err) this.setState({msg: 'No se ha podido conectar al back-end', alert: true})
-               else this.setState({orders: this.createBoxesFromArray(result), isLoaded: true})     
+        this._isMounted = true
+        {this._isMounted &&
+
+            isAuthored((error, response) => {
+                if(error){this.setState({goLogin: true})}
             })
+            let string = this.state.search
+            if(string === undefined){
+                getAllOrders((err, result) => {
+                   if(err) this._isMounted && this.setState({msg: 'No se ha podido conectar al back-end', alert: true})
+                   else this._isMounted && this.setState({orders: this.createBoxesFromArray(result), isLoaded: true})
+                })        
+            } else {
+                searchOrders(string, (err, result) =>{
+                    if(err) this._isMounted && this.setState({msg: 'No se ha podido conectar al back-end', alert: true})
+                   else this._isMounted && this.setState({orders: this.createBoxesFromArray(result), isLoaded: true})     
+                })
+            }
         }
     }
+
+    componentWillUnmount() {
+        this._isMounted = false
+     }
 
     createBoxesFromArray(orders){
         const orderBoxes = []
@@ -122,4 +131,4 @@ class OrderScreen extends React.Component {
     }
 }
 
-    export default withRouter(OrderScreen)
+export default withRouter(OrderScreen)

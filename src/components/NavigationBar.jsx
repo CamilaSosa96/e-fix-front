@@ -1,6 +1,7 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
-import {Navbar, InputGroup, Icon, Colors} from '@blueprintjs/core'
+import {isAuthored, logOut} from '../efixService'
+import {Navbar, InputGroup, Icon, Colors, Button} from '@blueprintjs/core'
 
 class NavigationBar extends React.Component{
 
@@ -8,11 +9,20 @@ class NavigationBar extends React.Component{
         super(props)
         this.state = {
             search: '',
+            username: '',
             goSearch: false,
-            goHome: false
+            goHome: false,
+            goLogin: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
+        this.handleLogOut = this.handleLogOut.bind(this)
+    }
+
+    componentDidMount(){
+        isAuthored((error, response) => {
+            if(!error) this.setState({username: response.data.user})
+        })
     }
 
     handleChange(event){
@@ -26,11 +36,19 @@ class NavigationBar extends React.Component{
         }
     }
 
+    handleLogOut(){
+        logOut((error, response) =>{
+            if(error) console.log(error)
+            this.setState({goLogin: true})
+        })
+    }
+
     render(){
         return(
             <div>
                 {this.state.goSearch && <Redirect to={`/orders/${this.state.search}`}/>}
                 {this.state.goHome && <Redirect to='/home' />}
+                {this.state.goLogin && <Redirect to='/login' />}
                 <Navbar style={{backgroundColor: '#5B1790',
                                 height: '70px',
                                 position: 'relative'}}>
@@ -62,6 +80,32 @@ class NavigationBar extends React.Component{
                                     onClick={this.handleSearch}
                                 />}
                         />
+                    </div>
+                    <div style={{ 
+                            position: 'absolute',
+                            top: '80%',
+                            left: '80%',
+                            transform: 'translate(-80%, -80%)',
+                            display: 'inline',
+                            color: 'white'
+                        }}>
+                        <p>
+                            ¡Hola {this.state.username}!
+                        </p>
+                    </div>
+                    <div>
+                        <Button style={{
+                                    position: 'absolute',
+                                    top: '90%',
+                                    left: '90%',
+                                    transform: 'translate(-90%, -90%)',
+                                    display: 'inline',
+                                    color: 'white'
+                                }}
+                                onClick={this.handleLogOut}
+                                intent='primary'>
+                            <p>Salir</p>
+                        </Button>
                     </div>
                 </Navbar>
             </div>

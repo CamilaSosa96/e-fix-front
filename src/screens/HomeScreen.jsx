@@ -42,9 +42,9 @@ class HomeScreen extends React.Component {
                             onClick={() => this.setState({goSeeAll: true})}
                             icon={<Icon icon='list' iconSize='25'/>}
                             intent='primary'> 
-                        <h1>VER TODAS LAS ORDENES</h1> 
+                        <h1>VER TODAS LAS ORDENES</h1>
                     </Button>
-                    </div>  
+                    </div>
                 </div>
             </div>
         )

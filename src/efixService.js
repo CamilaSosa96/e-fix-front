@@ -22,6 +22,14 @@ export function isAuthored(callback){
     });
 }
 
+export function logOut(callback){
+    axios.get(`http://${host}/endSession`).then((response) => {
+        callback(null, response);
+    }).catch((error) => {
+        callback(error, null);
+    });
+}
+
 export function saveOrder(name, dni, email, type, brand, model, problem, callback){
     axios.post(`http://${host}/saveOrder`, {
         clientName: name,
