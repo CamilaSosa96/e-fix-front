@@ -18,6 +18,7 @@ class OrderScreen extends React.Component {
             goLogin: false,
             alert: false,
             msg: '',
+            title: ''
         }
         this._isMounted = false
         this.createBoxesFromArray = this.createBoxesFromArray.bind(this)
@@ -27,19 +28,23 @@ class OrderScreen extends React.Component {
         this._isMounted = true
         {this._isMounted &&
 
-            isAuthored((error, response) => {
+            isAuthored((error, _response) => {
                 if(error){this.setState({goLogin: true})}
             })
             let string = this.state.search
             if(string === undefined){
                 getAllOrders((err, result) => {
                    if(err) this._isMounted && this.setState({msg: 'No se ha podido conectar al back-end', alert: true})
-                   else this._isMounted && this.setState({orders: this.createBoxesFromArray(result), isLoaded: true})
+                   else this._isMounted && this.setState({orders: this.createBoxesFromArray(result), 
+                                                        isLoaded: true,
+                                                        title: 'Todas las ordenes'})
                 })        
             } else {
                 searchOrders(string, (err, result) =>{
                     if(err) this._isMounted && this.setState({msg: 'No se ha podido conectar al back-end', alert: true})
-                   else this._isMounted && this.setState({orders: this.createBoxesFromArray(result), isLoaded: true})     
+                   else this._isMounted && this.setState({orders: this.createBoxesFromArray(result), 
+                                                        isLoaded: true, 
+                                                        title: 'Resultados de búsqueda'})     
                 })
             }
         }
@@ -105,7 +110,7 @@ class OrderScreen extends React.Component {
                                 </div> 
                                 :
                                 <div style={{display: 'inline'}}>
-                                    <h1>Resultados de búsqueda</h1>
+                                    <h1>{this.state.title}</h1>
                                     <div style={{width: '500px',
                                                 margin: '0 auto'}}>
                                         {this.state.orders}

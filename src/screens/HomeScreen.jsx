@@ -16,7 +16,7 @@ class HomeScreen extends React.Component {
     }
 
     componentDidMount(){
-        isAuthored((error, response) => {
+        isAuthored((error, _response) => {
             if(error){this.setState({goLogin: true})}
         })
     }
