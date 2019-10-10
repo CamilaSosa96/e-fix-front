@@ -67,7 +67,8 @@ class OrderResultBox extends React.Component{
     render(){
         return (
             <div>
-                <Dialog isOpen={this.state.info} onClose={()=> this.setState({info: false})}>
+                <Dialog isOpen={this.state.info} onClose={()=> this.setState({info: false})}
+                        style={{width: '550px', height: '400px'}}>
                    <OBDInformation orderInfo ={this.props} 
                                     stateInfo={this.state.productState}
                                     dateInfo={this.state.lastUpdate}                
