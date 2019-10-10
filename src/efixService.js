@@ -81,6 +81,18 @@ export function updateState(id, state, callback){
     })
 }
 
+export function loadBudget(id, diagnosis, budget, callback){
+    axios.post(`http://${host}/loadBudget`, {
+        id: id,
+        diagnosis: diagnosis,
+        budget: budget
+    }).then((response) =>{
+        callback(null, response);
+    }).catch((error) => {
+        callback(error, null);
+    })
+}
+
 export function searchOrders(string, callback){
     axios.get(`http://${host}/search/${string}`).then((response) =>{ 
         const orderList = response.data.result; 

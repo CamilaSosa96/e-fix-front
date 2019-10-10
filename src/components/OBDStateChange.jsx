@@ -27,9 +27,7 @@ render(){
         <h1>Cambiar estado de {this.props.orderInfo.brand}{' '}{this.props.orderInfo.model}</h1>
                         <select value={this.state.stateValue}
                                 onChange={this.handleChange}>
-                        <option value='RECIBIDO'>{stateNameTranslator('RECIBIDO')}</option>
-                        <option value='ESPERANDO_PRESUPUESTO'>{stateNameTranslator('ESPERANDO_PRESUPUESTO')}</option>
-                        <option value='REPARACION'>{stateNameTranslator('REPARACION')}</option>
+                        <option value='RECIBIDO'>{stateNameTranslator('RECIBIDO')}</option><option value='REPARACION'>{stateNameTranslator('REPARACION')}</option>
                         <option value='RETIRAR_SINARREGLO'>{stateNameTranslator('RETIRAR_SINARREGLO')}</option>
                         <option value='REPARADO'>{stateNameTranslator('REPARADO')}</option>
                         <option value='CANCELADA'>{stateNameTranslator('CANCELADA')}</option>
