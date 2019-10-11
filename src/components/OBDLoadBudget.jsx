@@ -30,6 +30,7 @@ class OBDLoadBudget extends React.Component {
                 <textarea placeholder='Diagnóstico'
                             name='diag'
                             onChange = {this.handleChange}
+                            maxLength='30'
                 />
                 <InputGroup type='number' 
                             name='bud'

@@ -37,7 +37,7 @@ class NavigationBar extends React.Component{
     }
 
     handleLogOut(){
-        logOut((error, response) =>{
+        logOut((error, _response) =>{
             if(error) console.log(error)
             this.setState({goLogin: true})
         })
@@ -73,6 +73,7 @@ class NavigationBar extends React.Component{
                             value={this.state.search}
                             placeholder='Buscar una orden por e-mail'
                             onChange = {this.handleChange}
+                            maxLength='30'
                             rightElement={
                                 <Icon icon='search'
                                     intent='primary' 

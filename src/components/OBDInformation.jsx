@@ -1,5 +1,5 @@
 import React from 'react'
-import {Divider, Colors} from '@blueprintjs/core'
+import {Dialog, Icon, Colors} from '@blueprintjs/core'
 
 class OBDInformation extends React.Component {
 
@@ -7,45 +7,49 @@ class OBDInformation extends React.Component {
         super(props)
         this.getDiagnosis = this.getDiagnosis.bind(this)
         this.getBudget = this.getBudget.bind(this)
+        this.handleClose = this.handleClose.bind(this)
     }
 
     getDiagnosis(){
-        if(this.props.orderInfo.diagnosis === null){
-            return 'No disponible'
-        } else {
-            return this.props.orderInfo.diagnosis
-        }
+        return this.props.orderInfo.diagnosis === null ? 
+        'No disponible' :
+        this.props.orderInfo.diagnosis
     }
 
     getBudget(){
-        if(this.props.orderInfo.budget === null){
-            return 'No disponible'
-        } else {
-            return this.props.orderInfo.budget
-        }
+        return this.props.orderInfo.budget === null ?
+        'No disponible' :
+        this.props.orderInfo.budget
     }
 
-render(){
-    return(
-        <div style={{backgroundColor: Colors.VIOLET1}}>
-            <div style={{backgroundColor: 'white', marginLeft: '20px', marginRight: '20px'}}>
-                <h1>Orden de Reparación #{this.props.orderInfo.id}</h1>
-                <Divider/>
-                <h3>Nombre del Cliente: {this.props.orderInfo.name}</h3>
-                <h3>DNI: {this.props.orderInfo.dni}</h3>
-                <h3>E-mail: {this.props.orderInfo.email}</h3>
-                <Divider/>
-                <h3>Producto: [{this.props.orderInfo.type}] {this.props.orderInfo.brand}{' '}{this.props.orderInfo.model}</h3>
-                <h3>Falla inicial: {this.props.orderInfo.problem}</h3>
-                <h3>Diagnóstico: {this.getDiagnosis()}</h3>
-                <h3>Presupuesto: {this.getBudget()}</h3>
-                <Divider/>
-                <h3>Estado: {this.props.stateInfo}</h3>
-                <h3>Última actualización: {this.props.dateInfo}</h3>
-            </div>
-        </div>
-    )
-}
+    handleClose(){
+        this.setState({isOpen: false})
+        this.props.closeInfoDialog()
+    }
+
+    render(){
+        return(
+            <Dialog isOpen={this.props.isOpen}
+                    icon={<Icon icon='info-sign' 
+                                iconSize='30'
+                                style={{marginRight: '10px', marginTop: '7px', color: Colors.VIOLET4}} />}
+                    title={<p style={{fontSize: '30px', marginTop: '12px'}}>Orden de Reparación #{this.props.orderInfo.id}</p>}
+                    onClose={this.handleClose}
+                    style={{width: '600px', height: '350px'}}>
+                <div style={{fontSize: '18px', marginLeft: '10px', marginTop: '5px'}}>
+                    <p> <Icon icon='user'/><b> Cliente:</b> {this.props.orderInfo.name}</p>
+                    <p><Icon icon='id-number'/><b> DNI:</b> {this.props.orderInfo.dni}</p>
+                    <p><Icon icon='envelope'/><b> E-mail:</b> {this.props.orderInfo.email}</p>
+                    <p><Icon icon='desktop'/><b> Producto:</b> {this.props.orderInfo.type} {this.props.orderInfo.brand} {this.props.orderInfo.model}</p>
+                    <p><Icon icon='cross'/><b> Falla incial:</b> {this.props.orderInfo.problem}</p>
+                    <p><Icon icon='warning-sign'/><b> Diagnóstico:</b> {this.getDiagnosis()}</p>
+                    <p><Icon icon='dollar'/><b> Presupuesto:</b> {this.getBudget()}</p>
+                    <p><Icon icon='wrench'/><b> Estado:</b> {this.props.stateInfo}</p>
+                    <p><Icon icon='calendar'/><b> Última actualización:</b> {this.props.dateInfo}</p>
+                </div>
+            </Dialog>
+        )
+    }
 
 }
 

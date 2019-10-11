@@ -58,12 +58,14 @@ class LoginScreen extends React.Component {
                             name='user' 
                             type='text'
                             placeholder='Usuario'
+                            maxLength='20'
                             onChange={this.handleChange}/>
                         <InputGroup 
                             style={{marginTop: '10px', maxWidth: '200px'}}
                             name='pass'
                             type='password' 
                             placeholder='Contraseña'
+                            maxLength='20'
                             onChange={this.handleChange}/>              
                         <InputGroup
                             style={{marginTop: '10px', 

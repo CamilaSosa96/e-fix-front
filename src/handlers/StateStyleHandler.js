@@ -21,9 +21,9 @@ export function stateColorSelector(rawStateName){
 }
 
 export function stateIconSelector(rawStateName){
-    if(rawStateName === 'RECIBIDO')return 'id-number'
+    if(rawStateName === 'RECIBIDO')return 'import'
     if(rawStateName === 'ESPERANDO_PRESUPUESTO')return 'dollar'
-    if(rawStateName === 'REPARACION')return 'build'
+    if(rawStateName === 'REPARACION')return 'wrench'
     if(rawStateName === 'RETIRAR_SINARREGLO')return 'ban-circle'
     if(rawStateName === 'REPARADO')return 'clean'
     if(rawStateName === 'CANCELADA')return 'delete' 

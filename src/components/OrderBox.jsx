@@ -24,6 +24,7 @@ class OrderResultBox extends React.Component{
         this.closeStateDialog = this.closeStateDialog.bind(this)
         this.handleOrderStatusChange = this.handleOrderStatusChange.bind(this)
         this.handleBudget = this.handleBudget.bind(this)
+        this.closeInfoDialog = this.closeInfoDialog.bind(this)
     }
 
     handleChange(event){
@@ -64,16 +65,20 @@ class OrderResultBox extends React.Component{
         })
     }
 
+    closeInfoDialog(){
+        this.setState({info: false})
+    }
+
     render(){
         return (
             <div>
-                <Dialog isOpen={this.state.info} onClose={()=> this.setState({info: false})}
-                        style={{width: '550px', height: '400px'}}>
-                   <OBDInformation orderInfo ={this.props} 
-                                    stateInfo={this.state.productState}
-                                    dateInfo={this.state.lastUpdate}                
-                    />
-                </Dialog>
+                {this.state.info && 
+                <OBDInformation isOpen = {this.state.info}
+                                closeInfoDialog = {this.closeInfoDialog}
+                                orderInfo ={this.props}
+                                stateInfo={this.state.productState}
+                                dateInfo={this.state.lastUpdate}/>
+                }
                 <Dialog isOpen={this.state.editState} onClose={()=> this.setState({editState: true})}>      
                     <OBDStateChange orderInfo = {this.props}
                                     handleChange = {this.handleChange}

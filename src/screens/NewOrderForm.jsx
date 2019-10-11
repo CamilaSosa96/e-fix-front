@@ -97,6 +97,7 @@ class NewOrderForm extends React.Component {
                             name='name'
                             value={this.state.name}
                             onChange={this.handleChange}
+                            maxLength='30'
                             placeholder='Nombre del cliente'/>
                         <InputGroup
                             style={{width: '200px', marginBottom: '10px'}}
@@ -104,13 +105,16 @@ class NewOrderForm extends React.Component {
                             name='dni'
                             value={this.state.dni}
                             onChange={this.handleChange}
+                            min='0'
+                            max='9999999999'
                             placeholder='DNI del cliente'/>
                         <InputGroup
                             style={{width: '200px', marginBottom: '10px'}}
-                            type='text'
+                            type='email'
                             name='email'
                             value={this.state.email}
                             onChange={this.handleChange}
+                            maxLength='30'
                             placeholder='Correo electrónico'/>
                         <InputGroup
                             style={{width: '200px', marginBottom: '10px'}}
@@ -118,6 +122,7 @@ class NewOrderForm extends React.Component {
                             name='type'
                             value={this.state.type}
                             onChange={this.handleChange}
+                            maxLength='30'
                             placeholder='Tipo de producto'/>
                         <InputGroup
                             style={{width: '200px', marginBottom: '10px'}}
@@ -125,6 +130,7 @@ class NewOrderForm extends React.Component {
                             name='brand'
                             value={this.state.brand}
                             onChange={this.handleChange}
+                            maxLength='30'
                             placeholder='Marca del producto'/>                      
                         <InputGroup
                             style={{width: '200px', marginBottom: '10px'}}
@@ -132,6 +138,7 @@ class NewOrderForm extends React.Component {
                             name='model'
                             value={this.state.model}
                             onChange={this.handleChange}
+                            maxLength='30'
                             placeholder='Modelo del producto'/>
                         </div>
                         <div style={{display: 'inline-block', marginLeft: '20px'}}>
@@ -141,7 +148,8 @@ class NewOrderForm extends React.Component {
                             name='problem'
                             value={this.state.problem}
                             onChange={this.handleChange}
-                            placeholder='Falla inicial'/>
+                            placeholder='Falla inicial'
+                            maxLength='30'/>
                         <InputGroup
                             style={{width: '200px', backgroundColor: '#C4FAD1'}}
                             type='submit'
