@@ -118,4 +118,35 @@ export function searchOrders(string, callback){
     }).catch((error) => {
         callback(error, null);
     })
+
+}
+
+export function searchOrderForApproval(dni, id, callback){
+    axios.get(`http://${host}/budgetApproval/${dni}/${id}`).then((response) => {
+        const order = {    
+            id: response.data.id,                              
+            name: response.data.nombre_cliente,
+            dni: response.data.dni_cliente,
+            email: response.data.email_cliente,
+            type: response.data.tipo_producto,
+            brand: response.data.marca_producto,
+            model: response.data.modelo_producto,
+            problem: response.data.problema_inicial,
+            diagnosis: response.data.diagnostico,
+            budget: response.data.presupuesto,
+            state: response.data.estado_producto,
+            lastUpdateDate: response.data.fecha_actualizacion
+        }
+        callback(null, order)
+    }).catch((error) => {
+        callback(error, null);
+    })
+}
+
+export function sendClientResponse(id, dni, choice, callback){
+    axios.post(`http://${host}/clientResponse/${id}/${dni}`, {choice: choice}).then((response)=>{
+        callback(null, response)
+    }).catch((error) => {
+        callback(error, null);
+    })
 }
