@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Elevation, Button, Dialog, Tag} from '@blueprintjs/core'
+import {Card, Elevation, Button, Tag} from '@blueprintjs/core'
 import {updateState, loadBudget} from '../efixService'
 import {stateNameTranslator, stateIconSelector, stateColorSelector} from '../handlers/StateStyleHandler'
 import OBDStateChange from './OBDStateChange'
@@ -21,10 +21,9 @@ class OrderResultBox extends React.Component{
         }
         this.handleChange = this.handleChange.bind(this)
         this.updateState = this.updateState.bind(this)
-        this.closeStateDialog = this.closeStateDialog.bind(this)
         this.handleOrderStatusChange = this.handleOrderStatusChange.bind(this)
         this.handleBudget = this.handleBudget.bind(this)
-        this.closeInfoDialog = this.closeInfoDialog.bind(this)
+        this.closeDialog = this.closeDialog.bind(this)
     }
 
     handleChange(event){
@@ -38,10 +37,6 @@ class OrderResultBox extends React.Component{
                 lastUpdate: new Date().toLocaleString(),
             })
         })
-    }
-
-    closeStateDialog(){
-        this.setState({editState: false, budgetLoad: false})
     }
 
     stateInfo(){
@@ -65,8 +60,8 @@ class OrderResultBox extends React.Component{
         })
     }
 
-    closeInfoDialog(){
-        this.setState({info: false})
+    closeDialog(){
+        this.setState({info: false, editState: false, budgetLoad: false})
     }
 
     render(){
@@ -74,25 +69,25 @@ class OrderResultBox extends React.Component{
             <div>
                 {this.state.info && 
                 <OBDInformation isOpen = {this.state.info}
-                                closeInfoDialog = {this.closeInfoDialog}
+                                closeDialog = {this.closeDialog}
                                 orderInfo ={this.props}
                                 stateInfo={this.state.productState}
-                                dateInfo={this.state.lastUpdate}/>
-                }
-                <Dialog isOpen={this.state.editState} onClose={()=> this.setState({editState: true})}>      
-                    <OBDStateChange orderInfo = {this.props}
-                                    handleChange = {this.handleChange}
-                                    updateState={this.updateState}
-                                    closeStateDialog={this.closeStateDialog}
-                                    handleOrderStatusChange = {this.handleOrderStatusChange}
-                    />
-                </Dialog>
-                <Dialog isOpen={this.state.budgetLoad} onClose={()=> this.setState({budgetLoad: false})}>
-                    <OBDLoadBudget orderInfo = {this.props}
-                                    handleBudget = {this.handleBudget}
-                                    closeStateDialog={this.closeStateDialog}
-                    />
-                </Dialog>
+                                dateInfo={this.state.lastUpdate}
+                />}
+                {this.state.editState && 
+                <OBDStateChange isOpen = {this.state.editState}
+                                closeDialog={this.closeDialog}
+                                orderInfo = {this.props}
+                                handleChange = {this.handleChange}
+                                updateState={this.updateState}
+                                handleOrderStatusChange = {this.handleOrderStatusChange}
+                />}
+                {this.state.budgetLoad &&
+                <OBDLoadBudget  isOpen = {this.state.budgetLoad}
+                                closeDialog={this.closeDialog}
+                                orderInfo = {this.props}
+                                handleBudget = {this.handleBudget}
+                />}
                 <Card elevation={Elevation.TWO} 
                     interactive='true'
                     style={{width: '500px', 

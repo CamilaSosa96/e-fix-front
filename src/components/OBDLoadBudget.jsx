@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputGroup, Button } from '@blueprintjs/core'
+import { InputGroup, Button, Dialog} from '@blueprintjs/core'
 
 class OBDLoadBudget extends React.Component {
 
@@ -10,6 +10,7 @@ class OBDLoadBudget extends React.Component {
             diag: ''
         }
         this.handleChange = this.handleChange.bind(this)
+        this.handleClose = this.handleClose.bind(this)
         this.sendChangeToParent = this.sendChangeToParent.bind(this)
     }
 
@@ -23,24 +24,29 @@ class OBDLoadBudget extends React.Component {
         }
     }
 
+    handleClose(){
+        this.props.closeDialog()
+    }
+
     render(){
         return(
             <div>
-                <p>Cargar presupuesto para {this.props.orderInfo.brand} {this.props.orderInfo.model}</p>
+                <Dialog isOpen={this.props.isOpen} 
+                        onClose={this.handleClose} 
+                        title={<p>Cargar presupuesto para {this.props.orderInfo.brand} {this.props.orderInfo.model}</p>}>
                 <textarea placeholder='Diagnóstico'
                             name='diag'
                             onChange = {this.handleChange}
-                            maxLength='30'
-                />
+                            maxLength='30'/>
                 <InputGroup type='number' 
                             name='bud'
                             placeholder='Costo de la reparación'
-                            onChange = {this.handleChange}
-                />
+                            onChange = {this.handleChange}/>
                 <Button onClick={this.sendChangeToParent}>
                     Cargar presupuesto
                 </Button>
-                <Button onClick={() => this.props.closeStateDialog()}> Volver </Button>
+                <Button onClick={() => this.props.closeDialog()}> Volver </Button>
+                </Dialog>
             </div>
         )
     }

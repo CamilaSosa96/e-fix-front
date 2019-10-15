@@ -25,8 +25,7 @@ class OBDInformation extends React.Component {
     }
 
     handleClose(){
-        this.setState({isOpen: false})
-        this.props.closeInfoDialog()
+        this.props.closeDialog()
     }
 
     formatDate(){
