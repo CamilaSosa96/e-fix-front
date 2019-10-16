@@ -130,7 +130,7 @@ class NewOrderForm extends React.Component {
                             name='brand'
                             value={this.state.brand}
                             onChange={this.handleChange}
-                            maxLength='30'
+                            maxLength='15'
                             placeholder='Marca del producto'/>                      
                         <InputGroup
                             style={{width: '200px', marginBottom: '10px'}}
@@ -138,7 +138,7 @@ class NewOrderForm extends React.Component {
                             name='model'
                             value={this.state.model}
                             onChange={this.handleChange}
-                            maxLength='30'
+                            maxLength='20'
                             placeholder='Modelo del producto'/>
                         </div>
                         <div style={{display: 'inline-block', marginLeft: '20px'}}>

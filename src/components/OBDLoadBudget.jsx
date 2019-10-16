@@ -31,21 +31,33 @@ class OBDLoadBudget extends React.Component {
     render(){
         return(
             <div>
-                <Dialog isOpen={this.props.isOpen} 
+                <Dialog
+                style={{height: '140px'}}
+                isOpen={this.props.isOpen} 
                         onClose={this.handleClose} 
-                        title={<p>Cargar presupuesto para {this.props.orderInfo.brand} {this.props.orderInfo.model}</p>}>
-                <textarea placeholder='Diagnóstico'
+                        title={<p style={{marginTop: '12px', textAlign: 'center'}}>
+                            Cargar presupuesto para {this.props.orderInfo.brand} {this.props.orderInfo.model}</p>}>
+                <div style={{textAlign: 'center'}}>
+                <div style={{display: 'inline-block', marginRight: '10px'}}>
+                <InputGroup style={{width: '350px', marginTop: '10px'}}
+                            type='text'
+                            placeholder='Diagnóstico'
                             name='diag'
                             onChange = {this.handleChange}
                             maxLength='30'/>
-                <InputGroup type='number' 
+                <InputGroup style={{width: '350px', marginTop: '10px'}}
+                            type='number' 
                             name='bud'
                             placeholder='Costo de la reparación'
                             onChange = {this.handleChange}/>
-                <Button onClick={this.sendChangeToParent}>
+                </div>
+                <div style={{display: 'inline-block'}}>
+                <Button onClick={this.sendChangeToParent} 
+                style={{textAlign: 'center', width: '100px', height:'70px', marginBottom: '30px'}}>
                     Cargar presupuesto
                 </Button>
-                <Button onClick={() => this.props.closeDialog()}> Volver </Button>
+                </div>
+                </div>
                 </Dialog>
             </div>
         )

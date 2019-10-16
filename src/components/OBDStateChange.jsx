@@ -31,16 +31,25 @@ render(){
     <div>
         <Dialog isOpen={this.props.isOpen} 
                 onClose={this.handleClose} 
-                title={<h1>Cambiar estado de {this.props.orderInfo.brand}{' '}{this.props.orderInfo.model}</h1>}>  
-                <select value={this.state.stateValue}
-                        onChange={this.handleChange}>
-                <option value='RECIBIDO'>{stateNameTranslator('RECIBIDO')}</option><option value='REPARACION'>{stateNameTranslator('REPARACION')}</option>
-                <option value='RETIRAR_SINARREGLO'>{stateNameTranslator('RETIRAR_SINARREGLO')}</option>
-                <option value='REPARADO'>{stateNameTranslator('REPARADO')}</option>
-                <option value='CANCELADA'>{stateNameTranslator('CANCELADA')}</option>
-                <option value='ENTREGADO'>{stateNameTranslator('ENTREGADO')}</option>
-                </select>
-                <Button onClick={this.sendChangeToParent}> Aceptar </Button>
+                title={<p style={{marginTop: '12px', textAlign: 'center'}}>
+                    Cambiar estado de {this.props.orderInfo.brand}{' '}{this.props.orderInfo.model}
+                </p>}> 
+                <div style={{textAlign: 'center'}}>
+                    <select style={{marginTop: '22px', height: '30px', width:'250px' , marginRight:'15px'}}
+                            value={this.state.stateValue} 
+                            onChange={this.handleChange}>
+                    <option value='RECIBIDO'>{stateNameTranslator('RECIBIDO')}</option>
+                    <option value='REPARACION'>{stateNameTranslator('REPARACION')}</option>
+                    <option value='RETIRAR_SINARREGLO'>{stateNameTranslator('RETIRAR_SINARREGLO')}</option>
+                    <option value='REPARADO'>{stateNameTranslator('REPARADO')}</option>
+                    <option value='CANCELADA'>{stateNameTranslator('CANCELADA')}</option>
+                    <option value='ENTREGADO'>{stateNameTranslator('ENTREGADO')}</option>
+                    </select>
+                    <Button style={{marginTop: '-3px', height:'30px'}}
+                            onClick={this.sendChangeToParent}> 
+                            Aceptar 
+                    </Button>
+                </div>
         </Dialog>
     </div>
     
