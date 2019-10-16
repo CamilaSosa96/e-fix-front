@@ -52,60 +52,59 @@ class NavigationBar extends React.Component{
                 <Navbar style={{backgroundColor: '#5B1790',
                                 height: '70px',
                                 position: 'relative'}}>
-                    <img style={{width:'150px',
-                                position: 'absolute', 
-                                top: '50%', 
-                                transform: 'translate(0,-50%)'}}
-                        src='../efixlogo.png' 
-                        alt='E-FIX' 
-                        onClick={()=> this.setState({goHome:true})}/>                 
+                    <img style={{width: '150px',
+                                 position: 'absolute', 
+                                 top: '50%', 
+                                 transform: 'translate(0,-50%)'}}
+                         src='../efixlogo.png' 
+                         alt='E-FIX' 
+                         onClick={()=> this.setState({goHome:true})}/>                 
                     <div style={{width: '400px',
-                                height: '5x',
-                                position: 'absolute',
-                                top: '50%',
-                                left: '50%',
-                                transform: 'translate(-50%, -50%)',
-                                display: 'inline'
+                                 height: '5x',
+                                 position: 'absolute',
+                                 top: '50%',
+                                 left: '50%',
+                                 transform: 'translate(-50%, -50%)',
+                                 display: 'inline'
                                 }}>
                         <InputGroup 
                             type='search'
                             name='search'
                             value={this.state.search}
                             placeholder='Buscar una orden por e-mail'
-                            onChange = {this.handleChange}
+                            onChange ={this.handleChange}
                             maxLength='30'
                             rightElement={
-                                <Icon icon='search'
-                                    intent='primary' 
-                                    style={{marginRight: '10px', marginTop: '7px', color: Colors.VIOLET4}}
-                                    onClick={this.handleSearch}
+                                <Icon style={{marginRight: '10px', marginTop: '7px', color: Colors.VIOLET4}}
+                                      icon='search'
+                                      intent='primary' 
+                                      onClick={this.handleSearch}
                                 />}
                         />
                     </div>
-                    <div style={{ 
-                            position: 'absolute',
-                            top: '80%',
-                            left: '80%',
-                            transform: 'translate(-80%, -80%)',
-                            display: 'inline',
-                            color: 'white'
-                        }}>
-                        <p>
-                            ¡Hola {this.state.username}!
+                    <div style={{textAlign: 'right',
+                                 position: 'absolute',
+                                 right: '0',
+                                 marginRight: '10px',
+                                 marginTop: '18px'
+                                 }}>
+                        <Icon icon='user' style={{color: 'white', marginBottom:'2px'}}/>
+                        <p style={{fontSize: '20px', 
+                                   color: 'white',
+                                   display:'inline', 
+                                   marginRight: '10px', 
+                                   marginLeft: '5px'}}>
+                            <b>{this.state.username}</b>
                         </p>
-                    </div>
-                    <div>
-                        <Button style={{
-                                    position: 'absolute',
-                                    top: '90%',
-                                    left: '90%',
-                                    transform: 'translate(-90%, -90%)',
-                                    display: 'inline',
-                                    color: 'white'
-                                }}
-                                onClick={this.handleLogOut}
-                                intent='primary'>
-                            <p>Salir</p>
+                        <Button style={{color: 'white', 
+                                        display:'inline', 
+                                        marginBottom:'5px',
+                                        height:'10px', 
+                                        backgroundColor: Colors.INDIGO4
+                                      }}
+                                onClick={this.handleLogOut} 
+                                minimal={true}>
+                                <p>Salir</p>
                         </Button>
                     </div>
                 </Navbar>

@@ -31,38 +31,39 @@ class OBDLoadBudget extends React.Component {
     render(){
         return(
             <div>
-                <Dialog
-                style={{height: '140px'}}
-                isOpen={this.props.isOpen} 
+                <Dialog style={{height: '140px'}}
+                        isOpen={this.props.isOpen} 
                         onClose={this.handleClose} 
                         title={<p style={{marginTop: '12px', textAlign: 'center'}}>
                             Cargar presupuesto para {this.props.orderInfo.brand} {this.props.orderInfo.model}</p>}>
-                <div style={{textAlign: 'center'}}>
-                <div style={{display: 'inline-block', marginRight: '10px'}}>
-                <InputGroup style={{width: '350px', marginTop: '10px'}}
-                            type='text'
-                            placeholder='Diagnóstico'
-                            name='diag'
-                            onChange = {this.handleChange}
-                            maxLength='30'/>
-                <InputGroup style={{width: '350px', marginTop: '10px'}}
-                            type='number' 
-                            name='bud'
-                            placeholder='Costo de la reparación'
-                            onChange = {this.handleChange}/>
-                </div>
-                <div style={{display: 'inline-block'}}>
-                <Button onClick={this.sendChangeToParent} 
-                style={{textAlign: 'center', width: '100px', height:'70px', marginBottom: '30px'}}>
-                    Cargar presupuesto
-                </Button>
-                </div>
-                </div>
+                    <div style={{textAlign: 'center'}}>
+                        <div style={{display: 'inline-block', marginRight: '10px'}}>
+                            <InputGroup style={{width: '350px', marginTop: '10px'}}
+                                        type='text'
+                                        placeholder='Diagnóstico'
+                                        name='diag'
+                                        onChange={this.handleChange}
+                                        maxLength='30'/>
+                            <InputGroup style={{width: '350px', marginTop: '10px'}}
+                                        type='number' 
+                                        name='bud'
+                                        placeholder='Costo de la reparación'
+                                        onChange={this.handleChange}/>
+                        </div>
+                        <div style={{display: 'inline-block'}}>
+                            <Button style={{textAlign: 'center', 
+                                            width: '100px', 
+                                            height:'70px', 
+                                            marginBottom: '30px'}}
+                                    onClick={this.sendChangeToParent}>
+                            Cargar presupuesto
+                            </Button>
+                        </div>
+                    </div>
                 </Dialog>
             </div>
         )
     }
-
 }
 
 export default OBDLoadBudget

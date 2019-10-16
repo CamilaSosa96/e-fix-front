@@ -35,14 +35,15 @@ class OBDInformation extends React.Component {
     render(){
         return(
             <Dialog isOpen={this.props.isOpen}
-                    icon={<Icon icon='info-sign' 
-                                iconSize='30'
-                                style={{marginRight: '10px', marginTop: '7px', color: Colors.VIOLET4}} />}
-                    title={<p style={{fontSize: '30px', marginTop: '12px'}}>Orden de Reparación #{this.props.orderInfo.id}</p>}
+                    icon={<Icon style={{marginRight: '10px', marginTop: '7px', color: Colors.VIOLET4}}
+                                icon='info-sign' 
+                                iconSize='30'/>}
+                    title={<p style={{fontSize: '30px', marginTop: '12px'}}>
+                            Orden de Reparación #{this.props.orderInfo.id}</p>}
                     onClose={this.handleClose}
                     style={{width: '600px', height: '360px'}}>
                 <div style={{fontSize: '18px', marginLeft: '10px', marginTop: '5px'}}>
-                    <p> <Icon  style={{marginBottom: '3px'}} icon='user'/><b> Cliente:</b> {this.props.orderInfo.name}</p>
+                    <p><Icon style={{marginBottom: '3px'}} icon='user'/><b> Cliente:</b> {this.props.orderInfo.name}</p>
                     <p><Icon style={{marginBottom: '3px'}} icon='id-number'/><b> DNI:</b> {this.props.orderInfo.dni}</p>
                     <p><Icon style={{marginBottom: '3px'}} icon='envelope'/><b> E-mail:</b> {this.props.orderInfo.email}</p>
                     <p><Icon style={{marginBottom: '3px'}} icon='desktop'/><b> Producto:</b> {this.props.orderInfo.type} {this.props.orderInfo.brand} {this.props.orderInfo.model}</p>
@@ -55,7 +56,6 @@ class OBDInformation extends React.Component {
             </Dialog>
         )
     }
-
 }
 
 export default OBDInformation

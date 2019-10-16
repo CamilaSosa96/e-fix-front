@@ -68,31 +68,29 @@ class OrderResultBox extends React.Component{
         return (
             <div>
                 {this.state.info && 
-                <OBDInformation isOpen = {this.state.info}
-                                closeDialog = {this.closeDialog}
-                                orderInfo ={this.props}
+                <OBDInformation isOpen={this.state.info}
+                                closeDialog={this.closeDialog}
+                                orderInfo={this.props}
                                 stateInfo={this.state.productState}
                                 dateInfo={this.state.lastUpdate}
                 />}
                 {this.state.editState && 
-                <OBDStateChange isOpen = {this.state.editState}
+                <OBDStateChange isOpen={this.state.editState}
                                 closeDialog={this.closeDialog}
-                                orderInfo = {this.props}
-                                handleChange = {this.handleChange}
+                                orderInfo={this.props}
+                                handleChange={this.handleChange}
                                 updateState={this.updateState}
-                                handleOrderStatusChange = {this.handleOrderStatusChange}
+                                handleOrderStatusChange={this.handleOrderStatusChange}
                 />}
                 {this.state.budgetLoad &&
-                <OBDLoadBudget  isOpen = {this.state.budgetLoad}
+                <OBDLoadBudget  isOpen={this.state.budgetLoad}
                                 closeDialog={this.closeDialog}
-                                orderInfo = {this.props}
-                                handleBudget = {this.handleBudget}
+                                orderInfo={this.props}
+                                handleBudget={this.handleBudget}
                 />}
-                <Card elevation={Elevation.TWO} 
-                    interactive='true'
-                    style={{width: '500px', 
-                            height: '150px', 
-                            marginBottom: '30px'}}>
+                <Card style={{width: '500px', height: '150px', marginBottom: '30px'}}
+                      elevation={Elevation.TWO} 
+                      interactive='true'>
                     <div style={{position: 'relative', height: '120px'}}>
                         <div style={{textAlign: 'left'}}>
                             <div style={{fontSize: '20px', marginBottom: '7px'}}>
@@ -119,12 +117,12 @@ class OrderResultBox extends React.Component{
                                 <Tag style={{backgroundColor: this.state.stateColor, 
                                             width: '460px',
                                             textAlign: 'left'}}
-                                    fill='true' 
-                                    round='true'
-                                    rightIcon={this.state.stateIcon}>
-                                    <b style={{color: 'white', fontSize: '16px'}}>
-                                        {this.state.productState}
-                                    </b>
+                                     fill='true' 
+                                     round='true'
+                                     rightIcon={this.state.stateIcon}>
+                                        <b style={{color: 'white', fontSize: '16px'}}>
+                                            {this.state.productState}
+                                        </b>
                                 </Tag>
                              </div> 
                         </div>          
