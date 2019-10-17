@@ -1,7 +1,7 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
 import {isAuthored, logOut} from '../efixService'
-import {Navbar, InputGroup, Icon, Colors, Button} from '@blueprintjs/core'
+import {Navbar, InputGroup, Icon, Colors, Button, Tooltip} from '@blueprintjs/core'
 
 class NavigationBar extends React.Component{
 
@@ -88,24 +88,26 @@ class NavigationBar extends React.Component{
                                  marginRight: '10px',
                                  marginTop: '18px'
                                  }}>
-                        <Icon icon='user' style={{color: 'white', marginBottom:'2px'}}/>
-                        <p style={{fontSize: '20px', 
+                        <Icon icon='user' iconSize= '20' style={{color: 'white', marginBottom:'2px'}}/>
+                        <p style={{fontSize: '30px', 
                                    color: 'white',
                                    display:'inline', 
-                                   marginRight: '10px', 
+                                   marginRight: '30px', 
                                    marginLeft: '5px'}}>
                             <b>{this.state.username}</b>
                         </p>
-                        <Button style={{color: 'white', 
-                                        display:'inline', 
-                                        marginBottom:'5px',
-                                        height:'10px', 
-                                        backgroundColor: Colors.INDIGO4
-                                      }}
-                                onClick={this.handleLogOut} 
-                                minimal={true}>
-                                <p>Salir</p>
-                        </Button>
+                        <Tooltip content='Cerrar sesión'>
+                            <Button style={{color: 'white', 
+                                            display:'inline', 
+                                            marginBottom:'20px',
+                                            height:'10px', 
+                                            backgroundColor: '#BF12FE'
+                                          }}
+                                    onClick={this.handleLogOut} 
+                                    minimal={true}>
+                                    <Icon icon='log-out' color='white' style={{marginLeft: '0px'}}/>
+                            </Button>
+                        </Tooltip>
                     </div>
                 </Navbar>
             </div>

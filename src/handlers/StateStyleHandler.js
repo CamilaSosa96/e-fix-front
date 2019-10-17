@@ -30,3 +30,13 @@ export function stateIconSelector(rawStateName){
     if(rawStateName === 'ENTREGADO')return 'endorsed' 
     return ''
 }
+
+export function stateTextForClient(rawStateName){
+    if(rawStateName === 'RECIBIDO')return 'ingresado en el sistema. Próximamente será revisado por un técnico.'
+    if(rawStateName === 'REPARACION')return `en proceso de reparación. Se le notificará cuando termine el mismo.`
+    if(rawStateName === 'RETIRAR_SINARREGLO')return 'listo para que sea retirado sin reparación.'
+    if(rawStateName === 'REPARADO')return 'reparado. Por favor, pase por el establecimiento para abonar la reparación y retirarlo.'
+    if(rawStateName === 'CANCELADA')return 'retirado sin reparar por el cliente' 
+    if(rawStateName === 'ENTREGADO')return 'entregado y su reparación abonada.' 
+    return ''
+}
