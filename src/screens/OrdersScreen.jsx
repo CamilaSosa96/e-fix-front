@@ -82,8 +82,12 @@ class OrderScreen extends React.Component {
         const backButton = () => {
             return(
                 <Button 
-                    style={{marginTop: '30px', marginBottom: '30px', backgroundColor: '#BF83DA'}}
-                    icon={<Icon icon='undo' iconSize='15'/>}
+                    style={{color: 'white', 
+                           marginTop: '30px', 
+                           marginBottom: '30px', 
+                           backgroundColor: '#39A1D2'}}
+                    icon={<Icon style={{color: 'white'}} icon='undo' iconSize='15'/>}
+                    minimal='true'
                     onClick={() => this.setState({goHome: true})}>
                     Volver
                 </Button>

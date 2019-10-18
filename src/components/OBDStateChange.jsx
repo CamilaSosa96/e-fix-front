@@ -1,6 +1,6 @@
 import React from 'react'
-import {stateNameTranslator} from '../handlers/StateStyleHandler'
-import {Button, Dialog} from '@blueprintjs/core'
+import {stateNameTranslator, stateIconSelector, stateColorSelector} from '../handlers/StateStyleHandler'
+import {Button, Dialog, Icon} from '@blueprintjs/core'
 
 class OBDStateChange extends React.Component {
 
@@ -11,6 +11,7 @@ class OBDStateChange extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleClose = this.handleClose.bind(this)
+        this.handleIcon = this.handleIcon.bind(this)
         this.sendChangeToParent = this.sendChangeToParent.bind(this)
     }
 
@@ -26,6 +27,16 @@ class OBDStateChange extends React.Component {
         this.props.closeDialog()
     }
 
+    handleIcon(){
+        if(stateIconSelector(this.state.stateValue) === 'dollar') return 'import'
+        else return stateIconSelector(this.state.stateValue)
+    }
+
+    handleIconColor(){
+        if(stateColorSelector(this.state.stateValue) === '#22C0EA') return '#686868'
+        else return stateColorSelector(this.state.stateValue)
+    }
+
     render(){
         return (    
         <div>
@@ -35,6 +46,9 @@ class OBDStateChange extends React.Component {
                             Cambiar estado de {this.props.orderInfo.brand}{' '}{this.props.orderInfo.model}
                            </p>}> 
                     <div style={{textAlign: 'center'}}>
+                        <Icon icon={this.handleIcon()} 
+                              iconSize='20'
+                              style={{color: this.handleIconColor(), marginRight: '10px'}}/>
                         <select style={{marginTop: '22px', height: '30px', width:'250px' , marginRight:'15px'}}
                                 value={this.state.stateValue} 
                                 onChange={this.handleChange}>
@@ -45,7 +59,8 @@ class OBDStateChange extends React.Component {
                         <option value='CANCELADA'>{stateNameTranslator('CANCELADA')}</option>
                         <option value='ENTREGADO'>{stateNameTranslator('ENTREGADO')}</option>
                         </select>
-                        <Button style={{marginTop: '-3px', height:'30px'}}
+                        <Button style={{marginTop: '-3px', 
+                                        height:'30px'}}
                                 onClick={this.sendChangeToParent}> 
                                 Aceptar 
                         </Button>

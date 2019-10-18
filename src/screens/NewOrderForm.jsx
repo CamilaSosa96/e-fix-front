@@ -40,12 +40,12 @@ class NewOrderForm extends React.Component {
             saveOrder(this.state.name, this.state.dni, this.state.email, this.state.type,
                       this.state.brand, this.state.model, this.state.problem, (err, response) => {
                         this.setState({onAlertClick: this.goBackHome, 
-                                       alertMSJ: 'Orden creada exitosamente', 
+                                       alertMSJ: '¡Orden creada exitosamente!', 
                                        alert: true})
                       })
         }  else {
             this.setState({onAlertClick: this.closeAlert,
-                           alertMSJ: 'Por favor, complete todos los campos', 
+                           alertMSJ: 'Por favor, complete todos los campos.', 
                            alert: true})
         }  
         event.preventDefault()
