@@ -1,6 +1,6 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
-import {validateUser} from '../efixService'
+import {validateUser, isAuthored} from '../efixService'
 import { FormGroup, InputGroup, Alert} from '@blueprintjs/core'
 import { Colors } from '@blueprintjs/core'
 import {Image} from 'react-bootstrap'
@@ -19,6 +19,12 @@ class LoginScreen extends React.Component {
         }
         this.handleLogin = this.handleLogin.bind(this)
         this.handleChange = this.handleChange.bind(this)
+    }
+
+    componentDidMount(){
+        isAuthored((error, _response) => {
+            if(!error){this.setState({isLoggedIn: true})}
+        })
     }
 
     handleLogin(event){
