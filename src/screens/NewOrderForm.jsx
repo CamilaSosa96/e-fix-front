@@ -103,10 +103,11 @@ class NewOrderForm extends React.Component {
                             <div style={{marginBottom: '17px', marginTop: '35px'}}>
                                 <Icon icon='desktop' iconSize='150' style={{color: '#5B1790'}}/>
                             </div>
-                            <Button style={{width: '150px'}}
-                                    icon={<Icon icon='undo' iconSize='15' />}
-                                    onClick={this.goBackHome} >
-                                Volver
+                            <Button style={{width: '150px', color: 'white', backgroundColor: '#39A1D2'}}
+                                    icon={<Icon style={{color: 'white'}} icon='undo' iconSize='15'/>}
+                                    minimal='true'
+                                    onClick={this.goBackHome}>
+                                <b>VOLVER</b>
                             </Button>
                         </div>
                         <div style={{display: 'inline-block', width: '225px'}}>
@@ -168,9 +169,13 @@ class NewOrderForm extends React.Component {
                             maxLength='20'
                             placeholder='Falla inicial del producto'/>
                         <InputGroup
-                            style={{marginTop: '10px', marginBottom: '10px'}}
+                            style={{marginTop: '10px', 
+                                    marginBottom: '10px', 
+                                    color:'white',
+                                    backgroundColor: '#3DA817',
+                                    fontWeight:'bolder'}}
                             type='submit'
-                            value='Crear Orden'
+                            value='CREAR ORDEN'
                             placeholder='Crear' />
                         </div>
                     </form>
