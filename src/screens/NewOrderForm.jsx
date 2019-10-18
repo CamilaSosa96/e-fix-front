@@ -2,7 +2,7 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import {saveOrder, isAuthored} from '../efixService'
 import NavigationBar from '../components/NavigationBar'
-import {Button, InputGroup, Alert, Card, Icon} from '@blueprintjs/core'
+import {Button, InputGroup, Alert, Card, Icon, Divider} from '@blueprintjs/core'
 
 class NewOrderForm extends React.Component {
 
@@ -88,11 +88,30 @@ class NewOrderForm extends React.Component {
                 </div>
                 <div style={{width: '500px', margin: '0 auto', marginTop: '20px'}}>
                     <Card>
-                    <h1>Crear nueva orden de reparación</h1>
+                    <p style={{fontSize: '27px', textAlign: 'center'}}>
+                        <b>Crear nueva orden de reparación</b>
+                    </p>
+                    <Divider></Divider>
                     <form onSubmit={this.handleOrderCreation}>
-                        <div style={{display: 'inline-block'}}>
+                        <div style={{display: 'inline-block', 
+                                     width: '200px', 
+                                     marginTop: '15px', 
+                                     textAlign: 'center'}}>
+                            <div style={{marginBottom: '20px'}}>
+                                <Icon  icon='person' iconSize='120' style={{color: '#5B1790'}}/>
+                            </div>
+                            <div style={{marginBottom: '17px', marginTop: '35px'}}>
+                                <Icon icon='desktop' iconSize='150' style={{color: '#5B1790'}}/>
+                            </div>
+                            <Button style={{width: '150px'}}
+                                    icon={<Icon icon='undo' iconSize='15' />}
+                                    onClick={this.goBackHome} >
+                                Volver
+                            </Button>
+                        </div>
+                        <div style={{display: 'inline-block', width: '225px'}}>
                         <InputGroup
-                            style={{width: '200px', marginBottom: '10px'}}
+                            style={{marginBottom: '10px'}}
                             type='text'
                             name='name'
                             value={this.state.name}
@@ -100,7 +119,7 @@ class NewOrderForm extends React.Component {
                             maxLength='30'
                             placeholder='Nombre del cliente'/>
                         <InputGroup
-                            style={{width: '200px', marginBottom: '10px'}}
+                            style={{marginBottom: '10px'}}
                             type='number'
                             name='dni'
                             value={this.state.dni}
@@ -109,7 +128,7 @@ class NewOrderForm extends React.Component {
                             max='9999999999'
                             placeholder='DNI del cliente'/>
                         <InputGroup
-                            style={{width: '200px', marginBottom: '10px'}}
+                            style={{marginBottom: '10px'}}
                             type='email'
                             name='email'
                             value={this.state.email}
@@ -117,7 +136,7 @@ class NewOrderForm extends React.Component {
                             maxLength='30'
                             placeholder='Correo electrónico'/>
                         <InputGroup
-                            style={{width: '200px', marginBottom: '10px'}}
+                            style={{marginBottom: '10px', marginTop: '30px'}}
                             type='text'
                             name='type'
                             value={this.state.type}
@@ -125,7 +144,7 @@ class NewOrderForm extends React.Component {
                             maxLength='30'
                             placeholder='Tipo de producto'/>
                         <InputGroup
-                            style={{width: '200px', marginBottom: '10px'}}
+                            style={{marginBottom: '10px'}}
                             type='text'
                             name='brand'
                             value={this.state.brand}
@@ -133,36 +152,28 @@ class NewOrderForm extends React.Component {
                             maxLength='15'
                             placeholder='Marca del producto'/>                      
                         <InputGroup
-                            style={{width: '200px', marginBottom: '10px'}}
+                            style={{marginBottom: '10px'}}
                             type='text'
                             name='model'
                             value={this.state.model}
                             onChange={this.handleChange}
                             maxLength='20'
                             placeholder='Modelo del producto'/>
-                        </div>
-                        <div style={{display: 'inline-block', marginLeft: '20px'}}>
-                        <textarea
-                            style={{width: '200px', height: '187px', marginBottom: '10px', resize: 'none'}}
+                        <InputGroup
+                            style={{marginBottom: '10px'}}
                             type='text'
                             name='problem'
                             value={this.state.problem}
                             onChange={this.handleChange}
-                            placeholder='Falla inicial'
-                            maxLength='30'/>
+                            maxLength='20'
+                            placeholder='Falla inicial del producto'/>
                         <InputGroup
-                            style={{width: '200px', backgroundColor: '#C4FAD1'}}
+                            style={{marginTop: '10px', marginBottom: '10px'}}
                             type='submit'
                             value='Crear Orden'
                             placeholder='Crear' />
                         </div>
                     </form>
-                    <Button
-                        style={{marginTop: '30px', backgroundColor: '#BF83DA'}}
-                        icon={<Icon icon='undo' iconSize='15'/>}
-                        onClick={this.goBackHome}>
-                        Volver
-                    </Button>
                     </Card>
                 </div>
             </div>
