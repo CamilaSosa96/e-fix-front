@@ -5,13 +5,15 @@ import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
 import NewOrderForm from './screens/NewOrderForm'
 import OrdersScreen from './screens/OrdersScreen'
-import { BrowserRouter as Router, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import ApprovalScreen from './screens/ApprovalScreen'
+import NotFoundScreen from './screens/NotFoundScreen'
 
 function App() {
   axios.defaults.withCredentials = true
   return (
     <Router>
+      <Switch>
         <Route exact path='/' component={RedirScreen} />
         <Route exact path='/login' component={LoginScreen} />
         <Route exact path='/home' component={HomeScreen} />
@@ -19,6 +21,8 @@ function App() {
         <Route path='/orders/:searchString' render={props => <OrdersScreen key={Date.now()} {...props} />}/>
         <Route exact path='/orders' component={OrdersScreen} />
         <Route path='/budget/:id/:dni' component={ApprovalScreen}/>
+        <Route component={NotFoundScreen}/>
+      </Switch>
     </Router>
   );
 }
