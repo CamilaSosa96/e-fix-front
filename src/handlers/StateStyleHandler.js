@@ -32,11 +32,33 @@ export function stateIconSelector(rawStateName){
 }
 
 export function stateTextForClient(rawStateName){
-    if(rawStateName === 'RECIBIDO')return 'ingresado en el sistema. Próximamente será revisado por un técnico.'
-    if(rawStateName === 'REPARACION')return `en proceso de reparación. Se le notificará cuando termine el mismo.`
-    if(rawStateName === 'RETIRAR_SINARREGLO')return 'listo para que sea retirado sin reparación.'
-    if(rawStateName === 'REPARADO')return 'reparado. Por favor, pase por el establecimiento para abonar la reparación y retirarlo.'
-    if(rawStateName === 'CANCELADA')return 'retirado sin reparar por el cliente' 
-    if(rawStateName === 'ENTREGADO')return 'entregado y su reparación abonada.' 
-    return ''
+    const text = {msg1: '', msg2: ''}
+    if(rawStateName === 'RECIBIDO'){
+        text.msg1 = 'se encuentra ingresado en el sistema.'
+        text.msg2 = 'Próximamente será revisado por un técnico.'
+    }
+    if(rawStateName === 'ESPERANDO_PRESUPUESTO'){
+        text.msg1 = 'se encuentra esperando la aprobación de la reparación.'
+    }
+    if(rawStateName === 'REPARACION'){
+        text.msg1 = 'se encuentra en proceso de reparación.'
+        text.msg2 = 'Se le notificará cuando termine el mismo.'
+    }
+    if(rawStateName === 'RETIRAR_SINARREGLO'){
+        text.msg1 = 'se encuentra listo para ser retirado sin reparación.'
+        text.msg2 = 'Esperamos su visita para que lo retire.'
+    }
+    if(rawStateName === 'REPARADO'){
+        text.msg1 = 'ya se encuentra reparado.'
+        text.msg2 = 'Esperamos su visita para que abone la reparación y retire el producto.'
+    }
+    if(rawStateName === 'CANCELADA'){
+        text.msg1 = 'ha sido retirado sin reparar.'
+        text.msg2 = 'No se ha aprobado la reparación y esta ha sido cancelada.'
+    }
+    if(rawStateName === 'ENTREGADO'){
+        text.msg1 = 'ha sido reparado.'
+        text.msg2 = 'La reparación fue abonada y el producto retirado.'
+    }
+    return text
 }

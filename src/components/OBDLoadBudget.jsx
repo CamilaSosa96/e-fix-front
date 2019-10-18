@@ -40,7 +40,7 @@ class OBDLoadBudget extends React.Component {
                         <div style={{display: 'inline-block', marginRight: '10px'}}>
                             <InputGroup style={{width: '350px', marginTop: '10px'}}
                                         type='text'
-                                        placeholder='Diagnóstico'
+                                        placeholder='¿Qué necesita para ser reparado?'
                                         name='diag'
                                         onChange={this.handleChange}
                                         maxLength='30'/>

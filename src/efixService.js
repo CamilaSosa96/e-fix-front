@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const host = '10.15.77.47:5000' // When accessing from another network (public IP) or from another pc (local IP)
-//const host = 'localhost:5000' // When accessing locally
+//const host = '10.15.77.47:5000' // When accessing from another network (public IP) or from another pc (local IP)
+const host = 'localhost:5000' // When accessing locally
 
 export function validateUser(username, password, callback) {
     axios.post(`http://${host}/auth`,{

@@ -50,7 +50,7 @@ class ApprovalScreen extends React.Component {
                 <Navbar style={{backgroundColor: '#5B1790',
                                 height: '70px',
                                 position: 'absolute', bottom: '0'}}/>         
-                <Card style={{width: '800px', 
+                <Card style={{width: '1000px', 
                             position: 'absolute',
                             top: '50%',
                             left: '50%',
@@ -59,20 +59,29 @@ class ApprovalScreen extends React.Component {
                     {!this.state.done && 
                     <div>
                         <p style={{ textAlign: 'center', fontSize: '20px'}}>
-                        Su producto <b>{this.state.order.brand} {this.state.order.model}</b> se encuentra {stateTextForClient(this.state.order.state)}
+                        <p>Su producto <b>{this.state.order.brand} {this.state.order.model}</b> {stateTextForClient(this.state.order.state).msg1}</p>
+                        <p>{stateTextForClient(this.state.order.state).msg2}</p>
                         </p>
                         {this.state.approval && 
-                        <div>
-                            <p>El diagnóstico de su producto es: {this.state.order.diagnosis}</p>
-                            <p>Su reparaciòn costaría: ${this.state.order.budget}</p>
+                        <div style={{ textAlign: 'center', fontSize: '20px'}}>
+                            <p>Para reparar su producto, se necesita: <b>{this.state.order.diagnosis}</b></p>
+                            <p>Su reparación costaría: <b>${this.state.order.budget}</b></p>
                             <p>¿Desea aprobar la reparación?</p>
-                            <Button onClick={()=> this.sendResponse(true)}>Aprobar</Button>
-                            <Button onClick={()=> this.sendResponse(false)}>Rechazar</Button>
+                            <Button style={{height: '60px', fontSize:'30px', marginTop: '15px', marginRight: '100px'}}
+                                    onClick={()=> this.sendResponse(true)}
+                                    intent='success'>
+                                <b>Aprobar</b>
+                            </Button>
+                            <Button style={{height: '60px', fontSize:'30px', marginTop: '15px'}}
+                                    onClick={()=> this.sendResponse(false)}
+                                    intent='danger'>
+                                <b>Rechazar</b>
+                            </Button>
                         </div>}
                     </div>}
                     {this.state.done && 
-                    <div>
-                        <p>Muchas gracias por responder, ya puede cerrar esta ventana</p>
+                    <div style={{ textAlign: 'center', fontSize: '20px'}}>
+                        <p>Muchas gracias por responder, ya puede cerrar esta ventana.</p>
                     </div>}
                 </Card>
             </div>

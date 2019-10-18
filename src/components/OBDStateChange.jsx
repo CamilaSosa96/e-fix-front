@@ -7,7 +7,7 @@ class OBDStateChange extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            stateValue: this.props.orderInfo.state
+            stateValue: this.props.rawState
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleClose = this.handleClose.bind(this)

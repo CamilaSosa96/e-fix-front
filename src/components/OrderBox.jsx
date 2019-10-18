@@ -17,6 +17,7 @@ class OrderResultBox extends React.Component{
             stateColor: stateColorSelector(this.props.state),
             stateIcon: stateIconSelector(this.props.state),
             productState: stateNameTranslator(this.props.state),
+            rawState: this.props.state,
             lastUpdate: this.props.lastUpdateDate
         }
         this.handleChange = this.handleChange.bind(this)
@@ -45,7 +46,8 @@ class OrderResultBox extends React.Component{
 
     handleOrderStatusChange(rawStateValue){
         this.setState({editState: false, 
-                        productState: stateNameTranslator(rawStateValue), 
+                        productState: stateNameTranslator(rawStateValue),
+                        rawState: rawStateValue, 
                         stateColor: stateColorSelector(rawStateValue),
                         stateIcon: stateIconSelector(rawStateValue)})
         this.updateState(rawStateValue)
@@ -76,6 +78,7 @@ class OrderResultBox extends React.Component{
                 />}
                 {this.state.editState && 
                 <OBDStateChange isOpen={this.state.editState}
+                                rawState={this.state.rawState}
                                 closeDialog={this.closeDialog}
                                 orderInfo={this.props}
                                 handleChange={this.handleChange}
