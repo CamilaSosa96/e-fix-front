@@ -18,7 +18,8 @@ class OrderScreen extends React.Component {
             goLogin: false,
             alert: false,
             msg: '',
-            title: ''
+            title: '',
+            loggedUser: ''
         }
         this._isMounted = false
         this.createBoxesFromArray = this.createBoxesFromArray.bind(this)
@@ -28,8 +29,9 @@ class OrderScreen extends React.Component {
         this._isMounted = true
         {this._isMounted &&
 
-            isAuthored((error, _response) => {
-                if(error){this.setState({goLogin: true})}
+            isAuthored((error, response) => {
+                if(error)this.setState({goLogin: true})
+                else this.setState({loggedUser: response.data.user})
             })
             let string = this.state.search
             if(string === undefined){
@@ -60,6 +62,7 @@ class OrderScreen extends React.Component {
             const box = <OrderResultBox
                 update = {this.update}
                 key={elem.id}
+                loggedUser={this.state.loggedUser}
                 id = {elem.id}
                 user = {elem.user}
                 name = {elem.name}

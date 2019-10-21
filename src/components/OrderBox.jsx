@@ -1,6 +1,6 @@
 import React from 'react'
 import {Card, Elevation, Button, Tag} from '@blueprintjs/core'
-import {updateState, loadBudget} from '../efixService'
+import {updateState, loadBudget, isAuthored} from '../efixService'
 import {stateNameTranslator, stateIconSelector, stateColorSelector} from '../handlers/StateStyleHandler'
 import OBDStateChange from './OBDStateChange'
 import OBDInformation from './OBDInformation'
@@ -18,13 +18,15 @@ class OrderResultBox extends React.Component{
             stateIcon: stateIconSelector(this.props.state),
             productState: stateNameTranslator(this.props.state),
             rawState: this.props.state,
-            lastUpdate: this.props.lastUpdateDate
+            lastUpdate: this.props.lastUpdateDate,
+            loggedUser: ''
         }
         this.handleChange = this.handleChange.bind(this)
         this.updateState = this.updateState.bind(this)
         this.handleOrderStatusChange = this.handleOrderStatusChange.bind(this)
         this.handleBudget = this.handleBudget.bind(this)
         this.closeDialog = this.closeDialog.bind(this)
+        this.isAllowedToModify = this.isAllowedToModify.bind(this)
     }
 
     handleChange(event){
@@ -64,6 +66,16 @@ class OrderResultBox extends React.Component{
 
     closeDialog(){
         this.setState({info: false, editState: false, budgetLoad: false})
+    }
+
+    isAllowedToModify(){
+        if(this.props.loggedUser === ''){
+            isAuthored((error, response) => {
+                if(error) console.log(error)
+                else this.setState({loggedUser: response.data.user})
+            })
+        }
+        else return ((this.props.loggedUser === this.props.user || this.props.loggedUser === 'Admin'))
     }
 
     render(){
@@ -108,10 +120,12 @@ class OrderResultBox extends React.Component{
                                     Ver Información
                                 </Button>
                                 <Button style={{width: '140px', marginRight: '20px'}}
+                                        disabled={!this.isAllowedToModify()}
                                         onClick={()=> this.setState({editState: true})}>
                                     Cambiar Estado
-                                </Button>
+                                </Button>                   
                                 <Button style={{width: '140px'}}
+                                        disabled={!this.isAllowedToModify()}
                                         onClick={()=> this.setState({budgetLoad: true})}>
                                     Enviar Presupuesto
                                 </Button>
