@@ -121,12 +121,11 @@ class NewOrderForm extends React.Component {
                             placeholder='Nombre del cliente'/>
                         <InputGroup
                             style={{marginBottom: '10px'}}
-                            type='number'
+                            type='text'
                             name='dni'
                             value={this.state.dni}
                             onChange={this.handleChange}
-                            min='0'
-                            max='9999999999'
+                            maxLength='30'
                             placeholder='DNI del cliente'/>
                         <InputGroup
                             style={{marginBottom: '10px'}}
