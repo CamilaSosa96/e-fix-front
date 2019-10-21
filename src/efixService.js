@@ -152,3 +152,11 @@ export function sendClientResponse(id, dni, choice, callback){
         callback(error, null);
     })
 }
+
+export function createUser(user, pass, callback){
+    axios.post(`http://${host}/newUser`, {user: user, pass: pass}).then((response) => {
+        callback(null, response)
+    }).catch((error) => {
+        callback(error, null);
+    })
+}

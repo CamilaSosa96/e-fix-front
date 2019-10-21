@@ -1,8 +1,9 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import {isAuthored} from '../efixService'
+import {isAuthored, createUser} from '../efixService'
 import NavigationBar from '../components/NavigationBar'
 import { Button, Icon } from '@blueprintjs/core'
+import CreateUser from '../components/CreateUser'
 
 class HomeScreen extends React.Component {
 
@@ -11,13 +12,29 @@ class HomeScreen extends React.Component {
         this.state = {
             goCreate: false, 
             goSeeAll: false,
-            goLogin: false
+            goLogin: false,
+            createUser: false,
+            loggedUser: ''
         }
+        this.closeDialog = this.closeDialog.bind(this)
+        this.createUser = this.createUser.bind(this)
     }
 
     componentDidMount(){
-        isAuthored((error, _response) => {
+        isAuthored((error, response) => {
             if(error){this.setState({goLogin: true})}
+            else this.setState({loggedUser: response.data.user})
+        })
+    }
+
+    closeDialog(){
+        this.setState({createUser: false})
+    }
+
+    createUser(user, pass){
+        createUser(user, pass, (err, _res) => {
+            if(err) console.log(err)
+            this.setState({createUser: false})
         })
     }
 
@@ -28,6 +45,9 @@ class HomeScreen extends React.Component {
                 {this.state.goLogin && <Redirect to='/login'/>}
                 {this.state.goCreate && <Redirect to='/createOrder'/>}
                 {this.state.goSeeAll && <Redirect to='/orders'/>}
+                {this.state.createUser && <CreateUser isOpen={this.state.createUser}
+                                                      closeDialog={this.closeDialog}
+                                                      createUser={this.createUser}/>}
                 <div style={{textAlign: 'center'}}>
                     <div>
                     <Button style={{width:'500px', marginTop: '100px'}}
@@ -45,6 +65,15 @@ class HomeScreen extends React.Component {
                         <h1>VER TODAS LAS ORDENES</h1>
                     </Button>
                     </div>
+                    {this.state.loggedUser === 'Admin' &&
+                    <div>
+                        <Button style={{width:'500px', marginTop: '100px'}}
+                            onClick={() => this.setState({createUser: true})}
+                            icon={<Icon icon='new-person' iconSize='25'/>}
+                            intent='warning'> 
+                        <h1>CREAR NUEVO USUARIO</h1>
+                        </Button>
+                    </div>}
                 </div>
             </div>
         )
