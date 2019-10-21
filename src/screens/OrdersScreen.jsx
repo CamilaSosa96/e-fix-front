@@ -62,7 +62,6 @@ class OrderScreen extends React.Component {
             const box = <OrderResultBox
                 update = {this.update}
                 key={elem.id}
-                loggedUser={this.state.loggedUser}
                 id = {elem.id}
                 user = {elem.user}
                 name = {elem.name}

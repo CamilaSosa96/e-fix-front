@@ -29,6 +29,13 @@ class OrderResultBox extends React.Component{
         this.isAllowedToModify = this.isAllowedToModify.bind(this)
     }
 
+    componentDidMount(){
+        isAuthored((error, result)=>{
+            if(error) console.log(error)
+            else this.setState({loggedUser: result.data.user})
+        })
+    }
+
     handleChange(event){
         this.setState({[event.target.name]: event.target.value})
     }
@@ -69,13 +76,9 @@ class OrderResultBox extends React.Component{
     }
 
     isAllowedToModify(){
-        if(this.props.loggedUser === ''){
-            isAuthored((error, response) => {
-                if(error) console.log(error)
-                else this.setState({loggedUser: response.data.user})
-            })
-        }
-        else return ((this.props.loggedUser === this.props.user || this.props.loggedUser === 'Admin'))
+        if(this.state.loggedUser === 'Admin') return true
+        if(this.state.loggedUser === this.props.user) return true
+        return false
     }
 
     render(){
