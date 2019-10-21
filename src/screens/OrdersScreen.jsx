@@ -61,6 +61,7 @@ class OrderScreen extends React.Component {
                 update = {this.update}
                 key={elem.id}
                 id = {elem.id}
+                user = {elem.user}
                 name = {elem.name}
                 dni = {elem.dni}
                 email = {elem.email}

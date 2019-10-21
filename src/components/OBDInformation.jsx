@@ -41,9 +41,10 @@ class OBDInformation extends React.Component {
                     title={<p style={{fontSize: '30px', marginTop: '12px'}}>
                             Orden de Reparación #{this.props.orderInfo.id}</p>}
                     onClose={this.handleClose}
-                    style={{width: '600px', height: '360px'}}>
+                    style={{width: '600px', height:'390px'}}>
                 <div style={{fontSize: '18px', marginLeft: '10px', marginTop: '5px'}}>
-                    <p><Icon style={{marginBottom: '3px'}} icon='user'/><b> Cliente:</b> {this.props.orderInfo.name}</p>
+                    <p><Icon style={{marginBottom: '3px'}} icon='user'/><b> Técnico:</b> {this.props.orderInfo.user}</p>
+                    <p><Icon style={{marginBottom: '3px'}} icon='person'/><b> Cliente:</b> {this.props.orderInfo.name}</p>
                     <p><Icon style={{marginBottom: '3px'}} icon='id-number'/><b> DNI:</b> {this.props.orderInfo.dni}</p>
                     <p><Icon style={{marginBottom: '3px'}} icon='envelope'/><b> E-mail:</b> {this.props.orderInfo.email}</p>
                     <p><Icon style={{marginBottom: '3px'}} icon='desktop'/><b> Producto:</b> {this.props.orderInfo.type} {this.props.orderInfo.brand} {this.props.orderInfo.model}</p>

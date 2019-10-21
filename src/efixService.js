@@ -52,7 +52,8 @@ export function getAllOrders(callback){
         const resultList = [];
         orderList.forEach(elem => {
             const order = {    
-                id: elem.id,                              
+                id: elem.id,  
+                user: elem.usuario_tecnico,                            
                 name: elem.nombre_cliente,
                 dni: elem.dni_cliente,
                 email: elem.email_cliente,
@@ -99,7 +100,8 @@ export function searchOrders(string, callback){
         const resultList = [];
         orderList.forEach(elem => {
             const order = {    
-                id: elem.id,                              
+                id: elem.id,            
+                user: elem.usuario_tecnico,                
                 name: elem.nombre_cliente,
                 dni: elem.dni_cliente,
                 email: elem.email_cliente,
@@ -124,7 +126,7 @@ export function searchOrders(string, callback){
 export function searchOrderForApproval(dni, id, callback){
     axios.get(`http://${host}/budgetApproval/${dni}/${id}`).then((response) => {
         const order = {    
-            id: response.data.id,                              
+            id: response.data.id,                      
             name: response.data.nombre_cliente,
             dni: response.data.dni_cliente,
             email: response.data.email_cliente,
