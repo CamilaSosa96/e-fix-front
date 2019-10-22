@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputGroup, Button, Dialog} from '@blueprintjs/core'
+import { InputGroup, Button, Dialog, Alert} from '@blueprintjs/core'
 
 class OBDLoadBudget extends React.Component {
 
@@ -7,7 +7,8 @@ class OBDLoadBudget extends React.Component {
         super(props)
         this.state = {
             bud: '',
-            diag: ''
+            diag: '',
+            alert: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleClose = this.handleClose.bind(this)
@@ -22,6 +23,7 @@ class OBDLoadBudget extends React.Component {
         if(this.state.bud !== '' && this.state.diag !== ''){
             this.props.handleBudget(this.state.diag, this.state.bud)
         }
+        else this.setState({alert: true})
     }
 
     handleClose(){
@@ -31,6 +33,12 @@ class OBDLoadBudget extends React.Component {
     render(){
         return(
             <div>
+                {this.state.alert && 
+                        <Alert
+                            isOpen={this.state.alert} 
+                            onClose={() => this.setState({alert: false})}>
+                            Por favor, complete todos los campos.
+                        </Alert>}
                 <Dialog style={{height: '140px'}}
                         isOpen={this.props.isOpen} 
                         onClose={this.handleClose} 

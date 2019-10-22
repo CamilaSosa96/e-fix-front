@@ -1,6 +1,6 @@
 import React from 'react'
 import {searchOrderForApproval, sendClientResponse} from '../efixService'
-import {Button, Navbar, Card} from '@blueprintjs/core'
+import {Button, Navbar, Card, Alert, Icon} from '@blueprintjs/core'
 import {stateTextForClient} from '../handlers/StateStyleHandler'
 
 class ApprovalScreen extends React.Component {
@@ -10,14 +10,18 @@ class ApprovalScreen extends React.Component {
         this.state = {
             approval: false,
             order: '',
-            done: false
+            done: false,
+            exists: true,
+            choice: '',
+            confirmation: false
         }
         this.sendResponse = this.sendResponse.bind(this)
+        this.onConfirmation = this.onConfirmation.bind(this)
     }
 
     componentDidMount(){
         searchOrderForApproval(this.props.match.params.dni, this.props.match.params.id, (err, order)=>{
-            if(err)this.setState({msg: 'La orden a la que trata de acceder no existe'})
+            if(err)this.setState({exists: false})
             else {
                 this.setState({order: order})
                 if(order.state === 'ESPERANDO_PRESUPUESTO'){
@@ -28,8 +32,12 @@ class ApprovalScreen extends React.Component {
     }
 
     sendResponse(choice){   
-        sendClientResponse(this.state.order.id, this.state.order.dni, choice, (response)=>{
-            this.setState({done: true})
+        this.setState({choice: choice, confirmation: true})
+    }
+
+    onConfirmation(){
+        sendClientResponse(this.state.order.id, this.state.order.dni, this.state.choice, (_response)=>{
+            this.setState({confirmation: false, done: true})
         })
     }
 
@@ -49,14 +57,32 @@ class ApprovalScreen extends React.Component {
                 </Navbar>     
                 <Navbar style={{backgroundColor: '#5B1790',
                                 height: '70px',
-                                position: 'absolute', bottom: '0'}}/>         
+                                position: 'absolute', bottom: '0'}}/> 
+                <Alert style={{width: '700px'}}
+                       confirmButtonText={this.state.choice ? 'Aprobar reparación' : 'Rechazar reparación'}
+                       cancelButtonText='Volver'
+                       intent={this.state.choice ? 'success' : 'danger'}
+                       isOpen={this.state.confirmation}
+                       icon={<Icon style={{marginRight: '10px',
+                                           color: this.state.choice ? 'green' : 'red', 
+                                           display: 'inline-block'}}
+                                    icon= {this.state.choice ? 'confirm' : 'warning-sign'} 
+                                    iconSize='50'/>}
+                        onCancel={() => this.setState({confirmation: false})}
+                        onConfirm={this.onConfirmation}>
+                        <p>
+                            ¿Está seguro de que desea <b>{this.state.choice ? 'aceptar ' : 'rechazar '}</b>
+                            la reparación de su producto <b>{this.state.order.brand} 
+                            {this.state.order.model}</b> por el costo de <b>${this.state.order.budget}</b> ?
+                        </p>
+                </Alert>        
                 <Card style={{width: '1000px', 
                             position: 'absolute',
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)'
                             }}>
-                    {!this.state.done && 
+                    {!this.state.done && this.state.exists &&
                     <div>
                         <p style={{ textAlign: 'center', fontSize: '20px'}}>
                         <p>Su producto <b>{this.state.order.brand} {this.state.order.model}</b> {stateTextForClient(this.state.order.state).msg1}</p>
@@ -82,6 +108,10 @@ class ApprovalScreen extends React.Component {
                     {this.state.done && 
                     <div style={{ textAlign: 'center', fontSize: '20px'}}>
                         <p>Muchas gracias por responder, ya puede cerrar esta ventana.</p>
+                    </div>}
+                    {!this.state.exists &&
+                    <div style={{ textAlign: 'center', fontSize: '20px'}}>
+                        <p>La orden solicitada no existe.</p>
                     </div>}
                 </Card>
             </div>
