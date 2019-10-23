@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dialog, InputGroup, Button } from '@blueprintjs/core'
+import { Dialog, InputGroup, Button, Icon} from '@blueprintjs/core'
 
 class CreateUser extends React.Component{
 
@@ -29,22 +29,40 @@ class CreateUser extends React.Component{
     render(){
         return(
             <div>
-                <Dialog isOpen={this.props.isOpen}
-                        title={"Crear nuevo usuario"} 
+                <Dialog style={{width: '380px', height:'150px', display: 'inline-block'}}
+                        isOpen={this.props.isOpen}
+                        title={<p style={{fontSize: '30px', marginTop: '12px'}}>Crear nuevo usuario</p>}
+                        icon={<Icon style={{marginRight: '10px', marginTop: '7px', color: '#3DA817'}}
+                                icon='new-person' 
+                                iconSize='30'/>} 
                         onClose={this.handleClose}>
-                    <InputGroup type='text'
+                    <div style={{display: 'inline-block'}}>
+                    <InputGroup style={{width: '250px', marginTop: '10px', marginLeft: '10px', marginRight: '10px'}}
+                                type='text'
                                 name='user' 
                                 placeholder='Usuario' 
                                 value={this.state.user}
                                 onChange={this.handleChange}/>
-                    <InputGroup type='text'
+                    <InputGroup style={{width: '250px', marginTop: '10px', marginLeft: '10px', marginRight: '10px'}}
+                                type='text'
                                 name='pass'
                                 placeholder='Contraseña' 
                                 value={this.state.pass}
                                 onChange={this.handleChange}/>
-                    <Button onClick={this.createUser}>
-                        Crear
+                    </div>    
+                    <div style={{display: 'inline-block'}}>        
+                    <Button style={{width: '100px',
+                                    height: '70px',
+                                    marginBottom: '30px',
+                                    color: 'white',
+                                    backgroundColor: '#3DA817'}}
+                            icon={<Icon icon='plus' color='white'/>}
+                            minimal='true'
+                            intent='success'
+                            onClick={this.createUser}>
+                        <b>CREAR</b>
                     </Button>
+                    </div>
                 </Dialog>
             </div>
         )

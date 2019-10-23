@@ -39,14 +39,14 @@ class OrderScreen extends React.Component {
                    if(err) this._isMounted && this.setState({msg: 'No se ha podido conectar al back-end', alert: true})
                    else this._isMounted && this.setState({orders: this.createBoxesFromArray(result), 
                                                         isLoaded: true,
-                                                        title: 'Todas las ordenes'})
+                                                        title: 'TODAS LAS ORDENES'})
                 })        
             } else {
                 searchOrders(string, (err, result) =>{
                     if(err) this._isMounted && this.setState({msg: 'No se ha podido conectar al back-end', alert: true})
                    else this._isMounted && this.setState({orders: this.createBoxesFromArray(result), 
                                                         isLoaded: true, 
-                                                        title: 'Resultados de búsqueda'})     
+                                                        title: 'RESULTADOS DE BÚSQUEDA'})     
                 })
             }
         }

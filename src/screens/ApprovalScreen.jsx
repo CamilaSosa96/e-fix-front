@@ -58,8 +58,7 @@ class ApprovalScreen extends React.Component {
                 <Navbar style={{backgroundColor: '#5B1790',
                                 height: '70px',
                                 position: 'absolute', bottom: '0'}}/> 
-                <Alert style={{width: '700px'}}
-                       confirmButtonText={this.state.choice ? 'Aprobar reparación' : 'Rechazar reparación'}
+                <Alert confirmButtonText={this.state.choice ? 'Aprobar reparación' : 'Rechazar reparación'}
                        cancelButtonText='Volver'
                        intent={this.state.choice ? 'success' : 'danger'}
                        isOpen={this.state.confirmation}
@@ -76,7 +75,7 @@ class ApprovalScreen extends React.Component {
                             {this.state.order.model}</b> por el costo de <b>${this.state.order.budget}</b> ?
                         </p>
                 </Alert>        
-                <Card style={{width: '1000px', 
+                <Card style={{maxWidth: '1200px',
                             position: 'absolute',
                             top: '50%',
                             left: '50%',
@@ -84,7 +83,7 @@ class ApprovalScreen extends React.Component {
                             }}>
                     {!this.state.done && this.state.exists &&
                     <div>
-                        <p style={{ textAlign: 'center', fontSize: '20px'}}>
+                        <p style={{width: '900px', textAlign: 'center', fontSize: '20px'}}>
                         <p>Su producto <b>{this.state.order.brand} {this.state.order.model}</b> {stateTextForClient(this.state.order.state).msg1}</p>
                         <p>{stateTextForClient(this.state.order.state).msg2}</p>
                         </p>
