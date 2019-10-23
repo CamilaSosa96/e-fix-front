@@ -58,11 +58,16 @@ class OBDStateChange extends React.Component {
                         <option value='REPARADO'>{stateNameTranslator('REPARADO')}</option>
                         <option value='CANCELADA'>{stateNameTranslator('CANCELADA')}</option>
                         <option value='ENTREGADO'>{stateNameTranslator('ENTREGADO')}</option>
-                        </select>
+                        </select>   
                         <Button style={{marginTop: '-3px', 
-                                        height:'30px'}}
+                                        height:'30px',
+                                        color: 'white',
+                                        backgroundColor: '#3DA817'}}
+                                    icon={<Icon icon='tick-circle' color='white'/>}
+                                    minimal='true'
+                                    intent='success'
                                 onClick={this.sendChangeToParent}> 
-                                Aceptar 
+                                <b>ACEPTAR</b>
                         </Button>
                     </div>
             </Dialog>

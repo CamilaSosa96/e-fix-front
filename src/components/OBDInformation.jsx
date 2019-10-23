@@ -13,15 +13,15 @@ class OBDInformation extends React.Component {
     }
 
     getDiagnosis(){
-        return this.props.orderInfo.diagnosis === null ? 
+        return this.props.diagnosisInfo === null ? 
         'No disponible' :
-        this.props.orderInfo.diagnosis
+        this.props.diagnosisInfo
     }
 
     getBudget(){
-        return this.props.orderInfo.budget === null ?
+        return this.props.budgetInfo === null ?
         'No disponible' :
-        `$ ${this.props.orderInfo.budget}`
+        `$ ${this.props.budgetInfo}`
     }
 
     handleClose(){

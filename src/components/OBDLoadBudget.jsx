@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputGroup, Button, Dialog, Alert} from '@blueprintjs/core'
+import { InputGroup, Button, Dialog, Alert, Icon} from '@blueprintjs/core'
 
 class OBDLoadBudget extends React.Component {
 
@@ -62,9 +62,14 @@ class OBDLoadBudget extends React.Component {
                             <Button style={{textAlign: 'center', 
                                             width: '100px', 
                                             height:'70px', 
-                                            marginBottom: '30px'}}
+                                            marginBottom: '30px',
+                                            color: 'white',
+                                            backgroundColor: '#3DA817'}}
+                                    icon={<Icon icon='insert' color='white'/>}
+                                    minimal='true'
+                                    intent='success'
                                     onClick={this.sendChangeToParent}>
-                            Cargar presupuesto
+                                <b>CARGAR</b>
                             </Button>
                         </div>
                     </div>

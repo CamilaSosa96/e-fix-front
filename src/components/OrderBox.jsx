@@ -17,6 +17,8 @@ class OrderResultBox extends React.Component{
             stateColor: stateColorSelector(this.props.state),
             stateIcon: stateIconSelector(this.props.state),
             productState: stateNameTranslator(this.props.state),
+            budget: this.props.budget,
+            diagnosis: this.props.diagnosis,
             rawState: this.props.state,
             lastUpdate: this.props.lastUpdateDate,
             loggedUser: ''
@@ -67,7 +69,9 @@ class OrderResultBox extends React.Component{
             this.setState({budgetLoad: false,
                             productState: stateNameTranslator('ESPERANDO_PRESUPUESTO'),
                             stateColor: stateColorSelector('ESPERANDO_PRESUPUESTO'),
-                            stateIcon: stateIconSelector('ESPERANDO_PRESUPUESTO')})
+                            stateIcon: stateIconSelector('ESPERANDO_PRESUPUESTO'),
+                            diagnosis: diagnosis,
+                            budget: budget})
         })
     }
 
@@ -89,6 +93,8 @@ class OrderResultBox extends React.Component{
                                 closeDialog={this.closeDialog}
                                 orderInfo={this.props}
                                 stateInfo={this.state.productState}
+                                budgetInfo={this.state.budget}
+                                diagnosisInfo={this.state.diagnosis}
                                 dateInfo={this.state.lastUpdate}
                 />}
                 {this.state.editState && 
