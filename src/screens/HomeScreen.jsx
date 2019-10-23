@@ -11,12 +11,14 @@ class HomeScreen extends React.Component {
         super(props)
         this.state = {
             goCreate: false, 
+            alertForCreate: false,
             goSeeAll: false,
             goLogin: false,
             createUser: false,
             loggedUser: ''
         }
         this.closeDialog = this.closeDialog.bind(this)
+        this.closeAlert = this.closeAlert.bind(this)
         this.createUser = this.createUser.bind(this)
     }
 
@@ -31,10 +33,16 @@ class HomeScreen extends React.Component {
         this.setState({createUser: false})
     }
 
+    closeAlert(){
+        this.setState({alertForCreate: false})
+    }
+
     createUser(user, pass){
-        createUser(user, pass, (err, _res) => {
-            if(err) console.log(err)
-            this.setState({createUser: false})
+        createUser(user, pass, (error, _res) => {
+            if(error.message === 'Request failed with status code 409') {
+                this.setState({alertForCreate: true})
+            }
+           else this.setState({createUser: false})
         })
     }
 
@@ -47,7 +55,9 @@ class HomeScreen extends React.Component {
                 {this.state.goSeeAll && <Redirect to='/orders'/>}
                 {this.state.createUser && <CreateUser isOpen={this.state.createUser}
                                                       closeDialog={this.closeDialog}
-                                                      createUser={this.createUser}/>}
+                                                      closeAlert={this.closeAlert}
+                                                      createUser={this.createUser}
+                                                      alert={this.state.alertForCreate}/>}
                 <div style={{textAlign: 'center'}}>
                     <div>
                     <Button style={{width:'500px', marginTop: '100px'}}
