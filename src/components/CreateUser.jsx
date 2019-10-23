@@ -80,10 +80,13 @@ class CreateUser extends React.Component{
                                     marginBottom: '70px',
                                     color: 'white',
                                     backgroundColor: '#3DA817'}}
-                            icon={<Icon icon='new-person' iconSize='60' color='white'/>}
                             minimal='true'
                             intent='success'
                             onClick={this.createUser}>
+                            <div>
+                                <Icon style={{marginLeft: '7px'}} icon='new-person' iconSize='60' color='white'/>
+                            </div>
+                            <div style={{fontSize: '20px'}}><b>CREAR</b></div>
                     </Button>
                     </div>
                 </Dialog>
