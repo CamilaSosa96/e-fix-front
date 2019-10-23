@@ -52,7 +52,7 @@ class ApprovalScreen extends React.Component {
                                  top: '50%',
                                  left: '50%', 
                                  transform: 'translate(-50%,-50%)'}}
-                         src='/efixlogo.png' 
+                         src='http://localhost:3000/efixlogo.png' 
                          alt='E-FIX'/>    
                 </Navbar>     
                 <Navbar style={{backgroundColor: '#5B1790',
@@ -83,10 +83,10 @@ class ApprovalScreen extends React.Component {
                             }}>
                     {!this.state.done && this.state.exists &&
                     <div>
-                        <p style={{width: '900px', textAlign: 'center', fontSize: '20px'}}>
+                        <div style={{width: '900px', textAlign: 'center', fontSize: '20px'}}>
                         <p>Su producto <b>{this.state.order.brand} {this.state.order.model}</b> {stateTextForClient(this.state.order.state).msg1}</p>
                         <p>{stateTextForClient(this.state.order.state).msg2}</p>
-                        </p>
+                        </div>
                         {this.state.approval && 
                         <div style={{ textAlign: 'center', fontSize: '20px'}}>
                             <p>Para reparar su producto, se necesita: <b>{this.state.order.diagnosis}</b></p>

@@ -56,7 +56,7 @@ class NavigationBar extends React.Component{
                                  position: 'absolute', 
                                  top: '50%', 
                                  transform: 'translate(0,-50%)'}}
-                         src='../efixlogo.png' 
+                         src='http://localhost:3000/efixlogo.png' 
                          alt='E-FIX' 
                          onClick={()=> this.setState({goHome:true})}/>                 
                     <div style={{width: '400px',
