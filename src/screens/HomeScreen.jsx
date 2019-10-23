@@ -2,7 +2,7 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import {isAuthored, createUser} from '../efixService'
 import NavigationBar from '../components/NavigationBar'
-import { Button, Icon } from '@blueprintjs/core'
+import { Button, Icon, Toaster, Position} from '@blueprintjs/core'
 import CreateUser from '../components/CreateUser'
 
 class HomeScreen extends React.Component {
@@ -21,6 +21,10 @@ class HomeScreen extends React.Component {
         this.closeAlert = this.closeAlert.bind(this)
         this.createUser = this.createUser.bind(this)
     }
+
+    refHandlers = {
+        toaster: (ref) => this.toaster = ref,
+      };
 
     componentDidMount(){
         isAuthored((error, response) => {
@@ -42,7 +46,10 @@ class HomeScreen extends React.Component {
             if(error.message === 'Request failed with status code 409') {
                 this.setState({alertForCreate: true})
             }
-           else this.setState({createUser: false})
+           else {
+                this.setState({createUser: false})
+                this.toaster.show({timeout:'3500', icon: 'new-person', message: "El usuario fue creado satisfactoriamente", intent: 'success'}); 
+           }
         })
     }
 
@@ -84,6 +91,7 @@ class HomeScreen extends React.Component {
                         <h1>CREAR NUEVO USUARIO</h1>
                         </Button>
                     </div>}
+                    <Toaster position={Position.TOP} ref={this.refHandlers.toaster} />
                 </div>
             </div>
         )
