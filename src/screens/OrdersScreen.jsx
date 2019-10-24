@@ -28,25 +28,23 @@ class OrderScreen extends React.Component {
     componentDidMount(){
         this._isMounted = true
         {this._isMounted &&
-
             isAuthored((error, response) => {
-                if(error)this.setState({goLogin: true})
-                else this.setState({loggedUser: response.data.user})
+                error ? this.setState({goLogin: true}) : this.setState({loggedUser: response.data.user})
             })
             let string = this.state.search
             if(string === undefined){
                 getAllOrders((err, result) => {
                    if(err) this._isMounted && this.setState({msg: 'No se ha podido conectar al back-end', alert: true})
                    else this._isMounted && this.setState({orders: this.createBoxesFromArray(result), 
-                                                        isLoaded: true,
-                                                        title: 'TODAS LAS ORDENES'})
+                                                          isLoaded: true,
+                                                          title: 'TODAS LAS ORDENES'})
                 })        
             } else {
-                searchOrders(string, (err, result) =>{
+                searchOrders(string, (err, result) => {
                     if(err) this._isMounted && this.setState({msg: 'No se ha podido conectar al back-end', alert: true})
-                   else this._isMounted && this.setState({orders: this.createBoxesFromArray(result), 
-                                                        isLoaded: true, 
-                                                        title: 'RESULTADOS DE BÚSQUEDA'})     
+                    else this._isMounted && this.setState({orders: this.createBoxesFromArray(result), 
+                                                           isLoaded: true, 
+                                                           title: 'RESULTADOS DE BÚSQUEDA'})     
                 })
             }
         }
@@ -86,9 +84,9 @@ class OrderScreen extends React.Component {
             return(
                 <Button 
                     style={{color: 'white', 
-                           marginTop: '30px', 
-                           marginBottom: '30px', 
-                           backgroundColor: '#39A1D2'}}
+                            marginTop: '30px', 
+                            marginBottom: '30px', 
+                            backgroundColor: '#39A1D2'}}
                     icon={<Icon style={{color: 'white'}} icon='undo' iconSize='15'/>}
                     minimal='true'
                     onClick={() => this.setState({goHome: true})}>
@@ -99,7 +97,7 @@ class OrderScreen extends React.Component {
         return(
             <div>
                 <Alert isOpen={this.state.alert}
-                    onClose={()=>{this.setState({goHome: true})}}>
+                    onClose={() => {this.setState({goHome: true})}}>
                     {this.state.msg}
                 </Alert>
                 {this.state.goLogin && <Redirect to='/login'/>}

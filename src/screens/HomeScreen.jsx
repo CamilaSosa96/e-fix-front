@@ -2,8 +2,9 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import {isAuthored, createUser} from '../efixService'
 import NavigationBar from '../components/NavigationBar'
-import { Button, Icon, Toaster, Position} from '@blueprintjs/core'
 import CreateUser from '../components/CreateUser'
+import { Button, Icon, Toaster, Position} from '@blueprintjs/core'
+
 
 class HomeScreen extends React.Component {
 
@@ -22,14 +23,11 @@ class HomeScreen extends React.Component {
         this.createUser = this.createUser.bind(this)
     }
 
-    refHandlers = {
-        toaster: (ref) => this.toaster = ref,
-      };
+    refHandlers = { toaster: (ref) => this.toaster = ref,}
 
     componentDidMount(){
         isAuthored((error, response) => {
-            if(error){this.setState({goLogin: true})}
-            else this.setState({loggedUser: response.data.user})
+            error ? this.setState({goLogin: true}) : this.setState({loggedUser: response.data.user})
         })
     }
 

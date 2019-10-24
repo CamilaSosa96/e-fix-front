@@ -30,7 +30,7 @@ class NewOrderForm extends React.Component {
     }
 
     componentDidMount(){
-        isAuthored((error, response) => {
+        isAuthored((error, _response) => {
             if(error){this.setState({goLogin: true})}
         })
     }
@@ -38,7 +38,7 @@ class NewOrderForm extends React.Component {
     handleOrderCreation(event){
         if(this.isValidOrder()){
             saveOrder(this.state.name, this.state.dni, this.state.email, this.state.type,
-                      this.state.brand, this.state.model, this.state.problem, (err, response) => {
+                      this.state.brand, this.state.model, this.state.problem, (_err, _response) => {
                         this.setState({onAlertClick: this.goBackHome, 
                                        alertMSJ: '¡Orden creada exitosamente!', 
                                        alert: true})
@@ -91,7 +91,7 @@ class NewOrderForm extends React.Component {
                     <p style={{fontSize: '27px', textAlign: 'center'}}>
                         <b>Crear nueva orden de reparación</b>
                     </p>
-                    <Divider></Divider>
+                    <Divider/>
                     <form onSubmit={this.handleOrderCreation}>
                         <div style={{display: 'inline-block', 
                                      width: '200px', 

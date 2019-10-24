@@ -8,11 +8,11 @@ class ApprovalScreen extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            approval: false,
+            choice: '',
             order: '',
+            approval: false,
             done: false,
             exists: true,
-            choice: '',
             confirmation: false
         }
         this.sendResponse = this.sendResponse.bind(this)
@@ -20,13 +20,11 @@ class ApprovalScreen extends React.Component {
     }
 
     componentDidMount(){
-        searchOrderForApproval(this.props.match.params.dni, this.props.match.params.id, (err, order)=>{
+        searchOrderForApproval(this.props.match.params.dni, this.props.match.params.id, (err, order) => {
             if(err)this.setState({exists: false})
             else {
                 this.setState({order: order})
-                if(order.state === 'ESPERANDO_PRESUPUESTO'){
-                    this.setState({approval: true})
-                }
+                if(order.state === 'ESPERANDO_PRESUPUESTO') this.setState({approval: true})
             }
         })
     }
@@ -36,7 +34,7 @@ class ApprovalScreen extends React.Component {
     }
 
     onConfirmation(){
-        sendClientResponse(this.state.order.id, this.state.order.dni, this.state.choice, (_response)=>{
+        sendClientResponse(this.state.order.id, this.state.order.dni, this.state.choice, (_response) => {
             this.setState({confirmation: false, done: true})
         })
     }
@@ -44,27 +42,28 @@ class ApprovalScreen extends React.Component {
     render(){
         return(
             <div>
-                <Navbar style={{backgroundColor: '#5B1790',
+                <Navbar style={{position: 'relative',
                                 height: '70px',
-                                position: 'relative'}}>
-                     <img style={{width: '150px',
-                                 position: 'absolute', 
-                                 top: '50%',
-                                 left: '50%', 
-                                 transform: 'translate(-50%,-50%)'}}
-                         src='http://localhost:3000/efixlogo.png' 
-                         alt='E-FIX'/>    
+                                backgroundColor: '#5B1790'}}>
+                     <img style={{position: 'absolute',
+                                  width: '150px',
+                                  top: '50%',
+                                  left: '50%', 
+                                  transform: 'translate(-50%,-50%)'}}
+                          src='http://localhost:3000/efixlogo.png' 
+                          alt='E-FIX'/>    
                 </Navbar>     
-                <Navbar style={{backgroundColor: '#5B1790',
+                <Navbar style={{position: 'absolute', 
                                 height: '70px',
-                                position: 'absolute', bottom: '0'}}/> 
-                <Alert confirmButtonText={this.state.choice ? 'Aprobar reparación' : 'Rechazar reparación'}
+                                bottom: '0',
+                                backgroundColor: '#5B1790'}}/> 
+                <Alert isOpen={this.state.confirmation}
+                       confirmButtonText={this.state.choice ? 'Aprobar reparación' : 'Rechazar reparación'}
                        cancelButtonText='Volver'
                        intent={this.state.choice ? 'success' : 'danger'}
-                       isOpen={this.state.confirmation}
                        icon={<Icon style={{marginRight: '10px',
-                                           color: this.state.choice ? 'green' : 'red', 
-                                           display: 'inline-block'}}
+                                           display: 'inline-block',
+                                           color: this.state.choice ? 'green' : 'red'}}
                                     icon= {this.state.choice ? 'confirm' : 'warning-sign'} 
                                     iconSize='50'/>}
                         onCancel={() => this.setState({confirmation: false})}
@@ -75,12 +74,11 @@ class ApprovalScreen extends React.Component {
                             {this.state.order.model}</b> por el costo de <b>${this.state.order.budget}</b> ?
                         </p>
                 </Alert>        
-                <Card style={{maxWidth: '1200px',
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)'
-                            }}>
+                <Card style={{position: 'absolute',
+                              maxWidth: '1200px',
+                              top: '50%',
+                              left: '50%',
+                              transform: 'translate(-50%, -50%)'}}>
                     {!this.state.done && this.state.exists &&
                     <div>
                         <div style={{width: '900px', textAlign: 'center', fontSize: '20px'}}>
@@ -105,11 +103,11 @@ class ApprovalScreen extends React.Component {
                         </div>}
                     </div>}
                     {this.state.done && 
-                    <div style={{ textAlign: 'center', fontSize: '20px'}}>
+                    <div style={{textAlign: 'center', fontSize: '20px'}}>
                         <p>Muchas gracias por responder, ya puede cerrar esta ventana.</p>
                     </div>}
                     {!this.state.exists &&
-                    <div style={{ textAlign: 'center', fontSize: '20px'}}>
+                    <div style={{textAlign: 'center', fontSize: '20px'}}>
                         <p>La orden solicitada no existe.</p>
                     </div>}
                 </Card>

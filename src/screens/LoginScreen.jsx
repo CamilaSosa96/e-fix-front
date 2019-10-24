@@ -30,21 +30,19 @@ class LoginScreen extends React.Component {
     handleLogin(event){
         validateUser(this.state.user, this.state.pass, (error) => {
             if(error){
-                if(error.message === 'Network Error'){
-                    this.setState({msg: 'No se ha podido conectar al back-end', alert: true})
-                } else {
+                error.message === 'Network Error' ?
+                    this.setState({msg: 'No se ha podido conectar al back-end', alert: true}) :
                     this.setState({msg: 'El usuario y/o contraseña son incorrectos', alert: true})
-                }
             } else { 
                 this.setState({isLoggedIn: true})
             }
         })
-        event.preventDefault();
+        event.preventDefault()
     }
 
     handleChange(event){
         this.setState({[event.target.name]: event.target.value})
-        event.preventDefault();
+        event.preventDefault()
     }
 
     render () {  
@@ -52,7 +50,7 @@ class LoginScreen extends React.Component {
             <div>
                 {this.state.isLoggedIn && <Redirect to='/home'/>}
                 <Alert isOpen={this.state.alert}
-                    onClose={()=>{this.setState({user: '', pass: '', alert: false})}}>
+                    onClose={() => {this.setState({user: '', pass: '', alert: false})}}>
                     {this.state.msg}
                 </Alert>
                 <form onSubmit={this.handleLogin}>
