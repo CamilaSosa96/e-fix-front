@@ -1,33 +1,24 @@
 import axios from 'axios';
 
-//const host = '10.15.77.47:5000' // When accessing from another network (public IP) or from another pc (local IP)
+//const host = 'x.x.x.x:5000' // When accessing from another network (public IP) or from another pc (local IP)
 const host = 'localhost:5000' // When accessing locally
 
 export function validateUser(username, password, callback) {
-    axios.post(`http://${host}/auth`,{
-        user: username, 
-        pass: password
-    }).then((response) => {
-        callback(null, response);
-    }).catch((error) => {
-        callback(error, null);
-    });
+    axios.post(`http://${host}/auth`,{user: username, pass: password})
+    .then((response) => callback(null, response))
+    .catch((error) => callback(error, null))
 }
 
 export function isAuthored(callback){
-    axios.get(`http://${host}/isAuthored`).then((response) => {
-        callback(null, response);
-    }).catch((error) => {
-        callback(error, null);
-    });
+    axios.get(`http://${host}/isAuthored`)
+    .then((response) => callback(null, response))
+    .catch((error) => callback(error, null))
 }
 
 export function logOut(callback){
-    axios.get(`http://${host}/endSession`).then((response) => {
-        callback(null, response);
-    }).catch((error) => {
-        callback(error, null);
-    });
+    axios.get(`http://${host}/endSession`)
+    .then((response) => callback(null, response))
+    .catch((error) => callback(error, null))
 }
 
 export function saveOrder(name, dni, email, type, brand, model, problem, callback){
@@ -39,18 +30,14 @@ export function saveOrder(name, dni, email, type, brand, model, problem, callbac
         productBrand: brand,
         productModel: model,
         problem: problem
-    }).then((response) => {
-        callback(null, response);
-    }).catch((error) => {
-        callback(error, null);
-    });
+    }).then((response) => callback(null, response))
+    .catch((error) => callback(error, null))
 }
 
 export function getAllOrders(callback){
-    axios.get(`http://${host}/getAllOrders`).then((response) =>{ 
-        const orderList = response.data.result; 
-        const resultList = [];
-        orderList.forEach(elem => {
+    axios.get(`http://${host}/getAllOrders`).then((response) => { 
+        const resultList = []
+        response.data.forEach(elem => {
             const order = {    
                 id: elem.id,  
                 user: elem.usuario_tecnico,                            
@@ -67,19 +54,15 @@ export function getAllOrders(callback){
                 lastUpdateDate: elem.fecha_actualizacion
             }
             resultList.push(order)
-        });
+        })
         callback(null, resultList);
-    }).catch((error) => {
-        callback(error, null);
-    })
+    }).catch((error) => callback(error, null))
 }
 
 export function updateState(id, state, callback){
-    axios.post(`http://${host}/updateState/${id}/${state}`, {}).then((response) =>{
-        callback(null, response);
-    }).catch((error) => {
-        callback(error, null);
-    })
+    axios.post(`http://${host}/updateState/${id}/${state}`, {})
+    .then((response) => callback(null, response))
+    .catch((error) => callback(error, null))
 }
 
 export function loadBudget(id, diagnosis, budget, callback){
@@ -87,18 +70,14 @@ export function loadBudget(id, diagnosis, budget, callback){
         id: id,
         diagnosis: diagnosis,
         budget: budget
-    }).then((response) =>{
-        callback(null, response);
-    }).catch((error) => {
-        callback(error, null);
-    })
+    }).then((response) => callback(null, response))
+    .catch((error) => callback(error, null))
 }
 
 export function searchOrders(string, callback){
     axios.get(`http://${host}/search/${string}`).then((response) =>{ 
-        const orderList = response.data.result; 
         const resultList = [];
-        orderList.forEach(elem => {
+        response.data.forEach(elem => {
             const order = {    
                 id: elem.id,            
                 user: elem.usuario_tecnico,                
@@ -117,10 +96,7 @@ export function searchOrders(string, callback){
             resultList.push(order)
         });
         callback(null, resultList);
-    }).catch((error) => {
-        callback(error, null);
-    })
-
+    }).catch((error) => callback(error, null))
 }
 
 export function searchOrderForApproval(dni, id, callback){
@@ -140,23 +116,17 @@ export function searchOrderForApproval(dni, id, callback){
             lastUpdateDate: response.data.fecha_actualizacion
         }
         callback(null, order)
-    }).catch((error) => {
-        callback(error, null);
-    })
+    }).catch((error) => callback(error, null))
 }
 
 export function sendClientResponse(id, dni, choice, callback){
-    axios.post(`http://${host}/clientResponse/${id}/${dni}`, {choice: choice}).then((response)=>{
-        callback(null, response)
-    }).catch((error) => {
-        callback(error, null);
-    })
+    axios.post(`http://${host}/clientResponse/${id}/${dni}`, {choice: choice})
+    .then((response) => callback(null, response))
+    .catch((error) => callback(error, null))
 }
 
 export function createUser(user, pass, callback){
-    axios.post(`http://${host}/newUser`, {user: user, pass: pass}).then((response) => {
-        callback(null, response)
-    }).catch((error) => {
-        callback(error, null);
-    })
+    axios.post(`http://${host}/newUser`, {user: user, pass: pass})
+    .then((response) => callback(null, response))
+    .catch((error) => callback(error, null))
 }
