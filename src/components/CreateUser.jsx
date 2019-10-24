@@ -27,10 +27,10 @@ class CreateUser extends React.Component{
 
     createUser(){
         if(this.state.user === '' || this.state.pass === '' || this.state.passConf === ''){
-            this.setState({alert: true, msg: "Por favor, complete todos los campos."})
+            this.setState({alert: true, msg: 'Por favor, complete todos los campos.'})
         } else {
             this.state.pass !== this.state.passConf ? 
-                this.setState({alert: true, pass: '', passConf: '', msg: "Las contraseñas no coinciden."}) :   
+                this.setState({alert: true, pass: '', passConf: '', msg: 'Las contraseñas no coinciden.'}) :   
                 this.props.createUser(this.state.user, this.state.pass) 
         }
     }

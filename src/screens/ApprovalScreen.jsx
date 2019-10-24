@@ -91,12 +91,12 @@ class ApprovalScreen extends React.Component {
                             <p>Su reparación costaría: <b>${this.state.order.budget}</b></p>
                             <p>¿Desea aprobar la reparación?</p>
                             <Button style={{height: '60px', fontSize:'30px', marginTop: '15px', marginRight: '100px'}}
-                                    onClick={()=> this.sendResponse(true)}
+                                    onClick={() => this.sendResponse(true)}
                                     intent='success'>
                                 <b>Aprobar</b>
                             </Button>
                             <Button style={{height: '60px', fontSize:'30px', marginTop: '15px'}}
-                                    onClick={()=> this.sendResponse(false)}
+                                    onClick={() => this.sendResponse(false)}
                                     intent='danger'>
                                 <b>Rechazar</b>
                             </Button>

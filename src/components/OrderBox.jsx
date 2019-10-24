@@ -32,7 +32,7 @@ class OrderResultBox extends React.Component{
     }
 
     componentDidMount(){
-        isAuthored((error, result)=>{
+        isAuthored((error, result) => {
             error ? console.log(error) : this.setState({loggedUser: result.data.user})
         })
     }
@@ -42,7 +42,7 @@ class OrderResultBox extends React.Component{
     }
 
     updateState(rawStateValue){
-        updateState(this.props.id, rawStateValue, (_response) =>{
+        updateState(this.props.id, rawStateValue, (_response) => {
             this.setState({
                 productState: stateNameTranslator(rawStateValue),
                 lastUpdate: new Date().toLocaleString(),
@@ -64,7 +64,7 @@ class OrderResultBox extends React.Component{
     }
 
     handleBudget(diagnosis, budget){
-        loadBudget(this.props.id, diagnosis, budget, (_result)=> {
+        loadBudget(this.props.id, diagnosis, budget, (_result) => {
             this.setState({budgetLoad: false,
                            productState: stateNameTranslator('ESPERANDO_PRESUPUESTO'),
                            stateColor: stateColorSelector('ESPERANDO_PRESUPUESTO'),

@@ -46,7 +46,7 @@ class HomeScreen extends React.Component {
             }
            else {
                 this.setState({createUser: false})
-                this.toaster.show({timeout:'3500', icon: 'new-person', message: "El usuario fue creado satisfactoriamente", intent: 'success'}); 
+                this.toaster.show({timeout:'3500', icon: 'new-person', message: 'El usuario fue creado satisfactoriamente', intent: 'success'}) 
            }
         })
     }
@@ -96,4 +96,4 @@ class HomeScreen extends React.Component {
     }
 }
 
-export default HomeScreen;
+export default HomeScreen

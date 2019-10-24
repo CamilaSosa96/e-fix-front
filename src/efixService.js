@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'axios'
 
 //const host = 'x.x.x.x:5000' // When accessing from another network (public IP) or from another pc (local IP)
 const host = 'localhost:5000' // When accessing locally
@@ -55,7 +55,7 @@ export function getAllOrders(callback){
             }
             resultList.push(order)
         })
-        callback(null, resultList);
+        callback(null, resultList)
     }).catch((error) => callback(error, null))
 }
 
@@ -94,8 +94,8 @@ export function searchOrders(string, callback){
                 lastUpdateDate: elem.fecha_actualizacion
             }
             resultList.push(order)
-        });
-        callback(null, resultList);
+        })
+        callback(null, resultList)
     }).catch((error) => callback(error, null))
 }
 

@@ -35,7 +35,7 @@ class NavigationBar extends React.Component{
     }
 
     handleLogOut(){
-        logOut((error, _response) =>{
+        logOut((error, _response) => {
             if(error) console.log(error)
             this.setState({goLogin: true})
         })

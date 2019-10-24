@@ -24,7 +24,7 @@ function App() {
         <Route component={NotFoundScreen}/>
       </Switch>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
