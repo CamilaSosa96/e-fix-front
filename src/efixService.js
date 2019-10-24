@@ -75,8 +75,8 @@ export function loadBudget(id, diagnosis, budget, callback){
 }
 
 export function searchOrders(string, callback){
-    axios.get(`http://${host}/search/${string}`).then((response) =>{ 
-        const resultList = [];
+    axios.get(`http://${host}/search/${string}`).then((response) => { 
+        const resultList = []
         response.data.forEach(elem => {
             const order = {    
                 id: elem.id,            
