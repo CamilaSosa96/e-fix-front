@@ -20,10 +20,9 @@ class OBDLoadBudget extends React.Component {
     }
 
     sendChangeToParent(){
-        if(this.state.bud !== '' && this.state.diag !== ''){
-            this.props.handleBudget(this.state.diag, this.state.bud)
-        }
-        else this.setState({alert: true})
+        this.state.bud !== '' && this.state.diag !== '' ?
+            this.props.handleBudget(this.state.diag, this.state.bud) :
+            this.setState({alert: true})
     }
 
     handleClose(){
@@ -34,24 +33,24 @@ class OBDLoadBudget extends React.Component {
         return(
             <div>
                 {this.state.alert && 
-                        <Alert
-                            isOpen={this.state.alert} 
-                            onClose={() => this.setState({alert: false})}>
-                            Por favor, complete todos los campos.
-                        </Alert>}
+                <Alert
+                    isOpen={this.state.alert} 
+                    onClose={() => this.setState({alert: false})}>
+                    Por favor, complete todos los campos.
+                </Alert>}
                 <Dialog style={{height: '140px'}}
-                        isOpen={this.props.isOpen} 
-                        onClose={this.handleClose} 
+                        isOpen={this.props.isOpen}  
                         title={<p style={{marginTop: '12px', textAlign: 'center'}}>
-                            Cargar presupuesto para {this.props.orderInfo.brand} {this.props.orderInfo.model}</p>}>
+                            Cargar presupuesto para {this.props.orderInfo.brand} {this.props.orderInfo.model}</p>}
+                        onClose={this.handleClose}>
                     <div style={{textAlign: 'center'}}>
                         <div style={{display: 'inline-block', marginRight: '10px'}}>
                             <InputGroup style={{width: '350px', marginTop: '10px'}}
                                         type='text'
-                                        placeholder='¿Qué necesita para ser reparado?'
                                         name='diag'
-                                        onChange={this.handleChange}
-                                        maxLength='30'/>
+                                        placeholder='¿Qué necesita para ser reparado?'
+                                        maxLength='30'
+                                        onChange={this.handleChange}/>
                             <InputGroup style={{width: '350px', marginTop: '10px'}}
                                         type='number' 
                                         name='bud'

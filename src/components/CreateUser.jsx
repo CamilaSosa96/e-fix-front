@@ -9,8 +9,8 @@ class CreateUser extends React.Component{
             user: '',
             pass: '',
             passConf: '',
-            alert: false,
-            msg: ''
+            msg: '',
+            alert: false
         }
         this.handleClose = this.handleClose.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -29,10 +29,9 @@ class CreateUser extends React.Component{
         if(this.state.user === '' || this.state.pass === '' || this.state.passConf === ''){
             this.setState({alert: true, msg: "Por favor, complete todos los campos."})
         } else {
-            if(this.state.pass !== this.state.passConf) {
-                this.setState({alert: true, pass: '', passConf: '', msg: "Las contraseñas no coinciden."})
-            }
-            else this.props.createUser(this.state.user, this.state.pass) 
+            this.state.pass !== this.state.passConf ? 
+                this.setState({alert: true, pass: '', passConf: '', msg: "Las contraseñas no coinciden."}) :   
+                this.props.createUser(this.state.user, this.state.pass) 
         }
     }
 
@@ -51,8 +50,8 @@ class CreateUser extends React.Component{
                         isOpen={this.props.isOpen}
                         title={<p style={{fontSize: '30px', marginTop: '12px'}}>Crear nuevo usuario</p>}
                         icon={<Icon style={{marginRight: '10px', marginTop: '7px', color: '#3DA817'}}
-                                icon='plus' 
-                                iconSize='30'/>} 
+                                    icon='plus' 
+                                    iconSize='30'/>} 
                         onClose={this.handleClose}>
                     <div style={{display: 'inline-block'}}>
                     <InputGroup style={{width: '250px', marginTop: '10px', marginLeft: '10px', marginRight: '10px'}}
@@ -67,7 +66,7 @@ class CreateUser extends React.Component{
                                 placeholder='Contraseña' 
                                 value={this.state.pass}
                                 onChange={this.handleChange}/>
-                     <InputGroup style={{width: '250px', marginTop: '10px', marginLeft: '10px', marginRight: '10px'}}
+                    <InputGroup style={{width: '250px', marginTop: '10px', marginLeft: '10px', marginRight: '10px'}}
                                 type='password'
                                 name='passConf'
                                 placeholder='Repita su contraseña' 

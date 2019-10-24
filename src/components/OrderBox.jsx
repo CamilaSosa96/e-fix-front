@@ -14,13 +14,13 @@ class OrderResultBox extends React.Component{
             info: false,
             editState: false,
             budgetLoad: false,
-            stateColor: stateColorSelector(this.props.state),
-            stateIcon: stateIconSelector(this.props.state),
-            productState: stateNameTranslator(this.props.state),
             budget: this.props.budget,
             diagnosis: this.props.diagnosis,
             rawState: this.props.state,
             lastUpdate: this.props.lastUpdateDate,
+            stateColor: stateColorSelector(this.props.state),
+            stateIcon: stateIconSelector(this.props.state),
+            productState: stateNameTranslator(this.props.state),
             loggedUser: ''
         }
         this.handleChange = this.handleChange.bind(this)
@@ -33,8 +33,7 @@ class OrderResultBox extends React.Component{
 
     componentDidMount(){
         isAuthored((error, result)=>{
-            if(error) console.log(error)
-            else this.setState({loggedUser: result.data.user})
+            error ? console.log(error) : this.setState({loggedUser: result.data.user})
         })
     }
 
@@ -57,21 +56,21 @@ class OrderResultBox extends React.Component{
 
     handleOrderStatusChange(rawStateValue){
         this.setState({editState: false, 
-                        productState: stateNameTranslator(rawStateValue),
-                        rawState: rawStateValue, 
-                        stateColor: stateColorSelector(rawStateValue),
-                        stateIcon: stateIconSelector(rawStateValue)})
+                       productState: stateNameTranslator(rawStateValue),
+                       rawState: rawStateValue, 
+                       stateColor: stateColorSelector(rawStateValue),
+                       stateIcon: stateIconSelector(rawStateValue)})
         this.updateState(rawStateValue)
     }
 
     handleBudget(diagnosis, budget){
         loadBudget(this.props.id, diagnosis, budget, (_result)=> {
             this.setState({budgetLoad: false,
-                            productState: stateNameTranslator('ESPERANDO_PRESUPUESTO'),
-                            stateColor: stateColorSelector('ESPERANDO_PRESUPUESTO'),
-                            stateIcon: stateIconSelector('ESPERANDO_PRESUPUESTO'),
-                            diagnosis: diagnosis,
-                            budget: budget})
+                           productState: stateNameTranslator('ESPERANDO_PRESUPUESTO'),
+                           stateColor: stateColorSelector('ESPERANDO_PRESUPUESTO'),
+                           stateIcon: stateIconSelector('ESPERANDO_PRESUPUESTO'),
+                           diagnosis: diagnosis,
+                           budget: budget})
         })
     }
 
@@ -80,9 +79,7 @@ class OrderResultBox extends React.Component{
     }
 
     isAllowedToModify(){
-        if(this.state.loggedUser === 'Admin') return true
-        if(this.state.loggedUser === this.props.user) return true
-        return false
+        return (this.state.loggedUser === 'Admin') || (this.state.loggedUser === this.props.user) 
     }
 
     render(){
@@ -125,24 +122,24 @@ class OrderResultBox extends React.Component{
                         <div style={{position: 'absolute', bottom: '0'}}>
                             <div style={{textAlign: 'center', marginBottom: '10px'}}>  
                                 <Button style={{width: '140px', marginRight: '20px'}}
-                                        onClick={()=> this.setState({info: true})}>
+                                        onClick={() => this.setState({info: true})}>
                                     Ver Información
                                 </Button>
                                 <Button style={{width: '140px', marginRight: '20px'}}
                                         disabled={!this.isAllowedToModify()}
-                                        onClick={()=> this.setState({editState: true})}>
+                                        onClick={() => this.setState({editState: true})}>
                                     Cambiar Estado
                                 </Button>                   
                                 <Button style={{width: '140px'}}
                                         disabled={!this.isAllowedToModify()}
-                                        onClick={()=> this.setState({budgetLoad: true})}>
+                                        onClick={() => this.setState({budgetLoad: true})}>
                                     Enviar Presupuesto
                                 </Button>
                             </div>
                             <div>
-                                <Tag style={{backgroundColor: this.state.stateColor, 
-                                            width: '460px',
-                                            textAlign: 'left'}}
+                                <Tag style={{width: '460px',
+                                             textAlign: 'left',
+                                             backgroundColor: this.state.stateColor}}
                                      fill='true' 
                                      round='true'
                                      rightIcon={this.state.stateIcon}>

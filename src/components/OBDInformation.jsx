@@ -34,14 +34,14 @@ class OBDInformation extends React.Component {
 
     render(){
         return(
-            <Dialog isOpen={this.props.isOpen}
+            <Dialog style={{width: '600px', height:'390px'}}
+                    isOpen={this.props.isOpen}
                     icon={<Icon style={{marginRight: '10px', marginTop: '7px', color: Colors.VIOLET4}}
                                 icon='info-sign' 
                                 iconSize='30'/>}
                     title={<p style={{fontSize: '30px', marginTop: '12px'}}>
                             Orden de Reparación #{this.props.orderInfo.id}</p>}
-                    onClose={this.handleClose}
-                    style={{width: '600px', height:'390px'}}>
+                    onClose={this.handleClose}>
                 <div style={{fontSize: '18px', marginLeft: '10px', marginTop: '5px'}}>
                     <p><Icon style={{marginBottom: '3px'}} icon='user'/><b> Técnico:</b> {this.props.orderInfo.user}</p>
                     <p><Icon style={{marginBottom: '3px'}} icon='person'/><b> Cliente:</b> {this.props.orderInfo.name}</p>

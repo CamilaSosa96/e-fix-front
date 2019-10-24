@@ -40,15 +40,15 @@ class OBDStateChange extends React.Component {
     render(){
         return (    
         <div>
-            <Dialog isOpen={this.props.isOpen} 
-                    onClose={this.handleClose} 
+            <Dialog isOpen={this.props.isOpen}  
                     title={<p style={{marginTop: '12px', textAlign: 'center'}}>
-                            Cambiar estado de {this.props.orderInfo.brand}{' '}{this.props.orderInfo.model}
-                           </p>}> 
+                            Cambiar estado de {this.props.orderInfo.brand} {this.props.orderInfo.model}
+                           </p>}
+                    onClose={this.handleClose}> 
                     <div style={{textAlign: 'center'}}>
-                        <Icon icon={this.handleIcon()} 
-                              iconSize='20'
-                              style={{color: this.handleIconColor(), marginRight: '10px'}}/>
+                        <Icon style={{color: this.handleIconColor(), marginRight: '10px'}}
+                              icon={this.handleIcon()} 
+                              iconSize='20'/>
                         <select style={{marginTop: '22px', height: '30px', width:'250px' , marginRight:'15px'}}
                                 value={this.state.stateValue} 
                                 onChange={this.handleChange}>
@@ -63,11 +63,11 @@ class OBDStateChange extends React.Component {
                                         height:'30px',
                                         color: 'white',
                                         backgroundColor: '#3DA817'}}
-                                    icon={<Icon icon='tick-circle' color='white'/>}
-                                    minimal='true'
-                                    intent='success'
+                                icon={<Icon icon='tick-circle' color='white'/>}
+                                minimal='true'
+                                intent='success'
                                 onClick={this.sendChangeToParent}> 
-                                <b>ACEPTAR</b>
+                            <b>ACEPTAR</b>
                         </Button>
                     </div>
             </Dialog>
