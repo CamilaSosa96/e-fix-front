@@ -130,3 +130,9 @@ export function createUser(user, pass, callback){
     .then((response) => callback(null, response))
     .catch((error) => callback(error, null))
 }
+
+export function changePass(user, pass, callback){
+    axios.post(`http://${host}/updatePassword`, {user: user, newPass: pass})
+    .then((response) => callback(null, response))
+    .catch((error) => callback(error, null))
+}

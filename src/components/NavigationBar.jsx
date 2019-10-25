@@ -1,7 +1,8 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
-import {isAuthored, logOut} from '../efixService'
-import {Navbar, InputGroup, Icon, Colors, Button, Tooltip} from '@blueprintjs/core'
+import {isAuthored, logOut, changePass} from '../efixService'
+import {Navbar, InputGroup, Icon, Colors, Button, Tooltip, Alert} from '@blueprintjs/core'
+import ChangePassword from './ChangePassword'
 
 class NavigationBar extends React.Component{
 
@@ -12,11 +13,15 @@ class NavigationBar extends React.Component{
             username: '',
             goSearch: false,
             goHome: false,
-            goLogin: false
+            goLogin: false,
+            changePass: false,
+            passwordAlert: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
         this.handleLogOut = this.handleLogOut.bind(this)
+        this.handlePasswordChange = this.handlePasswordChange.bind(this)
+        this.closeDialog = this.closeDialog.bind(this)
     }
 
     componentDidMount(){
@@ -41,12 +46,32 @@ class NavigationBar extends React.Component{
         })
     }
 
+    handlePasswordChange(newPass){
+        changePass(this.state.username, newPass, (_err, _response) => {
+            this.setState({changePass: false, passwordAlert: true})
+        })
+    }
+
+    closeDialog(){
+        this.setState({changePass: false})
+    }
+
     render(){
         return(
             <div>
+                {this.state.changePass && 
+                <ChangePassword passwordChange={this.handlePasswordChange} 
+                                username={this.state.username}
+                                open={this.state.changePass}
+                                close={this.closeDialog}/>}
                 {this.state.goSearch && <Redirect to={`/orders/${this.state.search}`}/>}
                 {this.state.goHome && <Redirect to='/home' />}
                 {this.state.goLogin && <Redirect to='/login' />}
+                <Alert isOpen={this.state.passwordAlert}
+                       onClose={this.handleLogOut}>
+                    La contraseña fue actualizada satisfactoriamente. 
+                    Por favor, vuelva a iniciar sesión con su nueva contraseña.
+                </Alert>
                 <Navbar style={{position: 'relative',
                                 height: '70px',
                                 backgroundColor: '#5B1790'}}>
@@ -83,7 +108,7 @@ class NavigationBar extends React.Component{
                                  marginRight: '10px',
                                  marginTop: '18px',
                                  textAlign: 'right'}}>
-                        <Icon icon='user' iconSize= '20' style={{color: 'white', marginBottom:'2px'}}/>
+                        <Icon icon='user' iconSize= '20' style={{color: 'white', marginBottom:'4px'}}/>
                         <p style={{display:'inline', 
                                    marginRight: '30px', 
                                    marginLeft: '5px',
@@ -91,9 +116,23 @@ class NavigationBar extends React.Component{
                                    color: 'white',}}>
                             <b>{this.state.username}</b>
                         </p>
+                        <Tooltip content='Cambiar contraseña'>
+                            <Button style={{display:'inline',
+                                            height:'15px',
+                                            width: '15px',
+                                            marginBottom:'20px',
+                                            marginRight: '15px',
+                                            color: 'white',
+                                            backgroundColor: '#BF12FE'}}
+                                     minimal={true}
+                                     onClick={() => this.setState({changePass: true})} >
+                                    <Icon style={{marginLeft: '-2px'}} icon='key' color='white'/>
+                            </Button>
+                        </Tooltip>
                         <Tooltip content='Cerrar sesión'>
                             <Button style={{display:'inline',
-                                            height:'10px',
+                                            height:'15px',
+                                            width: '15px',
                                             marginBottom:'20px',
                                             color: 'white',
                                             backgroundColor: '#BF12FE'}}
