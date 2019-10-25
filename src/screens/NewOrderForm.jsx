@@ -80,6 +80,9 @@ class NewOrderForm extends React.Component {
                     {this.state.alert && 
                         <Alert
                             isOpen={this.state.alert} 
+                            confirmButtonText='ACEPTAR'
+                            icon='warning-sign'
+                            intent='warning'
                             onClose={this.state.onAlertClick}>
                             {this.state.alertMSJ}
                         </Alert>}

@@ -16,6 +16,8 @@ class LoginScreen extends React.Component {
             msg: '',
             user: '',
             pass: '',
+            intent: '',
+            icon: ''
         }
         this.handleLogin = this.handleLogin.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -31,8 +33,14 @@ class LoginScreen extends React.Component {
         validateUser(this.state.user, this.state.pass, (error) => {
             if(error){
                 error.message === 'Network Error' ?
-                    this.setState({msg: 'No se ha podido conectar al back-end', alert: true}) :
-                    this.setState({msg: 'El usuario y/o contraseña son incorrectos', alert: true})
+                    this.setState({msg: 'No se ha podido conectar al back-end', 
+                                   alert: true,
+                                   intent: 'danger',
+                                   icon: 'error'}) :
+                    this.setState({msg: 'El usuario y/o contraseña son incorrectos', 
+                                   alert: true,
+                                   intent: 'warning',
+                                   icon: 'warning-sign'})
             } else { 
                 this.setState({isLoggedIn: true})
             }
@@ -50,7 +58,10 @@ class LoginScreen extends React.Component {
             <div>
                 {this.state.isLoggedIn && <Redirect to='/home'/>}
                 <Alert isOpen={this.state.alert}
-                    onClose={() => {this.setState({user: '', pass: '', alert: false})}}>
+                       confirmButtonText='ACEPTAR'
+                       icon={this.state.icon}
+                       intent={this.state.intent}
+                       onClose={() => {this.setState({user: '', pass: '', alert: false})}}>
                     {this.state.msg}
                 </Alert>
                 <form onSubmit={this.handleLogin}>

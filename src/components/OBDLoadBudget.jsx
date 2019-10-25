@@ -35,6 +35,9 @@ class OBDLoadBudget extends React.Component {
                 {this.state.alert && 
                 <Alert
                     isOpen={this.state.alert} 
+                    confirmButtonText='ACEPTAR'
+                    icon='warning-sign'
+                    intent='warning'
                     onClose={() => this.setState({alert: false})}>
                     Por favor, complete todos los campos.
                 </Alert>}

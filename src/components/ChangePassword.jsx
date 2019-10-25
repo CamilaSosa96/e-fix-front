@@ -60,6 +60,9 @@ class ChangePassword extends React.Component {
         return(
             <div>
                 <Alert isOpen={this.state.alert}
+                       confirmButtonText='ACEPTAR'
+                       icon='warning-sign'
+                       intent='warning'
                        onClose={() => this.setState({alert: false})}>
                     {this.state.msg}
                 </Alert>
