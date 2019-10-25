@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import {isAuthored, createUser} from '../efixService'
 import NavigationBar from '../components/NavigationBar'
 import CreateUser from '../components/CreateUser'
-import { Button, Icon, Toaster, Position} from '@blueprintjs/core'
+import { Button, Icon, Toaster} from '@blueprintjs/core'
 
 
 class HomeScreen extends React.Component {
@@ -46,7 +46,10 @@ class HomeScreen extends React.Component {
             }
            else {
                 this.setState({createUser: false})
-                this.toaster.show({timeout:'3500', icon: 'new-person', message: 'El usuario fue creado satisfactoriamente', intent: 'success'}) 
+                this.toaster.show({timeout:'3500', 
+                                   icon: 'new-person',
+                                   message: 'El usuario fue creado satisfactoriamente', 
+                                   intent: 'success'}) 
            }
         })
     }
@@ -89,7 +92,7 @@ class HomeScreen extends React.Component {
                         <h1>CREAR NUEVO USUARIO</h1>
                         </Button>
                     </div>}
-                    <Toaster position={Position.TOP} ref={this.refHandlers.toaster} />
+                    <Toaster position='top' ref={this.refHandlers.toaster} />
                 </div>
             </div>
         )

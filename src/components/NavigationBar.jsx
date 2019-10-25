@@ -1,7 +1,7 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
 import {isAuthored, logOut, changePass} from '../efixService'
-import {Navbar, InputGroup, Icon, Colors, Button, Tooltip, Alert} from '@blueprintjs/core'
+import {Navbar, InputGroup, Icon, Colors, Button, Tooltip, Alert, Toaster} from '@blueprintjs/core'
 import ChangePassword from './ChangePassword'
 
 class NavigationBar extends React.Component{
@@ -21,8 +21,11 @@ class NavigationBar extends React.Component{
         this.handleSearch = this.handleSearch.bind(this)
         this.handleLogOut = this.handleLogOut.bind(this)
         this.handlePasswordChange = this.handlePasswordChange.bind(this)
+        this.handlePasswordChangeForUser = this.handlePasswordChangeForUser.bind(this)
         this.closeDialog = this.closeDialog.bind(this)
     }
+
+    refHandlers = { toaster: (ref) => this.toaster = ref,}
 
     componentDidMount(){
         isAuthored((error, response) => {
@@ -52,6 +55,21 @@ class NavigationBar extends React.Component{
         })
     }
 
+    handlePasswordChangeForUser(username, newPass){
+        changePass(username, newPass, (_err, response) => {
+            this.setState({changePass: false})
+            response.data.userExists === 0 ?
+            this.toaster.show({timeout:'5000', 
+                               icon: 'error', 
+                               message: `El usuario ${username} no existe.` , 
+                               intent: 'danger'}) :
+            this.toaster.show({timeout:'5000', 
+                               icon: 'lock', 
+                               message: `La cotraseña para el usuario ${username} ha sido cambiada.` , 
+                               intent: 'primary'}) 
+        })
+    }
+
     closeDialog(){
         this.setState({changePass: false})
     }
@@ -61,6 +79,7 @@ class NavigationBar extends React.Component{
             <div>
                 {this.state.changePass && 
                 <ChangePassword passwordChange={this.handlePasswordChange} 
+                                passwordChangeForUser={this.handlePasswordChangeForUser}
                                 username={this.state.username}
                                 open={this.state.changePass}
                                 close={this.closeDialog}/>}
@@ -141,6 +160,7 @@ class NavigationBar extends React.Component{
                                     <Icon style={{marginLeft: '0px'}} icon='log-out' color='white'/>
                             </Button>
                         </Tooltip>
+                        <Toaster position='top' ref={this.refHandlers.toaster} />
                     </div>
                 </Navbar>
             </div>
