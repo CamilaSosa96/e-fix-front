@@ -136,3 +136,15 @@ export function changePass(user, pass, callback){
     .then((response) => callback(null, response))
     .catch((error) => callback(error, null))
 }
+
+export function saveSettings(settings, callback){
+    axios.post(`http:///${host}/saveSettings`, {settings: settings})
+    .then((response) => callback(null, response))
+    .catch((error) => callback(error, null))
+}
+
+export function getSettings(callback){
+    axios.get(`http:///${host}/getSettings`)
+    .then((response) => callback(null, response))
+    .catch((error) => callback(error, null))
+}

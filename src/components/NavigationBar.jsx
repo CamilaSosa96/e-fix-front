@@ -1,8 +1,9 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
-import {isAuthored, logOut, changePass} from '../efixService'
+import {isAuthored, logOut, changePass, saveSettings} from '../efixService'
 import {Navbar, InputGroup, Icon, Colors, Button, Tooltip, Alert, Toaster} from '@blueprintjs/core'
 import ChangePassword from './ChangePassword'
+import AdminInfo from './AdminInfo'
 
 class NavigationBar extends React.Component{
 
@@ -72,12 +73,18 @@ class NavigationBar extends React.Component{
         })
     }
 
-    handleSettings(){
-
+    handleSettings(settings){
+        saveSettings(settings, () => {
+        this.closeDialog()
+        this.toaster.show({timeout:'5000', 
+                           icon: 'cog', 
+                           message: `La configuración ha sido guardada.` , 
+                           intent: 'primary'}) 
+        })
     }
 
     closeDialog(){
-        this.setState({changePass: false})
+        this.setState({changePass: false, goSettings:false})
     }
 
     render(){
@@ -89,6 +96,10 @@ class NavigationBar extends React.Component{
                                 username={this.state.username}
                                 open={this.state.changePass}
                                 close={this.closeDialog}/>}
+                {this.state.goSettings && 
+                <AdminInfo open={this.state.goSettings}
+                           handleSettings={this.handleSettings}
+                           close={this.closeDialog}/>}
                 {this.state.goSearch && <Redirect to={`/orders/${this.state.search}`}/>}
                 {this.state.goHome && <Redirect to='/home' />}
                 {this.state.goLogin && <Redirect to='/login' />}
