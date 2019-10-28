@@ -15,11 +15,13 @@ class NavigationBar extends React.Component{
             goHome: false,
             goLogin: false,
             changePass: false,
-            passwordAlert: false
+            passwordAlert: false,
+            goSettings: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
         this.handleLogOut = this.handleLogOut.bind(this)
+        this.handleSettings = this.handleSettings.bind(this)
         this.handlePasswordChange = this.handlePasswordChange.bind(this)
         this.handlePasswordChangeForUser = this.handlePasswordChangeForUser.bind(this)
         this.closeDialog = this.closeDialog.bind(this)
@@ -68,6 +70,10 @@ class NavigationBar extends React.Component{
                                message: `La cotraseña para el usuario ${username} ha sido cambiada.` , 
                                intent: 'primary'}) 
         })
+    }
+
+    handleSettings(){
+
     }
 
     closeDialog(){
@@ -135,6 +141,20 @@ class NavigationBar extends React.Component{
                                    color: 'white',}}>
                             <b>{this.state.username}</b>
                         </p>
+                        {this.state.username === 'Admin' &&
+                        <Tooltip content='Configuración'>
+                            <Button style={{display:'inline',
+                                            height:'15px',
+                                            width: '15px',
+                                            marginBottom:'20px',
+                                            marginRight: '15px',
+                                            color: 'white',
+                                            backgroundColor: '#BF12FE'}}
+                                     minimal={true}
+                                     onClick={() => this.setState({goSettings: true})}>
+                                    <Icon style={{marginLeft: '-3px'}} icon='cog' color='white'/>
+                            </Button>
+                        </Tooltip>}
                         <Tooltip content='Cambiar contraseña'>
                             <Button style={{display:'inline',
                                             height:'15px',
