@@ -19,6 +19,7 @@ class AdminInfo extends React.Component{
             prefRepaired: false,
             prefTookBackNoRepair: false,
             prefDelivered: false,
+            authDialog: false
         }
         this.closeDialog = this.closeDialog.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -59,6 +60,52 @@ class AdminInfo extends React.Component{
     render(){
         return(
             <div>
+                {this.state.authDialog &&
+                <Dialog style={{marginLeft: '-15px'}}
+                        isOpen={this.state.authDialog}
+                        title={<p style={{fontSize: '30px', 
+                                          textAlign: 'center',
+                                          width: '380px',
+                                          marginTop: '12px',}}>
+                                Autorizar envío de correo</p>}
+                        icon={<Icon style={{marginRight: '10px', marginTop: '7px', color: 'grey'}}
+                                    icon='envelope' 
+                                    iconSize='30'/>}
+                        onClose={() => this.setState({authDialog: false})}>
+                    <div style={{marginTop:'10px', 
+                                 marginLeft:'10px', 
+                                 marginRight:'10px', 
+                                 fontSize: '15px',
+                                 textAlign: 'center'}}>
+                        <p style={{textAlign: 'left'}}>
+                        Ingrese al siguiente link para aprobar el uso de su correo electrónico por parte de E-FIX. 
+                        Se enviarán correos a los clientes (a nombre de el correo que elija utilizar) informando 
+                        los cambios de estados de su producto (según qué cambios se hayan elegido para ser notificados).
+                        </p>
+                        <p style={{textAlign: 'left'}}>
+                        E-FIX no se encuentra verificada por Google, por lo cual será notificado de esto en la
+                        pantalla de aprobación. Para aprobar el uso de su correo por parte de E-FIX, seleccione
+                        'configuración avanzada > Ir a E-FIX (no seguro)'. Para su tranquilidad, se le recomienda
+                        que use una dirección de correo electrónico sólo para el uso por parte de E-FIX.
+                        </p>
+                        <Button style={{marginBottom: '10px'}}
+                                icon={<Icon style={{color: 'grey'}}
+                                            icon='share' 
+                                            iconSize='20'/>}
+                                onClose={() => this.setState({authDialog: false})}>
+                            Ir a pantalla de autorización de Gmail
+                        </Button>
+                    <p style={{textAlign: 'left'}}>
+                        Luego de aceptar los permisos, le mostrará un código que tiene que copiar y pegar aquí.
+                        Luego de pegarlo, presione el botón 'enviar código' para terminar el proceso de autorización.
+                    </p>
+                    <InputGroup type='text' placeholder='Código de autorización'>
+                    </InputGroup>
+                    <Button style={{marginTop: '10px'}}>
+                        Enviar código
+                    </Button>
+                    </div>
+                </Dialog>}
                 <Dialog isOpen={this.props.open}
                         onClose={this.closeDialog}
                         title={<p style={{fontSize: '30px', 
@@ -155,6 +202,7 @@ class AdminInfo extends React.Component{
                                     textAlign:'center',
                                     color:'white',
                                     backgroundColor: this.state.emailAuth ? 'orange' : 'blue'}}
+                            onClick={() => this.setState({authDialog: true})}
                             minimal={true}
                             icon={<Icon icon='envelope' color='white'/>}>
                         {this.state.emailAuth ? <b>USAR OTRO CORREO PARA ENVIAR LAS NOTIFICACIONES</b> : 
