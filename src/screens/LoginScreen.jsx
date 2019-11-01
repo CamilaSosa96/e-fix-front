@@ -61,7 +61,7 @@ class LoginScreen extends React.Component {
                        confirmButtonText='ACEPTAR'
                        icon={this.state.icon}
                        intent={this.state.intent}
-                       onClose={() => {this.setState({user: '', pass: '', alert: false})}}>
+                       onClose={() => {this.setState({alert: false})}}>
                     {this.state.msg}
                 </Alert>
                 <form onSubmit={this.handleLogin}>
@@ -70,7 +70,8 @@ class LoginScreen extends React.Component {
                         <h2>Gestor de Órdenes de Reparación</h2>
                         <InputGroup 
                             style={{marginTop: '10px', maxWidth: '200px'}}
-                            name='user' 
+                            name='user'
+                            value={this.state.user} 
                             type='text'
                             placeholder='Usuario'
                             maxLength='20'
@@ -78,6 +79,7 @@ class LoginScreen extends React.Component {
                         <InputGroup 
                             style={{marginTop: '10px', maxWidth: '200px'}}
                             name='pass'
+                            value={this.state.pass}
                             type='password' 
                             placeholder='Contraseña'
                             maxLength='20'
