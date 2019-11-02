@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom'
 import {isAuthored, logOut, changePass, saveSettings} from '../efixService'
 import {Navbar, InputGroup, Icon, Colors, Button, Tooltip, Alert, Toaster} from '@blueprintjs/core'
 import ChangePassword from './ChangePassword'
-import AdminInfo from './AdminInfo'
+import AdminInfo from './AdminSettings'
 
 class NavigationBar extends React.Component{
 

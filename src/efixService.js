@@ -148,3 +148,15 @@ export function getSettings(callback){
     .then((response) => callback(null, response))
     .catch((error) => callback(error, null))
 }
+
+export function getOAuthURL(callback){
+    axios.get(`http://${host}/emailOAuth`)
+    .then((response) => callback(null, response))
+    .catch((error) => callback(error, null))
+}
+
+export function sendOAuthCode(code, callback){
+    axios.post(`http://${host}/OAuthCode`, {code: code})
+    .then((response) => callback(null, response))
+    .catch((error) => callback(error, null))
+}

@@ -24,6 +24,7 @@ class AdminInfo extends React.Component{
         this.closeDialog = this.closeDialog.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSettings = this.handleSettings.bind(this)
+        this.handleEmailAuth = this.handleEmailAuth.bind(this)
     }
 
     componentDidMount(){
@@ -55,6 +56,10 @@ class AdminInfo extends React.Component{
 
     closeDialog(){
         this.props.close()
+    }
+
+    handleEmailAuth(){
+        this.setState({authDialog: true})
     }
 
     render(){
@@ -202,7 +207,7 @@ class AdminInfo extends React.Component{
                                     textAlign:'center',
                                     color:'white',
                                     backgroundColor: this.state.emailAuth ? 'orange' : 'blue'}}
-                            onClick={() => this.setState({authDialog: true})}
+                            onClick={this.handleEmailAuth}
                             minimal={true}
                             icon={<Icon icon='envelope' color='white'/>}>
                         {this.state.emailAuth ? <b>USAR OTRO CORREO PARA ENVIAR LAS NOTIFICACIONES</b> : 
