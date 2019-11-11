@@ -1,17 +1,18 @@
 import React from 'react'
-import {getSettings} from '../efixService'
+import {getSettings, getOAuthURL, sendOAuthCode} from '../efixService'
 import {stateIconSelector, stateColorSelector} from '../handlers/StateStyleHandler'
-import {Dialog, Icon, InputGroup, Checkbox, Button, Divider} from '@blueprintjs/core'
+import {Dialog, Icon, InputGroup, Checkbox, Button, Divider, Toaster} from '@blueprintjs/core'
 
 class AdminInfo extends React.Component{
 
     constructor(props){
         super(props)
         this.state = {
-            emailAuth: false,
             name: '',
             email: '',
             phone: '',
+            gmailLink: '',
+            gmailCode: '',
             prefRecived: false,
             prefBudget: false,
             prefRepairing: false,
@@ -25,13 +26,15 @@ class AdminInfo extends React.Component{
         this.handleChange = this.handleChange.bind(this)
         this.handleSettings = this.handleSettings.bind(this)
         this.handleEmailAuth = this.handleEmailAuth.bind(this)
+        this.handleCodeDelivery = this.handleCodeDelivery.bind(this)
     }
+
+    refHandlers = { toaster: (ref) => this.toaster = ref,}
 
     componentDidMount(){
         getSettings((_err, result) => {
             const info = result.data[0]
             this.setState({
-                emailAuth: info.email_auth,
                 name: info.nombre,
                 email: info.email,
                 phone: info.telefono,
@@ -59,7 +62,25 @@ class AdminInfo extends React.Component{
     }
 
     handleEmailAuth(){
-        this.setState({authDialog: true})
+        getOAuthURL((_err, link) => {
+            this.setState({authDialog: true, gmailLink: link})
+        })
+    }
+
+    handleCodeDelivery(){
+        sendOAuthCode(this.state.gmailCode, (err, _response) => {
+            err ? 
+                this.toaster.show({timeout:'5000', 
+                icon: 'error', 
+                message: `El código ingresado es incorrecto.` , 
+                intent: 'danger'})
+            :
+                this.toaster.show({timeout:'5000', 
+                           icon: 'tick-circle', 
+                           message: `La autorización fue completada satisfactoriamente` , 
+                           intent: 'success'}) 
+                this.setState({gmailCode: '', authDialog: false})   
+        })
     }
 
     render(){
@@ -97,16 +118,22 @@ class AdminInfo extends React.Component{
                                 icon={<Icon style={{color: 'grey'}}
                                             icon='share' 
                                             iconSize='20'/>}
-                                onClose={() => this.setState({authDialog: false})}>
+                                onClick={() => window.open(this.state.gmailLink)}
+                                >
                             Ir a pantalla de autorización de Gmail
                         </Button>
                     <p style={{textAlign: 'left'}}>
                         Luego de aceptar los permisos, le mostrará un código que tiene que copiar y pegar aquí.
                         Luego de pegarlo, presione el botón 'enviar código' para terminar el proceso de autorización.
                     </p>
-                    <InputGroup type='text' placeholder='Código de autorización'>
+                    <InputGroup type='text'
+                                name='gmailCode'
+                                placeholder='Código de autorización'
+                                value={this.state.gmailCode}
+                                onChange={this.handleChange}>
                     </InputGroup>
-                    <Button style={{marginTop: '10px'}}>
+                    <Button style={{marginTop: '10px'}}
+                            onClick={this.handleCodeDelivery}>
                         Enviar código
                     </Button>
                     </div>
@@ -206,12 +233,11 @@ class AdminInfo extends React.Component{
                                     marginLeft:'10px',
                                     textAlign:'center',
                                     color:'white',
-                                    backgroundColor: this.state.emailAuth ? 'orange' : 'blue'}}
+                                    backgroundColor: 'blue'}}
                             onClick={this.handleEmailAuth}
                             minimal={true}
                             icon={<Icon icon='envelope' color='white'/>}>
-                        {this.state.emailAuth ? <b>USAR OTRO CORREO PARA ENVIAR LAS NOTIFICACIONES</b> : 
-                        <b>AUTORIZAR CORREO PARA ENVIAR LAS NOTIFICACIONES</b>}
+                        <b>AUTORIZAR CORREO PARA ENVIAR LAS NOTIFICACIONES</b>
                     </Button>
                     <Divider/>
                     <Button style={{width:'480px',
@@ -226,6 +252,7 @@ class AdminInfo extends React.Component{
                             onClick={this.handleSettings}>
                         <b>GUARDAR CAMBIOS</b>
                     </Button>
+                    <Toaster position='top' ref={this.refHandlers.toaster} />
                 </Dialog>
             </div>
         )

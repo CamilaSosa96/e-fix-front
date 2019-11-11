@@ -151,7 +151,7 @@ export function getSettings(callback){
 
 export function getOAuthURL(callback){
     axios.get(`http://${host}/emailOAuth`)
-    .then((response) => callback(null, response))
+    .then((response) => callback(null, response.data.link))
     .catch((error) => callback(error, null))
 }
 

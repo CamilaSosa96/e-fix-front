@@ -121,7 +121,7 @@ class NavigationBar extends React.Component{
                     <div style={{position: 'absolute',
                                  display: 'inline',
                                  width: '400px',
-                                 height: '5x',
+                                 height: '5px',
                                  top: '50%',
                                  left: '50%',
                                  transform: 'translate(-50%, -50%)'}}>
