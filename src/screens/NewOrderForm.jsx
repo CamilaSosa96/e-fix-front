@@ -81,8 +81,8 @@ class NewOrderForm extends React.Component {
                         <Alert
                             isOpen={this.state.alert} 
                             confirmButtonText='ACEPTAR'
-                            icon='warning-sign'
-                            intent='warning'
+                            icon={this.state.alertMSJ.includes('Por') ? 'warning-sign' : 'saved'}
+                            intent={this.state.alertMSJ.includes('Por') ? 'warning' : 'success'}
                             onClose={this.state.onAlertClick}>
                             {this.state.alertMSJ}
                         </Alert>}
