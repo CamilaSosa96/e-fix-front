@@ -1,5 +1,5 @@
 import React from 'react'
-import {getSettings, getOAuthURL, sendOAuthCode} from '../efixService'
+import {getSettings, getOAuthURL, sendOAuthCode, isEmailAuthored} from '../efixService'
 import {stateIconSelector, stateColorSelector} from '../handlers/StateStyleHandler'
 import {Dialog, Icon, InputGroup, Checkbox, Button, Divider, Toaster} from '@blueprintjs/core'
 
@@ -20,7 +20,8 @@ class AdminInfo extends React.Component{
             prefRepaired: false,
             prefTookBackNoRepair: false,
             prefDelivered: false,
-            authDialog: false
+            authDialog: false,
+            isAuthored: false
         }
         this.closeDialog = this.closeDialog.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -45,6 +46,9 @@ class AdminInfo extends React.Component{
                 prefRepaired: info.REPARADO,
                 prefTookBackNoRepair: info.CANCELADA,
                 prefDelivered: info.ENTREGADO,
+            })
+            isEmailAuthored((result) => {
+                this.setState({isAuthored: result.data.auth})
             })
         })
     }
@@ -233,11 +237,13 @@ class AdminInfo extends React.Component{
                                     marginLeft:'10px',
                                     textAlign:'center',
                                     color:'white',
-                                    backgroundColor: 'blue'}}
+                                    backgroundColor: this.state.isAuthored ? 'orange' : 'blue'}}
                             onClick={this.handleEmailAuth}
                             minimal={true}
                             icon={<Icon icon='envelope' color='white'/>}>
-                        <b>AUTORIZAR CORREO PARA ENVIAR LAS NOTIFICACIONES</b>
+                        {this.state.isAuthored ?
+                        <b>CAMBIAR CORREO PARA ENVIAR LAS NOTIFICACIONES</b> :
+                        <b>AUTORIZAR CORREO PARA ENVIAR LAS NOTIFICACIONES</b>}
                     </Button>
                     <Divider/>
                     <Button style={{width:'480px',

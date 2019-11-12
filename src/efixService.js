@@ -160,3 +160,8 @@ export function sendOAuthCode(code, callback){
     .then((response) => callback(null, response))
     .catch((error) => callback(error, null))
 }
+
+export function isEmailAuthored(callback){
+    axios.get(`http://${host}/isEmailAuthored`)
+    .then((response) => callback(response))
+}
