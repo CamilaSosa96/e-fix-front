@@ -122,7 +122,7 @@ class NavigationBar extends React.Component{
                                  display: 'inline',
                                  width: '400px',
                                  height: '5px',
-                                 top: '50%',
+                                 top: '35%',
                                  left: '50%',
                                  transform: 'translate(-50%, -50%)'}}>
                         <InputGroup type='search'
